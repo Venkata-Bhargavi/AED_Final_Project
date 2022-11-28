@@ -168,9 +168,7 @@ public class MainJFrame extends javax.swing.JFrame {
         //        for(Doctor doc: doctorlist.getDoctorlist()){
             //            this.doctorCred.put(doc.getUsername(), doc.getPassword());
             //        }
-        doctorCred = doctorlist.getDoctorCredentails();
-        patientCred = patientlist.getPatientCredentails();
-
+        
         if((role.equals("System Admin")) && (!txt_username.getText().equals(""))  && (!pass_password.getText().equals(""))){
             this.setVisible(false);
             SystemAdmin sa = new SystemAdmin(patientlist, doctorlist, encounterhistory, citylist, communitylist);
