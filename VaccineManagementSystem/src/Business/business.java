@@ -6,7 +6,7 @@ package Business;
 
 /**
  *
- * @author Krishnakanth Naik Jarapala
+ * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
  */
 public class business {
     
