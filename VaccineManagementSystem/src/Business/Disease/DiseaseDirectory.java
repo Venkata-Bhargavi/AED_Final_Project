@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Business.Disease;
 
@@ -8,31 +9,34 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Krishnakanth Naik Jarapala
+ * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
  */
 public class DiseaseDirectory {
-    ArrayList<Disease> diseaselist;
+    
+    ArrayList<Disease> diseaseList;
     
     public DiseaseDirectory(){
         
-        diseaselist = new ArrayList();
+        diseaseList = new ArrayList();
     }
     
-    public ArrayList<Disease> getDiseaselist() {
-        return diseaselist;
+    public ArrayList<Disease> getDiseaseList() {
+        return diseaseList;
     }
 
-    public void setDiseaselist(ArrayList<Disease> diseaselist) {
-        this.diseaselist = diseaselist;
+    public void setDiseaseList(ArrayList<Disease> diseaseList) {
+        this.diseaseList = diseaseList;
     }
     
     public Disease addDisease() {
-        Disease dis = new Disease();
-        diseaselist.add(dis);
-        return dis;
+        Disease vaccine = new Disease();
+        diseaseList.add(vaccine);
+        return vaccine;
     }
     
-    public void removeDisease(Disease dis) {
-        diseaselist.remove(dis);
+    //Removing an Employee from the Directory
+    public void removeDisease(Disease vaccine) {
+        diseaseList.remove(vaccine);
     }
+    
 }
