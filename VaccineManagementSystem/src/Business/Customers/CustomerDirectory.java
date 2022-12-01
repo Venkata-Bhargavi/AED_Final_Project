@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Business.Customers;
 
@@ -8,27 +9,33 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Krishnakanth Naik Jarapala
+ * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
  */
 public class CustomerDirectory {
-    ArrayList<Customer> customerlist;
-    
+
+    ArrayList<Customer> customerList;
+
     public CustomerDirectory() {
-        customerlist = new ArrayList();
+        customerList = new ArrayList();
+    }
+    
+    public ArrayList<Customer> getCustomerList() {
+        return customerList;
     }
 
-    public ArrayList<Customer> getCustomerlist() {
-        return customerlist;
-    }
-
-    public void setCustomerlist(ArrayList<Customer> customerlist) {
-        this.customerlist = customerlist;
+    public void setCustomerList(ArrayList<Customer> customerList) {
+        this.customerList = customerList;
     }
     
     public Customer addCustomer()
     {
-        Customer customer = new Customer();
-        customerlist.add(customer);
-        return customer;
+        Customer cus = new Customer();
+        customerList.add(cus);
+        return cus;
     }
+    
+    
+    
+    
+    
 }

@@ -1,22 +1,22 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Business.Disease;
 
 /**
  *
- * @author Krishnakanth Naik Jarapala
+ * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
  */
 public class Disease {
     
     private String diseaseName;
-    private int diseaseId;
-    private static int dis_count = 1;
+    private String diseaseId;
+    private static int dCount;
     
     public Disease(){
-        diseaseId = dis_count;
-        dis_count++;
+        diseaseId= String.valueOf(++dCount);
     }
 
     public String getDiseaseName() {
@@ -27,13 +27,12 @@ public class Disease {
         this.diseaseName = diseaseName;
     }
 
-    public int getDiseaseId() {
+    public String getDiseaseId() {
         return diseaseId;
     }
 
     @Override
     public String toString(){
-        return diseaseName;
-    }   
-    
+    return diseaseName;
+}   
 }
