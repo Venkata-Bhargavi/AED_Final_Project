@@ -51,6 +51,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(800, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
@@ -144,6 +145,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/kisspng-circle-structure-area-network-5abe0aa1daab97.4949489615224040018957.png"))); // NOI18N
         jLabel11.setText("jLabel11");
+        jLabel11.setPreferredSize(new java.awt.Dimension(800, 800));
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 800));
     }// </editor-fold>//GEN-END:initComponents
 
