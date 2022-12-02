@@ -75,6 +75,7 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(800, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -263,6 +264,7 @@ public class ViewPatients extends javax.swing.JPanel {
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
         jLabel25.setText("jLabel25");
+        jLabel25.setPreferredSize(new java.awt.Dimension(800, 800));
         add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 800));
     }// </editor-fold>//GEN-END:initComponents
 
