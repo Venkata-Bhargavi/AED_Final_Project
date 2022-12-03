@@ -4,6 +4,19 @@
  */
 package UI;
 
+import Business.DB4OUtil.DB4OUtil;
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.EventOrganisation;
+import Business.Organization.Organization;
+import Business.SubOrganization.SubOrganization;
+import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author bhargavi
@@ -13,8 +26,19 @@ public class MainJFrame extends javax.swing.JPanel {
     /**
      * Creates new form MainJFrame
      */
+    private EcoSystem system;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private Network network;
+    
     public MainJFrame() {
         initComponents();
+        system = dB4OUtil.retrieveSystem();
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setUndecorated(true);
+        setVisible(true);
+        
+        
+        
     }
 
     /**
@@ -155,10 +179,137 @@ public class MainJFrame extends javax.swing.JPanel {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-       
+        
+        
+        if (txt_username.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Login Name.");
+        } else if (pass_password.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Login Password.");
+        } else {
 
+            // Get user name
+            String userName = txt_username.getText();
+            String password = pass_password.getText();
+
+            //Checking whether is user is an instance of enterprise.
+            UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userName, password);           
+            // Initilizing the enterprise, org, suborg and user as null as we don't yet know where the user is working.
+            UserAccount userAccounttoFind = null;
+            Enterprise userEnterprise = null;
+            Organization userOrganization = null;
+            SubOrganization userSubOrganization = null;
+            
+            
+//            Loop to find whether the user is in Enterprise / Org / Suborg
+            if(userAccount == null){
+//                if the user is not found, then checking in each enterprise by each network
+                for(Network network: system.getNetworkList()){
+                    for(Enterprise ent: network.getEnterpriseDirectory().getEnterpriseList()){
+                        userAccount = ent.getUserAccountDirectory().authenticateUser(userName, password);
+                        if (userAccount == null) {
+                            //if user is not found in the enterprse, we drill down into each each organization for each enterprise
+                            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                                userAccount = org.getUserAccountDirectory().authenticateUser(userName, password);
+                                if (userAccount == null) {
+                                    if (org instanceof EventOrganisation && ((EventOrganisation) org).getEventSubOrganizationDirectory().getOrganizationList() != null) {
+                                        // Similarly, checking in the suborg of each org.
+                                        for (SubOrganization subOrganization : ((EventOrganisation) org).getEventSubOrganizationDirectory().getOrganizationList()) {
+                                            userAccount = subOrganization.getUserAccountDirectory().authenticateUser(userName, password);
+                                            if (userAccount != null) {
+                                                userAccounttoFind = userAccount;
+                                                userEnterprise = ent;
+                                                userOrganization = org;
+                                                this.network = network;
+                                                userSubOrganization = subOrganization;
+                                                System.out.println("organization ia an instance of EventOrganisation" + userAccount.getRole());
+                                                System.out.println("organization is an instance of EventOrganisation" + userEnterprise);
+                                                System.out.println("organization is an instance of EventOrganisation" + userSubOrganization);
+                                                //System.out.println("organization instanceof EventOrganisation");
+                                                break;
+                                            }
+                                        }
+                                    }
+//                                    User found in a organization, so must be working in thespecific organization
+                                    else if (userAccount != null) {
+                                        userEnterprise = ent;
+                                        userOrganization = org;
+                                        this.network = network;
+                                        System.out.println("organization is an instance of EventOrganisation" + userAccount.getRole());
+                                        break;
+                                        //}
+                                    }
+                                } else if (userAccount != null) {
+                                    userEnterprise = ent;
+                                    userOrganization = org;
+                                    this.network = network;
+                                    break;
+                                }
+                            }
+                        }
+//                        Found the user in enterprise
+                        else {
+                            userEnterprise = ent;
+                            this.network = network;
+                            break;
+                        }
+                        if (userOrganization != null) {
+                            break;
+                        }
+                    }
+                    if (userEnterprise != null) {
+                        break;
+                    }
+                }
+            }
+            
+            if(userAccount == null && userAccounttoFind == null){
+                JOptionPane.showMessageDialog(null, "User not Found!, Please check Credentails!");
+                return;
+            }
+            else if(userAccount == null && userAccounttoFind != null){
+                JPanel workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+                workArea.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "valid Credentails!");
+                JPanel workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+                workArea.setVisible(true);
+            }
     }//GEN-LAST:event_btn_loginActionPerformed
 
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(userLoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(userLoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(userLoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(userLoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainJFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
