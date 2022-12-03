@@ -4,6 +4,9 @@
  */
 package UI.SystemAdminWorkArea;
 
+import Business.EcoSystem;
+import java.awt.CardLayout;
+
 /**
  *
  * @author bhargavi
@@ -13,8 +16,11 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form SystemAdminWorkArea
      */
-    public SystemAdminWorkArea() {
+    
+    EcoSystem system;
+    public SystemAdminWorkArea(EcoSystem system) {
         initComponents();
+        this.system = system;
     }
 
     /**
@@ -32,7 +38,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
         btnManageDisease = new javax.swing.JButton();
         btnManageEnterprise = new javax.swing.JButton();
         btnManageEnterpriseAdmin = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         btnManageVaccine = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
@@ -58,7 +64,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
 
         btnManageEnterpriseAdmin.setText("Manage Enterprise Admin");
 
-        btnExit.setText("Exit");
+        btnLogout.setText("Logout");
 
         btnManageVaccine.setText("Manage Vaccine");
         btnManageVaccine.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +84,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
                     .addComponent(btnManageDisease, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnManageEnterpriseAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnManageVaccine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -99,7 +105,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnManageVaccine)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                .addComponent(btnExit)
+                .addComponent(btnLogout)
                 .addGap(51, 51, 51))
         );
 
@@ -136,6 +142,12 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
 
     private void btnManageNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageNetworkActionPerformed
         // TODO add your handling code here:
+        ManageNetworkJPanel manageNetworkJPanel = new ManageNetworkJPanel(system);
+//        userProcessContainer.add("manageNetworkJPanel", manageNetworkJPanel);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+        
+        
     }//GEN-LAST:event_btnManageNetworkActionPerformed
 
     private void btnManageDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDiseaseActionPerformed
@@ -149,40 +161,40 @@ public class SystemAdminWorkArea extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SystemAdminWorkArea().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SystemAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SystemAdminWorkArea().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnManageDisease;
     private javax.swing.JButton btnManageEnterprise;
     private javax.swing.JButton btnManageEnterpriseAdmin;

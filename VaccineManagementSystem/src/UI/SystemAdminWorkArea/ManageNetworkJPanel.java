@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SystemAdminWorkArea;
-
+import Business.EcoSystem;
 /**
  *
  * @author bhargavi
@@ -13,8 +13,11 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageNetworkJPanel
      */
-    public ManageNetworkJPanel() {
+    EcoSystem system;
+    
+    public ManageNetworkJPanel(EcoSystem system) {
         initComponents();
+        this.system = system;
     }
 
     /**
@@ -61,8 +64,6 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         lblNetworkName.setText("Network Name :");
         add(lblNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 258, -1, -1));
-
-        txtNetworkName.setText("jTextField1");
         add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 255, 170, -1));
 
         btnAdd.setText("Add");
