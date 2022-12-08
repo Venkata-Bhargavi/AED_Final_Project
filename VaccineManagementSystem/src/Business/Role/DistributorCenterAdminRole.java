@@ -11,8 +11,9 @@ import Business.Network.Network;
 import Business.Organization.DistributionCenterOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import userinterface.Distributor.DistributionCenter.DistributorCenterAdminWorkAreaJPanel;
+import UI.Distributor.DistributionCenter.DistributorCenterAdminWorkArea;
 
 
 /**
@@ -24,8 +25,8 @@ import userinterface.Distributor.DistributionCenter.DistributorCenterAdminWorkAr
 public class DistributorCenterAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new DistributorCenterAdminWorkAreaJPanel(userProcessContainer, account, (DistributionCenterOrganization)organization, enterprise, business, network);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new DistributorCenterAdminWorkArea(account, (DistributionCenterOrganization)organization, enterprise, business, network);
     }
     
 }

@@ -25,8 +25,8 @@ import UI.CDC.BillingWorkArea;
 public class CDCBillManagerRole extends Role {
 
     @Override
-    public JFrame createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        System.out.println(network.getName());
+    public JFrame createWorkArea( UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+//        System.out.println(network.getName());
         return new BillingWorkArea(account,  (CDCBillingOrganization)organization, enterprise, business,network);
     }
     

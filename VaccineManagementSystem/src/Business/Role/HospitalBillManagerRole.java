@@ -12,7 +12,8 @@ import Business.Organization.HospitalBillingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Hospital.Billing.BillingWorkAreaJPanel;
+import UI.Hospital.Billing.BillingWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -24,8 +25,8 @@ import userinterface.Hospital.Billing.BillingWorkAreaJPanel;
 public class HospitalBillManagerRole extends Role{
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new BillingWorkAreaJPanel(userProcessContainer, account,  (HospitalBillingOrganization)organization, enterprise, business,network);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+        return new BillingWorkArea(account,  (HospitalBillingOrganization)organization, enterprise, business,network);
     }
 
     

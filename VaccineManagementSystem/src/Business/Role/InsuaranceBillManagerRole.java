@@ -11,8 +11,9 @@ import Business.Network.Network;
 import Business.Organization.InsuaranceBillingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import userinterface.Insuarance.InsuaranceBillingWorkAreaJPanel;
+import UI.Insurance.InsuranceBillingWorkArea;
 
 
 /**
@@ -24,7 +25,7 @@ import userinterface.Insuarance.InsuaranceBillingWorkAreaJPanel;
 public class InsuaranceBillManagerRole extends Role{
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new InsuaranceBillingWorkAreaJPanel(userProcessContainer, account,  (InsuaranceBillingOrganization)organization, enterprise, business,network);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+        return new InsuranceBillingWorkArea( account,  (InsuaranceBillingOrganization)organization, enterprise, business,network);
     }
 }
