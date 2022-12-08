@@ -2,30 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UI.CDC;
+package UI.PHD;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.PHDEnterprise;
 import Business.Network.Network;
 
 /**
  *
- * @author bhargavi
+ * @author Krishnakanth Naik Jarapala
  */
-public class CdcAdminWorkArea extends javax.swing.JFrame {
+public class PHDAdminWorkArea extends javax.swing.JFrame {
 
     /**
-     * Creates new form CdcWorkArea
+     * Creates new form PhdWorkArea
      */
+    private PHDEnterprise phdent;
+    private EcoSystem system;
+    private Network network;
     
-    EcoSystem system;
-    Enterprise enterprise;
-    Network network;
-    
-    public CdcAdminWorkArea(EcoSystem system, Enterprise enterprise, Network network) {
+    public PHDAdminWorkArea(EcoSystem sys, Enterprise enterprise, Network network) {
         initComponents();
-        this.system = system;
-        this.enterprise = enterprise;
+        
+        phdent = (PHDEnterprise) enterprise;
+        this.system= sys;
         this.network = network;
     }
 
@@ -44,8 +45,6 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,30 +62,21 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
 
         jButton3.setText("Manage Users");
 
-        jButton4.setText("Manage Events");
-
-        jButton5.setText("Vaccine Usage Report");
-
-        jButton6.setText("View Patients");
+        jButton4.setText("Manage Hospitals");
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
-
-        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6});
-
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
@@ -98,11 +88,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addGap(23, 23, 23)
-                .addComponent(jButton5)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addContainerGap(362, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(controlPanel);
@@ -113,11 +99,11 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         workArea.setLayout(workAreaLayout);
         workAreaLayout.setHorizontalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGap(0, 758, Short.MAX_VALUE)
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 687, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(workArea);
@@ -126,11 +112,13 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,9 +128,9 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+//    /**
+//     * @param args the command line arguments
+//     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -157,21 +145,23 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CdcAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PHDAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CdcAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PHDAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CdcAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PHDAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CdcAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(PHDAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
+//        //</editor-fold>
+//        //</editor-fold>
 //        //</editor-fold>
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new CdcAdminWorkArea().setVisible(true);
+//                new PHDAdminWorkArea().setVisible(true);
 //            }
 //        });
 //    }
@@ -182,8 +172,6 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables

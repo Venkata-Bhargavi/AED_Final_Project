@@ -11,7 +11,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.CDC.CDCAdminWorkAreaJPanel;
+import UI.CDC.CdcAdminWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -23,8 +24,8 @@ import userinterface.CDC.CDCAdminWorkAreaJPanel;
 public class CDCAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new CDCAdminWorkAreaJPanel(userProcessContainer, enterprise, business, network);
+    public JFrame createWorkArea( UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,Network network) {
+        return new CdcAdminWorkArea(system, enterprise, network);
     }
     
 }

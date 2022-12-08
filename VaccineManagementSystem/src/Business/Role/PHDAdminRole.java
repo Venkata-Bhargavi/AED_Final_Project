@@ -11,7 +11,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.PHD.PHDAdminWorkAreaJPanel;
+import UI.PHD.PHDAdminWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -23,8 +24,8 @@ import userinterface.PHD.PHDAdminWorkAreaJPanel;
 public class PHDAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new PHDAdminWorkAreaJPanel(userProcessContainer, enterprise, business, network);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+        return new PHDAdminWorkArea(business, enterprise,  network);
     }
     
 }

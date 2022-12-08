@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -45,7 +46,7 @@ public abstract class Role {
         }
     }
     
-    public abstract JPanel createWorkArea( 
+    public abstract JFrame createWorkArea( 
             UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 

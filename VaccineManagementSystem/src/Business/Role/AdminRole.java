@@ -9,7 +9,8 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import UserInterface.AdministrativeRole.AdminWorkAreaJPanel;
+import UI.AdministrativeRole.AdministrativeWorkArea;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -22,8 +23,8 @@ import javax.swing.JPanel;
 public class AdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new AdminWorkAreaJPanel(userProcessContainer, enterprise);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new AdministrativeWorkArea( enterprise, business);
     }
 
     

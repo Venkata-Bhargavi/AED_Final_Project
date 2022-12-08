@@ -267,12 +267,12 @@ public class MainJFrame extends javax.swing.JPanel {
                 return;
             }
             else if(userAccount == null && userAccounttoFind != null){
-                JPanel workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+                JFrame workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
                 workArea.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null, "valid Credentails!");
-                JPanel workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+                JFrame workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
                 workArea.setVisible(true);
             }
     }//GEN-LAST:event_btn_loginActionPerformed

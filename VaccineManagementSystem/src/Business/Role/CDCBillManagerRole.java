@@ -11,8 +11,9 @@ import Business.Network.Network;
 import Business.Organization.CDCBillingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import userinterface.CDC.CDCBillingWorkAreaJPanel;
+import UI.CDC.BillingWorkArea;
 
 
 /**
@@ -24,9 +25,9 @@ import userinterface.CDC.CDCBillingWorkAreaJPanel;
 public class CDCBillManagerRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+    public JFrame createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
         System.out.println(network.getName());
-        return new CDCBillingWorkAreaJPanel(userProcessContainer, account,  (CDCBillingOrganization)organization, enterprise, business,network);
+        return new BillingWorkArea(account,  (CDCBillingOrganization)organization, enterprise, business,network);
     }
     
 }
