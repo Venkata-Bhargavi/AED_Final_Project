@@ -12,6 +12,7 @@ import Business.Organization.EventOrganisation;
 import Business.Organization.Organization;
 import Business.SubOrganization.SubOrganization;
 import Business.UserAccount.UserAccount;
+import UI.SystemAdminWorkArea.SystemAdminWorkArea;
 import java.awt.CardLayout;
 import static java.time.Clock.system;
 import javax.swing.JFrame;
@@ -30,7 +31,14 @@ public class MainLoginJFrame extends javax.swing.JFrame {
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     private Network network;
     
-    public MainLoginJFrame() {
+    public MainLoginJFrame(){
+        initComponents();
+        system = dB4OUtil.retrieveSystem();
+        setVisible(true);
+
+    }
+    
+    public MainLoginJFrame(EcoSystem system,Network network) {
         initComponents();
         system = dB4OUtil.retrieveSystem();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -84,7 +92,7 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         txt_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
         comboBox_roleMenu.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        comboBox_roleMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin", "Hospital Admin", "Doctor", "Patient", "Community Admin" }));
+        comboBox_roleMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin" }));
         comboBox_roleMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBox_roleMenuActionPerformed(evt);
@@ -183,102 +191,123 @@ public class MainLoginJFrame extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-
-        if (txt_username.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter Login Name.");
-        } else if (pass_password.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter Login Password.");
-        } else {
-
-            // Get user name
-            String userName = txt_username.getText();
-            String password = pass_password.getText();
-
-            //Checking whether is user is an instance of enterprise.
-            UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userName, password);
-            // Initilizing the enterprise, org, suborg and user as null as we don't yet know where the user is working.
-            UserAccount userAccounttoFind = null;
-            Enterprise userEnterprise = null;
-            Organization userOrganization = null;
-            SubOrganization userSubOrganization = null;
-
-            //            Loop to find whether the user is in Enterprise / Org / Suborg
-            if(userAccount == null){
-                //                if the user is not found, then checking in each enterprise by each network
-                for(Network network: system.getNetworkList()){
-                    for(Enterprise ent: network.getEnterpriseDirectory().getEnterpriseList()){
-                        userAccount = ent.getUserAccountDirectory().authenticateUser(userName, password);
-                        if (userAccount == null) {
-                            //if user is not found in the enterprse, we drill down into each each organization for each enterprise
-                            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
-                                userAccount = org.getUserAccountDirectory().authenticateUser(userName, password);
-                                if (userAccount == null) {
-                                    if (org instanceof EventOrganisation && ((EventOrganisation) org).getEventSubOrganizationDirectory().getOrganizationList() != null) {
-                                        // Similarly, checking in the suborg of each org.
-                                        for (SubOrganization subOrganization : ((EventOrganisation) org).getEventSubOrganizationDirectory().getOrganizationList()) {
-                                            userAccount = subOrganization.getUserAccountDirectory().authenticateUser(userName, password);
-                                            if (userAccount != null) {
-                                                userAccounttoFind = userAccount;
-                                                userEnterprise = ent;
-                                                userOrganization = org;
-                                                this.network = network;
-                                                userSubOrganization = subOrganization;
-                                                System.out.println("organization ia an instance of EventOrganisation" + userAccount.getRole());
-                                                System.out.println("organization is an instance of EventOrganisation" + userEnterprise);
-                                                System.out.println("organization is an instance of EventOrganisation" + userSubOrganization);
-                                                //System.out.println("organization instanceof EventOrganisation");
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    //                                    User found in a organization, so must be working in thespecific organization
-                                    else if (userAccount != null) {
-                                        userEnterprise = ent;
-                                        userOrganization = org;
-                                        this.network = network;
-                                        System.out.println("organization is an instance of EventOrganisation" + userAccount.getRole());
-                                        break;
-                                        //}
-                                }
-                            } else if (userAccount != null) {
-                                userEnterprise = ent;
-                                userOrganization = org;
-                                this.network = network;
-                                break;
-                            }
-                        }
-                    }
-                    //                        Found the user in enterprise
-                    else {
-                        userEnterprise = ent;
-                        this.network = network;
-                        break;
-                    }
-                    if (userOrganization != null) {
-                        break;
-                    }
-                }
-                if (userEnterprise != null) {
-                    break;
-                }
-                }
-            }
-
-        if(userAccount == null && userAccounttoFind == null){
-            JOptionPane.showMessageDialog(null, "User not Found!, Please check Credentails!");
-            return;
+        
+        String role = comboBox_roleMenu.getSelectedItem().toString();
+        
+//        for(Patient pat: patientlist.getPatientlist()){
+//            this.patientCred.put(pat.getUsername(), pat.getPassword());
+//        }
+//        
+//        for(Doctor doc: doctorlist.getDoctorlist()){
+//            this.doctorCred.put(doc.getUsername(), doc.getPassword());
+//        }
+        //doctorCred = doctorlist.getDoctorCredentails();
+        //patientCred = patientlist.getPatientCredentails();
+        
+        
+        if((role.equals("System Admin")) && (txt_username.getText().equals("admin"))  && (pass_password.getText().equals("admin"))){
+            this.setVisible(false);
+            SystemAdminWorkArea sa = new SystemAdminWorkArea(system);
+//            JOptionPane.showMessageDialog(this, "USER Credentials are correct!");
+            sa.setVisible(true);
         }
-        else if(userAccount == null && userAccounttoFind != null){
-            JFrame workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
-            workArea.setVisible(true);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "valid Credentails!");
-            JFrame workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
-            workArea.setVisible(true);
-        }
+
+//        if (txt_username.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "Please enter Login Name.");
+//        } else if (pass_password.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "Please enter Login Password.");
+//        } 
+//        else {
+//
+//            // Get user name
+//            String userName = txt_username.getText();
+//            String password = pass_password.getText();
+//
+//            //Checking whether is user is an instance of enterprise.
+//            UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userName, password);
+//            // Initilizing the enterprise, org, suborg and user as null as we don't yet know where the user is working.
+//            UserAccount userAccounttoFind = null;
+//            Enterprise userEnterprise = null;
+//            Organization userOrganization = null;
+//            SubOrganization userSubOrganization = null;
+//
+//            //            Loop to find whether the user is in Enterprise / Org / Suborg
+//            if(userAccount == null){
+//                //                if the user is not found, then checking in each enterprise by each network
+//                for(Network network: system.getNetworkList()){
+//                    for(Enterprise ent: network.getEnterpriseDirectory().getEnterpriseList()){
+//                        userAccount = ent.getUserAccountDirectory().authenticateUser(userName, password);
+//                        if (userAccount == null) {
+//                            //if user is not found in the enterprse, we drill down into each each organization for each enterprise
+//                            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+//                                userAccount = org.getUserAccountDirectory().authenticateUser(userName, password);
+//                                if (userAccount == null) {
+//                                    if (org instanceof EventOrganisation && ((EventOrganisation) org).getEventSubOrganizationDirectory().getOrganizationList() != null) {
+//                                        // Similarly, checking in the suborg of each org.
+//                                        for (SubOrganization subOrganization : ((EventOrganisation) org).getEventSubOrganizationDirectory().getOrganizationList()) {
+//                                            userAccount = subOrganization.getUserAccountDirectory().authenticateUser(userName, password);
+//                                            if (userAccount != null) {
+//                                                userAccounttoFind = userAccount;
+//                                                userEnterprise = ent;
+//                                                userOrganization = org;
+//                                                this.network = network;
+//                                                userSubOrganization = subOrganization;
+//                                                System.out.println("organization ia an instance of EventOrganisation" + userAccount.getRole());
+//                                                System.out.println("organization is an instance of EventOrganisation" + userEnterprise);
+//                                                System.out.println("organization is an instance of EventOrganisation" + userSubOrganization);
+//                                                //System.out.println("organization instanceof EventOrganisation");
+//                                                break;
+//                                            }
+//                                        }
+//                                    }
+//                                    //                                    User found in a organization, so must be working in thespecific organization
+//                                    else if (userAccount != null) {
+//                                        userEnterprise = ent;
+//                                        userOrganization = org;
+//                                        this.network = network;
+//                                        System.out.println("organization is an instance of EventOrganisation" + userAccount.getRole());
+//                                        break;
+//                                        //}
+//                                }
+//                            } else if (userAccount != null) {
+//                                userEnterprise = ent;
+//                                userOrganization = org;
+//                                this.network = network;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    //                        Found the user in enterprise
+//                    else {
+//                        userEnterprise = ent;
+//                        this.network = network;
+//                        break;
+//                    }
+//                    if (userOrganization != null) {
+//                        break;
+//                    }
+//                }
+//                if (userEnterprise != null) {
+//                    break;
+//                }
+//                }
+//            }
+//
+//        if(userAccount == null && userAccounttoFind == null){
+//            JOptionPane.showMessageDialog(null, "User not Found!, Please check Credentails!");
+//            return;
+//        }
+//        else if(userAccount == null && userAccounttoFind != null){
+//            JFrame workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+//            workArea.setVisible(true);
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(null, "valid Credentails!");
+//            JFrame workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+//            workArea.setVisible(true);
+//        }
     }//GEN-LAST:event_btn_loginActionPerformed
-    }
+    
     /**
      * @param args the command line arguments
      */

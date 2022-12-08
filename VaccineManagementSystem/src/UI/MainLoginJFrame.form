@@ -162,12 +162,8 @@
               <Font name="sansserif" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="1">
                 <StringItem index="0" value="System Admin"/>
-                <StringItem index="1" value="Hospital Admin"/>
-                <StringItem index="2" value="Doctor"/>
-                <StringItem index="3" value="Patient"/>
-                <StringItem index="4" value="Community Admin"/>
               </StringArray>
             </Property>
           </Properties>

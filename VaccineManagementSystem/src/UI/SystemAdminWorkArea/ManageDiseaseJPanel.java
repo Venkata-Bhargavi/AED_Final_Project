@@ -4,6 +4,8 @@
  */
 package UI.SystemAdminWorkArea;
 
+import Business.EcoSystem;
+
 /**
  *
  * @author bhargavi
@@ -13,7 +15,9 @@ public class ManageDiseaseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageDiseaseJPanel
      */
-    public ManageDiseaseJPanel() {
+    
+    EcoSystem system;
+    public ManageDiseaseJPanel(EcoSystem system) {
         initComponents();
     }
 

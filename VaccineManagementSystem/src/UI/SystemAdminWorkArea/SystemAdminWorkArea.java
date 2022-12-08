@@ -5,6 +5,8 @@
 package UI.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Network.Network;
+import UI.MainLoginJFrame;
 import java.awt.CardLayout;
 
 /**
@@ -18,6 +20,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
      */
     
     EcoSystem system;
+    Network network;
     public SystemAdminWorkArea(EcoSystem system) {
         initComponents();
         this.system = system;
@@ -61,10 +64,25 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         });
 
         btnManageEnterprise.setText("Manage Enterprise");
+        btnManageEnterprise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageEnterpriseActionPerformed(evt);
+            }
+        });
 
         btnManageEnterpriseAdmin.setText("Manage Enterprise Admin");
+        btnManageEnterpriseAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageEnterpriseAdminActionPerformed(evt);
+            }
+        });
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         btnManageVaccine.setText("Manage Vaccine");
         btnManageVaccine.addActionListener(new java.awt.event.ActionListener() {
@@ -142,21 +160,55 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
 
     private void btnManageNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageNetworkActionPerformed
         // TODO add your handling code here:
-        ManageNetworkJPanel manageNetworkJPanel = new ManageNetworkJPanel(system);
-//        userProcessContainer.add("manageNetworkJPanel", manageNetworkJPanel);
-        CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.next(workArea);
-        
+//        ManageNetworkJPanel manageNetworkJPanel = new ManageNetworkJPanel(system);
+////        userProcessContainer.add("manageNetworkJPanel", manageNetworkJPanel);
+//        CardLayout layout = (CardLayout) workArea.getLayout();
+//        layout.next(workArea);
+        ManageNetworkJPanel mnp = new ManageNetworkJPanel(system);
+        workArea.add("managePatientJPanel", mnp);
+        splitPane.setRightComponent(mnp);
+
+//        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+//        cardlayout.next(workArea);        
         
     }//GEN-LAST:event_btnManageNetworkActionPerformed
 
     private void btnManageDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDiseaseActionPerformed
         // TODO add your handling code here:
+        ManageDiseaseJPanel mdp = new ManageDiseaseJPanel(system);
+        workArea.add("managePatientJPanel", mdp);
+        splitPane.setRightComponent(mdp);
     }//GEN-LAST:event_btnManageDiseaseActionPerformed
 
     private void btnManageVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineActionPerformed
         // TODO add your handling code here:
+        ManageVaccineJPanel mvp = new ManageVaccineJPanel(system);
+        workArea.add("managePatientJPanel", mvp);
+        splitPane.setRightComponent(mvp);
     }//GEN-LAST:event_btnManageVaccineActionPerformed
+
+    private void btnManageEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEnterpriseActionPerformed
+        // TODO add your handling code here:
+        ManageEnterpriseJPanel mep = new ManageEnterpriseJPanel(system);
+        workArea.add("managePatientJPanel", mep);
+        splitPane.setRightComponent(mep);
+    }//GEN-LAST:event_btnManageEnterpriseActionPerformed
+
+    private void btnManageEnterpriseAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEnterpriseAdminActionPerformed
+        // TODO add your handling code here:
+        
+        ManageEnterpriseAdminJPanel meap = new ManageEnterpriseAdminJPanel(system);
+        workArea.add("managePatientJPanel", meap);
+        splitPane.setRightComponent(meap);
+    }//GEN-LAST:event_btnManageEnterpriseAdminActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        
+         this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
