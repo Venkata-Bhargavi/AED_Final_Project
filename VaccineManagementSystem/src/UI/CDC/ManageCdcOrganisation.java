@@ -8,13 +8,22 @@ package UI.CDC;
  *
  * @author bhargavi
  */
+
+import Business.Enterprise.Enterprise;
+
 public class ManageCdcOrganisation extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCdcOrganisation
      */
+    Enterprise enterprise;
+
     public ManageCdcOrganisation() {
         initComponents();
+    }
+    public ManageCdcOrganisation(Enterprise enterprise){
+        initComponents();
+        this.enterprise = enterprise;
     }
 
     /**

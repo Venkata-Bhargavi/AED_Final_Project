@@ -4,6 +4,8 @@
  */
 package UI.CDC;
 
+import Business.Enterprise.Enterprise;
+
 /**
  *
  * @author bhargavi
@@ -13,7 +15,8 @@ public class VaccineUsageReport extends javax.swing.JPanel {
     /**
      * Creates new form VaccineUsageReport
      */
-    public VaccineUsageReport() {
+    Enterprise enterprise;
+    public VaccineUsageReport(Enterprise enterprise) {
         initComponents();
     }
 

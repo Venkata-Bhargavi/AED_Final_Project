@@ -4,6 +4,8 @@
  */
 package UI.CDC;
 
+import Business.Enterprise.Enterprise;
+
 /**
  *
  * @author bhargavi
@@ -13,7 +15,8 @@ public class ManageCdcEmployee extends javax.swing.JPanel {
     /**
      * Creates new form ManageCdcEmployee
      */
-    public ManageCdcEmployee() {
+    Enterprise enterprise;
+    public ManageCdcEmployee(Enterprise enterprise) {
         initComponents();
     }
 

@@ -4,9 +4,11 @@
  */
 package UI.CDC;
 
+import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import UI.MainLoginJFrame;
 
 /**
  *
@@ -21,6 +23,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     EcoSystem system;
     Enterprise enterprise;
     Network network;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     
     public CdcAdminWorkArea(EcoSystem system, Enterprise enterprise, Network network) {
         initComponents();
@@ -38,74 +41,110 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
+        splitPane = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnMO = new javax.swing.JButton();
+        btnME = new javax.swing.JButton();
+        btnMU = new javax.swing.JButton();
+        btnMEvents = new javax.swing.JButton();
+        btnVUR = new javax.swing.JButton();
+        btnVP = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
 
-        jButton1.setText("Manage Organisation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMO.setText("Manage Organisation");
+        btnMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMOActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage Employee");
+        btnME.setText("Manage Employee");
+        btnME.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMEActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Manage Users");
+        btnMU.setText("Manage Users");
+        btnMU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMUActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Manage Events");
+        btnMEvents.setText("Manage Events");
+        btnMEvents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMEventsActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Vaccine Usage Report");
+        btnVUR.setText("Vaccine Usage Report");
+        btnVUR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVURActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("View Patients");
+        btnVP.setText("View Patients");
+        btnVP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVPActionPerformed(evt);
+            }
+        });
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnMO, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnME, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMU, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMEvents, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVUR, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVP, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4, jButton5, jButton6});
+        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnME, btnMEvents, btnMO, btnMU, btnVP, btnVUR});
 
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addGap(163, 163, 163)
-                .addComponent(jButton1)
+                .addComponent(btnMO)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnME)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnMU)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnMEvents)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(btnVP)
                 .addGap(23, 23, 23)
-                .addComponent(jButton5)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addComponent(btnVUR)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(21, 21, 21))
         );
 
-        jSplitPane1.setLeftComponent(controlPanel);
+        splitPane.setLeftComponent(controlPanel);
 
         workArea.setPreferredSize(new java.awt.Dimension(800, 800));
 
@@ -120,25 +159,73 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
             .addGap(0, 800, Short.MAX_VALUE)
         );
 
-        jSplitPane1.setRightComponent(workArea);
+        splitPane.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(splitPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        ManageCdcOrganisation mo = new ManageCdcOrganisation(enterprise);
+        workArea.add("managePatientJPanel", mo);
+        splitPane.setRightComponent(mo);
+    }//GEN-LAST:event_btnMOActionPerformed
+
+    private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
+        // TODO add your handling code here:
+        ManageCdcEmployee me = new ManageCdcEmployee(enterprise);
+        workArea.add("managePatientJPanel", me);
+        splitPane.setRightComponent(me);
+    }//GEN-LAST:event_btnMEActionPerformed
+
+    private void btnMUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMUActionPerformed
+        // TODO add your handling code here:
+        ManageCdcUser mu = new ManageCdcUser(enterprise);
+        workArea.add("managePatientJPanel", mu);
+        splitPane.setRightComponent(mu);
+    }//GEN-LAST:event_btnMUActionPerformed
+
+    private void btnMEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEventsActionPerformed
+        // TODO add your handling code here:
+        ManageEventsDirectory mu = new ManageEventsDirectory(enterprise);
+        workArea.add("managePatientJPanel", mu);
+        splitPane.setRightComponent(mu);
+    }//GEN-LAST:event_btnMEventsActionPerformed
+
+    private void btnVPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVPActionPerformed
+        // TODO add your handling code here:
+         ViewPatients vp = new ViewPatients(enterprise);
+        workArea.add("managePatientJPanel", vp);
+        splitPane.setRightComponent(vp);
+    }//GEN-LAST:event_btnVPActionPerformed
+
+    private void btnVURActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVURActionPerformed
+        // TODO add your handling code here:
+        VaccineUsageReport vp = new VaccineUsageReport(enterprise);
+        workArea.add("managePatientJPanel", vp);
+        splitPane.setRightComponent(vp);
+    }//GEN-LAST:event_btnVURActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+        dB4OUtil.storeSystem(system);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,14 +264,15 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnME;
+    private javax.swing.JButton btnMEvents;
+    private javax.swing.JButton btnMO;
+    private javax.swing.JButton btnMU;
+    private javax.swing.JButton btnVP;
+    private javax.swing.JButton btnVUR;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

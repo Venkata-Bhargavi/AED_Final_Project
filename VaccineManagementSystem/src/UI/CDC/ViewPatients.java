@@ -4,6 +4,8 @@
  */
 package UI.CDC;
 
+import Business.Enterprise.Enterprise;
+
 /**
  *
  * @author bhargavi
@@ -13,7 +15,8 @@ public class ViewPatients extends javax.swing.JPanel {
     /**
      * Creates new form ViewPatients
      */
-    public ViewPatients() {
+    Enterprise enterprise;
+    public ViewPatients(Enterprise enterprise) {
         initComponents();
     }
 

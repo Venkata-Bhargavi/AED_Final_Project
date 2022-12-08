@@ -4,6 +4,8 @@
  */
 package UI.CDC;
 
+import Business.Enterprise.Enterprise;
+
 /**
  *
  * @author bhargavi
@@ -13,7 +15,8 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
     /**
      * Creates new form ManageEventsDirectory
      */
-    public ManageEventsDirectory() {
+    Enterprise enterprise;
+    public ManageEventsDirectory(Enterprise enterprise) {
         initComponents();
     }
 
