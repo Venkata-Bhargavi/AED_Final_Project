@@ -11,7 +11,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Insuarance.InsuaranceAdminWorkAreaJPanel;
+import UI.Insurance.InsuranceAdminWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -22,8 +23,8 @@ import userinterface.Insuarance.InsuaranceAdminWorkAreaJPanel;
 
 public class InsuaranceAdminRole extends Role{
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new InsuaranceAdminWorkAreaJPanel(userProcessContainer, enterprise, business);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new InsuranceAdminWorkArea( enterprise, business);
     }
     
 }

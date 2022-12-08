@@ -13,6 +13,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import UI.CDC.CdcManagerWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -24,8 +25,8 @@ import UI.CDC.CdcManagerWorkArea;
 public class CDCManagerRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new CdcManagerWorkArea(userProcessContainer, account,  (CDCOrderOrganization)organization, enterprise, business, network);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new CdcManagerWorkArea(account,  (CDCOrderOrganization)organization, enterprise, business, network);
         
     
     

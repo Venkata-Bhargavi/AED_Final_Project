@@ -12,7 +12,8 @@ import Business.Organization.Organization;
 import Business.Organization.ReceptionOrganization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-//import userinterface.Hospital.Reception.ReceptionWorkAreaJPanel;
+import UI.Hospital.Reception.ReceptionAdminWorkArea;
+import javax.swing.JFrame;
 
 /**
  *
@@ -20,11 +21,11 @@ import javax.swing.JPanel;
  */
 
 
-//public class ReceptionAdminRole extends Role {
-//    
-//     @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-//        return new ReceptionWorkAreaJPanel(userProcessContainer, account, (ReceptionOrganization)organization,enterprise,business,network);
-//    }
-//    
-//}
+public class ReceptionAdminRole extends Role {
+    
+     @Override
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new ReceptionAdminWorkArea( account, (ReceptionOrganization)organization,enterprise,business,network);
+    }
+    
+}

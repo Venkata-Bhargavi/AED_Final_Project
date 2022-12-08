@@ -13,7 +13,8 @@ import Business.Organization.ClinicOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Hospital.Clinic.ClinicWorkAreaJPanel;
+import UI.Hospital.Clinic.ClinicWorkArea;
+import javax.swing.JFrame;
 
 
 
@@ -26,8 +27,8 @@ import userinterface.Hospital.Clinic.ClinicWorkAreaJPanel;
 public class ClinicAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-       return new ClinicWorkAreaJPanel(userProcessContainer, account, (ClinicOrganization)organization, enterprise, business, network);
+    public JFrame createWorkArea( UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+       return new ClinicWorkArea(account, (ClinicOrganization)organization, enterprise, business, network);
     }
     
 }

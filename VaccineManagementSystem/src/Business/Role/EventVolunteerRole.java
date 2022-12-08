@@ -12,7 +12,8 @@ import Business.Organization.Organization;
 import Business.Organization.EventOrganisation;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Hospital.Event.EventVolunteerWorkAreaJPanel;
+import UI.Hospital.Event.EventVolunteerWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -24,8 +25,8 @@ import userinterface.Hospital.Event.EventVolunteerWorkAreaJPanel;
 public class EventVolunteerRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new EventVolunteerWorkAreaJPanel(userProcessContainer, account, (EventOrganisation)organization, enterprise, business, network);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new EventVolunteerWorkArea( account, (EventOrganisation)organization, enterprise, business, network);
     }
     
 }

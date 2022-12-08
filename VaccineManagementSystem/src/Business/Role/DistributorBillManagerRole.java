@@ -13,8 +13,8 @@ import Business.Organization.HospitalBillingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Distributor.DistributionCenter.DistributorBillingWorkAreaJPanel;
-import userinterface.Hospital.Billing.BillingWorkAreaJPanel;
+import UI.Distributor.DistributionCenter.DistributorBillingWorkArea;
+import javax.swing.JFrame;
 
 /**
  *
@@ -22,7 +22,7 @@ import userinterface.Hospital.Billing.BillingWorkAreaJPanel;
  */
 public class DistributorBillManagerRole extends Role{
     
-     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new DistributorBillingWorkAreaJPanel(userProcessContainer, account,  (DistributorBillingOrganization)organization, enterprise, business,network);
+     public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+        return new DistributorBillingWorkArea(account,  (DistributorBillingOrganization)organization, enterprise, business,network);
     }
 }

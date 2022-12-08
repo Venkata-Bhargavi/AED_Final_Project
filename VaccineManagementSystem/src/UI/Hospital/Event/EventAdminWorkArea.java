@@ -2,20 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UI.Distributor;
+package UI.Hospital.Event;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.EventOrganisation;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 
 /**
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class DistributorAdminWorkArea extends javax.swing.JFrame {
+public class EventAdminWorkArea extends javax.swing.JFrame {
 
     /**
-     * Creates new form DistributorAdminWorkArea
+     * Creates new form EventAdminWorkArea
      */
-    public DistributorAdminWorkArea(Enterprise enterprise) {
+    public EventAdminWorkArea(UserAccount account, EventOrganisation organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
     }
 
@@ -89,11 +94,11 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         workArea.setLayout(workAreaLayout);
         workAreaLayout.setHorizontalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 849, Short.MAX_VALUE)
+            .addGap(0, 847, Short.MAX_VALUE)
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(workArea);
@@ -103,13 +108,13 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1054, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -137,20 +142,20 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(DistributorAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(EventAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(DistributorAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(EventAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(DistributorAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(EventAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(DistributorAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(EventAdminWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new DistributorAdminWorkArea().setVisible(true);
+//                new EventAdminWorkArea().setVisible(true);
 //            }
 //        });
 //    }

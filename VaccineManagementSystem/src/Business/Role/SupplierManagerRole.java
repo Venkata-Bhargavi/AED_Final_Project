@@ -12,7 +12,8 @@ import Business.Organization.Organization;
 import Business.Organization.SupplierOrganization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-//import userinterface.Manufacturer.SupplierOrgnization.SupplierManagerWorkAreaJPanel;
+import UI.Supplier.SupplierManagerWorkArea;
+import javax.swing.JFrame;
 
 
 /**
@@ -21,9 +22,9 @@ import javax.swing.JPanel;
  */
 
 
-//public class SupplierManagerRole extends Role{
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-//        return new SupplierManagerWorkAreaJPanel(userProcessContainer, account, (SupplierOrganization)organization,enterprise,business);
-//    }
-//}
+public class SupplierManagerRole extends Role{
+    @Override
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new SupplierManagerWorkArea(account, (SupplierOrganization)organization,enterprise,business);
+    }
+}
