@@ -12,21 +12,21 @@ import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Hospital.Pharmacy.PharmacyAdminWorkAreaJPanel;
-
-
-/**
- *
- * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
- */
-
-
-public class PharmacyAdminRole extends Role {
-    
-     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new PharmacyAdminWorkAreaJPanel(userProcessContainer, account, (PharmacyOrganization)organization,enterprise,business,network);
-    }
-    
-    
-}
+//import userinterface.Hospital.Pharmacy.PharmacyAdminWorkAreaJPanel;
+//
+//
+///**
+// *
+// * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
+// */
+//
+//
+//public class PharmacyAdminRole extends Role {
+//    
+//     @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+//        return new PharmacyAdminWorkAreaJPanel(userProcessContainer, account, (PharmacyOrganization)organization,enterprise,business,network);
+//    }
+//    
+//    
+//}

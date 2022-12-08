@@ -4,6 +4,13 @@
  */
 package UI.CDC;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.CDCBillingOrganization;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author bhargavi
@@ -13,7 +20,7 @@ public class BillingWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form BillingWorkArea
      */
-    public BillingWorkArea() {
+    public BillingWorkArea(UserAccount account, CDCBillingOrganization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
     }
 

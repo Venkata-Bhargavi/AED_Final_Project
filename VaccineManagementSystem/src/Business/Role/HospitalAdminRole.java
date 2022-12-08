@@ -11,7 +11,8 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.Hospital.HospitalAdminWorkAreaJPanel;
+import UI.Hospital.HospitalAdmin;
+import javax.swing.JFrame;
 
 
 /**
@@ -23,8 +24,8 @@ import userinterface.Hospital.HospitalAdminWorkAreaJPanel;
 public class HospitalAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new HospitalAdminWorkAreaJPanel(userProcessContainer, enterprise, business);
+    public JFrame createWorkArea( UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new HospitalAdmin(business, enterprise);
     }
     
 }

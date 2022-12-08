@@ -11,7 +11,7 @@ import java.awt.CardLayout;
  *
  * @author bhargavi
  */
-public class SystemAdminWorkArea extends javax.swing.JFrame {
+public class SystemAdminWorkArea extends javax.swing.JFrame{
 
     /**
      * Creates new form SystemAdminWorkArea

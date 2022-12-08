@@ -9,7 +9,8 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import UserInterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
+import UI.SystemAdminWorkArea.SystemAdminWorkArea;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -22,8 +23,8 @@ import javax.swing.JPanel;
 public class SystemAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, Network network) {
-        return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, Network network) {
+        return new SystemAdminWorkArea(system);
     }
     
 }

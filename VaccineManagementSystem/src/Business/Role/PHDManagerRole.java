@@ -12,20 +12,20 @@ import Business.Organization.Organization;
 import Business.Organization.PHDOrderOrganization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.PHD.PHDManagerWorkAreaJPanel;
-
-
-/**
- *
- * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
- */
-
-
-public class PHDManagerRole extends Role {
-
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new PHDManagerWorkAreaJPanel(userProcessContainer, account, (PHDOrderOrganization)organization,enterprise, business, network);
-    }
-    
-}
+//import userinterface.PHD.PHDManagerWorkAreaJPanel;
+//
+//
+///**
+// *
+// * @author Krishnakanth Naik Jarapala, Venkata Bhargavi Sikhakolli.
+// */
+//
+//
+//public class PHDManagerRole extends Role {
+//
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+//        return new PHDManagerWorkAreaJPanel(userProcessContainer, account, (PHDOrderOrganization)organization,enterprise, business, network);
+//    }
+//    
+//}
