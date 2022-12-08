@@ -138,19 +138,19 @@ public class ManageOrganization extends javax.swing.JPanel {
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 
-        Type type = (Type) organizationJComboBox.getSelectedItem();
-        directory.createOrganization(type);
-        populateTable();
-
-        JOptionPane.showMessageDialog(null, "Organization added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+//        Type type = (Type) organizationJComboBox.getSelectedItem();
+//        directory.createOrganization(type);
+//        populateTable();
+//
+//        JOptionPane.showMessageDialog(null, "Organization added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+//
+//        userProcessContainer.remove(this);
+//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//        layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
 
