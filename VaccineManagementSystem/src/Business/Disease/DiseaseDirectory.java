@@ -39,4 +39,12 @@ public class DiseaseDirectory {
         diseaseList.remove(vaccine);
     }
     
+    public Disease findaDisease(String Disease){
+        for(Disease d: diseaseList){
+            if(d.getDiseaseName() == Disease){
+                return d;
+            }
+        }
+        return null;
+    }
 }

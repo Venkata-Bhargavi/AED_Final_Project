@@ -30,9 +30,11 @@ public class Disease {
     public String getDiseaseId() {
         return diseaseId;
     }
-
+    
     @Override
     public String toString(){
-    return diseaseName;
-}   
+        return diseaseName;
+    }
+
+     
 }

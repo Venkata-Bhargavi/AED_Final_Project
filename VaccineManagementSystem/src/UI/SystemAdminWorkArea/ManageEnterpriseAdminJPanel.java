@@ -15,6 +15,7 @@ import Business.Role.InsuaranceAdminRole;
 import Business.Role.PHDAdminRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,8 +28,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
      * Creates new form ManageEnterpriseAdminJPanel
      */
     EcoSystem system;
-    public ManageEnterpriseAdminJPanel(EcoSystem sys) {
+    JPanel workArea;
+    public ManageEnterpriseAdminJPanel(EcoSystem sys, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
+
         this.system = sys;
         populateTable();
         populateCBNetwork();
@@ -56,7 +60,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         cbNet.removeAllItems();
         
         for (Network network : system.getNetworkList()){
-            cbNet.addItem(network.toString());
+            cbNet.addItem(network);
         }
     }
     
@@ -64,7 +68,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         cbEnter.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            cbEnter.addItem(enterprise.toString());
+            cbEnter.addItem(enterprise);
         }
         
     }
@@ -86,8 +90,8 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cbNet = new javax.swing.JComboBox<>();
-        cbEnter = new javax.swing.JComboBox<>();
+        cbNet = new javax.swing.JComboBox();
+        cbEnter = new javax.swing.JComboBox();
         txtUN = new javax.swing.JTextField();
         txtPwd = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
@@ -120,14 +124,14 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Name :");
 
-        cbNet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbNet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbNetActionPerformed(evt);
             }
         });
 
-        cbEnter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbEnter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtUN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,10 +213,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPwdValid, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPwdValid, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52)
                 .addComponent(btnSubmit)
                 .addGap(293, 293, 293))
@@ -321,6 +326,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         Network network = (Network) cbNet.getSelectedItem();
+        
         if (network != null){
             populateCBEnterprise(network);
         }
@@ -329,8 +335,8 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JComboBox<String> cbEnter;
-    private javax.swing.JComboBox<String> cbNet;
+    private javax.swing.JComboBox cbEnter;
+    private javax.swing.JComboBox cbNet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

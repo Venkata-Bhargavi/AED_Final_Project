@@ -9,6 +9,7 @@ import Business.Network.Network;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -25,7 +26,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     public SystemAdminWorkArea(EcoSystem system) {
         initComponents();
         this.system = system;
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -131,19 +132,8 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setPreferredSize(new java.awt.Dimension(800, 800));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
-        );
-
+        workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
+        workArea.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,42 +156,53 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
 ////        userProcessContainer.add("manageNetworkJPanel", manageNetworkJPanel);
 //        CardLayout layout = (CardLayout) workArea.getLayout();
 //        layout.next(workArea);
-        ManageNetworkJPanel mnp = new ManageNetworkJPanel(system);
-        workArea.add("managePatientJPanel", mnp);
-        splitPane.setRightComponent(mnp);
+        ManageNetworkJPanel mnp = new ManageNetworkJPanel(system, workArea);
+        workArea.add("manageNetworkJPanel", mnp);
+//        splitPane.setRightComponent(mnp);
 
-//        CardLayout cardlayout = (CardLayout) workArea.getLayout();
-//        cardlayout.next(workArea);        
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);        
         
     }//GEN-LAST:event_btnManageNetworkActionPerformed
 
     private void btnManageDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDiseaseActionPerformed
         // TODO add your handling code here:
-        ManageDiseaseJPanel mdp = new ManageDiseaseJPanel(system);
-        workArea.add("managePatientJPanel", mdp);
-        splitPane.setRightComponent(mdp);
+        ManageDiseaseJPanel mdp = new ManageDiseaseJPanel(system, workArea);
+//        workArea.add("managePatientJPanel", mdp);
+//        splitPane.setRightComponent(mdp);
+        workArea.add("manageDiseaseJPanel", mdp);
+//        splitPane.setRightComponent(mnp);
+
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);        
     }//GEN-LAST:event_btnManageDiseaseActionPerformed
 
     private void btnManageVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineActionPerformed
         // TODO add your handling code here:
-        ManageVaccineJPanel mvp = new ManageVaccineJPanel(system);
+        ManageVaccineJPanel mvp = new ManageVaccineJPanel(system, workArea);
         workArea.add("managePatientJPanel", mvp);
-        splitPane.setRightComponent(mvp);
+//        splitPane.setRightComponent(mvp);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);      
     }//GEN-LAST:event_btnManageVaccineActionPerformed
 
     private void btnManageEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEnterpriseActionPerformed
         // TODO add your handling code here:
-        ManageEnterpriseJPanel mep = new ManageEnterpriseJPanel(system);
+        ManageEnterpriseJPanel mep = new ManageEnterpriseJPanel(system, workArea);
         workArea.add("managePatientJPanel", mep);
-        splitPane.setRightComponent(mep);
+//        splitPane.setRightComponent(mep);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);  
     }//GEN-LAST:event_btnManageEnterpriseActionPerformed
 
     private void btnManageEnterpriseAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEnterpriseAdminActionPerformed
         // TODO add your handling code here:
         
-        ManageEnterpriseAdminJPanel meap = new ManageEnterpriseAdminJPanel(system);
-        workArea.add("managePatientJPanel", meap);
-        splitPane.setRightComponent(meap);
+        ManageEnterpriseAdminJPanel meap = new ManageEnterpriseAdminJPanel(system, workArea);
+        workArea.add("managePatientJPanel1", meap);
+//        splitPane.setRightComponent(meap);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);  
     }//GEN-LAST:event_btnManageEnterpriseAdminActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

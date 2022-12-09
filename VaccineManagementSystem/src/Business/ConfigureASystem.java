@@ -35,7 +35,7 @@ public class ConfigureASystem {
         //create user account
         
         
-        Employee employee = system.getEmployeeDirectory().createEmployee("RRH");
+        Employee employee = system.getEmployeeDirectory().createEmployee("Krishna");
         
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
         
@@ -47,10 +47,10 @@ public class ConfigureASystem {
 //        v.setQuantity(30);
 //        v.setVaccineName("Flu vaccine");
         Customer cus1 = system.getCustomerDirectory().addCustomer();
-        cus1.setName("Deepak");
+        cus1.setName("Krishnakanth");
         cus1.setInsuarance(true);
         Customer cus2 = system.getCustomerDirectory().addCustomer();
-        cus2.setName("Sneha");
+        cus2.setName("Bhargavi");
         cus2.setInsuarance(false);
         
             
