@@ -75,18 +75,21 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblNetworkName">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Black" size="15" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Network Name :"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="211" y="258" width="-1" height="-1"/>
+          <AbsoluteConstraints x="210" y="250" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNetworkName">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="346" y="255" width="170" height="-1"/>
+          <AbsoluteConstraints x="360" y="250" width="170" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -99,7 +102,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="560" y="255" width="-1" height="-1"/>
+          <AbsoluteConstraints x="560" y="250" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -114,7 +117,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="890" height="660"/>
+          <AbsoluteConstraints x="0" y="0" width="820" height="570"/>
         </Constraint>
       </Constraints>
     </Component>

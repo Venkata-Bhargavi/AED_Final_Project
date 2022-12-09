@@ -35,6 +35,14 @@ public class UserAccountDirectory {
         return null;
     }
     
+    public boolean validateUserName(String username){
+        for (UserAccount ua : userAccountList)
+            if (ua.getUsername().equals(username) ){
+                return true;
+            }
+        return false;
+    }
+    
     public UserAccount createUserAccount(String username, String password, Employee employee, Role role){
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(username);

@@ -5,6 +5,13 @@
 package UI.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.Enterprise.PHDEnterprise;
+import Business.Network.Network;
+import Business.WorkQueue.PHDHospitalApproval;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,10 +23,44 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
      * Creates new form ManageEnterpriseJPanel
      */
     EcoSystem system;
-    public ManageEnterpriseJPanel(EcoSystem system) {
+    public ManageEnterpriseJPanel(EcoSystem sys) {
         initComponents();
+        this.system = sys;
+        
+        populateEntTable();
+        populateComboBoxes();
+    }
+    private void populateEntTable() {
+        DefaultTableModel model = (DefaultTableModel) tblEnt.getModel();
+
+        model.setRowCount(0);
+        for (Network network : system.getNetworkList()) {
+            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                Object[] row = new Object[3];
+                row[0] = enterprise.getName();
+                row[1] = network.getName();
+                row[2] = enterprise.getEnterpriseType().getValue();
+
+                model.addRow(row);
+            }
+        }
     }
 
+    private void populateComboBoxes() {
+        cbNetwork.removeAllItems();
+        cbEnterpriseName.removeAllItems();
+        
+        
+        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
+            cbEnterpriseName.addItem(type.toString());
+        }
+        
+        for (Network network : system.getNetworkList()) {
+            cbNetwork.addItem(network.toString());
+        }
+
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +72,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEnt = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -43,7 +84,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Manage Enterprise");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEnt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -54,17 +95,13 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 "Enterprise Name", "Network", "Type"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEnt);
 
         jLabel2.setText("Network :");
 
         jLabel3.setText("Enterprise Type :");
 
         jLabel4.setText("Name :");
-
-        cbNetwork.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbEnterpriseName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +144,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addContainerGap(207, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,6 +177,63 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        
+        
+        if (txtName.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter the Enterprise Name!");
+        } else {
+
+            Network network = (Network) cbNetwork.getSelectedItem();
+            Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) cbEnterpriseName.getSelectedItem();
+
+            if (network == null || type == null) {
+                JOptionPane.showMessageDialog(null, "Please select Network and Enterprise.");
+                return;
+            }
+            /// if trying to certe hospital check for PHD exist
+            boolean typeHospital = false;
+            PHDEnterprise phde = null;
+            int count = 0;
+//            Checking the Hospital Enterprise
+            if (type.equals(Enterprise.EnterpriseType.Hospital)) {
+                typeHospital = true;
+                for (Enterprise enterprisePHD : network.getEnterpriseDirectory().getEnterpriseList()) {
+                    if (enterprisePHD instanceof PHDEnterprise) {
+                        //((PHDEnterprise) enterprisePHD).getHospitalApprovalArrayList().);
+                        phde = (PHDEnterprise) enterprisePHD;
+                        count++;
+                        //return;
+                    }
+                }
+            } else {
+                String name = txtName.getText();
+                Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(type, name);
+            }
+            
+//            If the enterprise is hospital then check for PHD existance then create approval request for the hospital.
+            if (typeHospital) {
+                if (phde == null) {
+                    JOptionPane.showMessageDialog(null, "Kindly create a PHD Enterprise before creating a Hospital.");
+                } else if (phde != null && typeHospital && count == 1) {
+                    String name = txtName.getText();
+                    Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise( type, name);
+                    HospitalEnterprise hospitalEnterprise = (HospitalEnterprise) enterprise;
+
+                    PHDHospitalApproval phdHospitalApproval = new PHDHospitalApproval();
+                    phdHospitalApproval.setHospitalEnterprise((HospitalEnterprise) hospitalEnterprise);
+                    ((HospitalEnterprise) hospitalEnterprise).setHospitalApproved(false);
+                    phdHospitalApproval.setHospitalStatus("Requested to PHD for Approval of the Hospital!");
+                    phde.getHospitalApprovalList().add(phdHospitalApproval);
+                }
+            }
+            txtName.setText("");
+            cbNetwork.setSelectedIndex(-1);
+            cbEnterpriseName.setSelectedIndex(-1);
+
+            populateEntTable();
+            JOptionPane.showMessageDialog(null, "Enterprise added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -156,7 +250,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblEnt;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }
