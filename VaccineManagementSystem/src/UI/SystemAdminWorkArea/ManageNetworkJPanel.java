@@ -6,6 +6,7 @@ package UI.SystemAdminWorkArea;
 import Business.EcoSystem;
 import Business.Network.Network;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -17,11 +18,11 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
      * Creates new form ManageNetworkJPanel
      */
     EcoSystem system;
-    
-    public ManageNetworkJPanel(EcoSystem system) {
+    JPanel WorkArea;
+    public ManageNetworkJPanel(EcoSystem system, JPanel workArea) {
         initComponents();
+        this.WorkArea = workArea;
         this.system = system;
-        
         populateNetworkTable();
     }
     
@@ -53,7 +54,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(800, 800));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
@@ -91,8 +92,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/kisspng-circle-structure-area-network-5abe0aa1daab97.4949489615224040018957.png"))); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(800, 800));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 570));
+        jLabel1.setPreferredSize(new java.awt.Dimension(1100, 800));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 560));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

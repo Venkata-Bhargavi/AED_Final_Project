@@ -8,6 +8,7 @@ import Business.Disease.Disease;
 import Business.EcoSystem;
 import Business.vaccine.Vaccine;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,14 +21,14 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
      * Creates new form ManageVaccineJPanel
      */
     EcoSystem system;
-    public ManageVaccineJPanel(EcoSystem sys) {
-        initComponents();
-        
-        this.system  = sys;
-        
-        
+    JPanel WorkArea;
+    Disease tempDisease;
+    public ManageVaccineJPanel(EcoSystem sys, JPanel workArea) {
+        initComponents(); 
+        this.WorkArea = workArea;
+        this.system  = sys;       
         populateVaccineTable();
-        populatecombo();
+        populateComboBox();
     }
     
     public void populateVaccineTable(){
@@ -42,9 +43,9 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
        }  
        }
     
-    public void populatecombo(){
+    public void populateComboBox(){
         for (Disease disease : system.getDiseaseDirectory().getDiseaseList()) {
-            cbDisease.addItem(disease.toString());
+            cbDisease.addItem(disease);
         }
     }
 
@@ -66,8 +67,10 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
         lblPrice = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
-        cbDisease = new javax.swing.JComboBox<>();
+        cbDisease = new javax.swing.JComboBox();
         btnAddVaccine = new javax.swing.JButton();
+
+        setPreferredSize(new java.awt.Dimension(1100, 800));
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblTitle.setText("Manage Vaccine");
@@ -115,10 +118,6 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnDeleteVaccine)
-                .addGap(131, 131, 131))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -141,7 +140,11 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(283, 283, 283)
                         .addComponent(lblTitle)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(473, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnDeleteVaccine)
+                .addGap(378, 378, 378))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbDisease, txtName, txtPrice});
@@ -153,9 +156,9 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
                 .addComponent(lblTitle)
                 .addGap(67, 67, 67)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDeleteVaccine)
                 .addGap(18, 18, 18)
+                .addComponent(btnDeleteVaccine)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +174,7 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
                         .addComponent(lblPrice)))
                 .addGap(41, 41, 41)
                 .addComponent(btnAddVaccine)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -208,7 +211,8 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter vaccine Name");
         }
         else
-        {
+        {          
+            
             Vaccine v= system.getVaccineDirectory().addVaccine();
             v.setVaccineName(txtName.getText());
             v.setDisease((Disease) cbDisease.getSelectedItem());
@@ -223,7 +227,7 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddVaccine;
     private javax.swing.JButton btnDeleteVaccine;
-    private javax.swing.JComboBox<String> cbDisease;
+    private javax.swing.JComboBox cbDisease;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDisease;
     private javax.swing.JLabel lblName;

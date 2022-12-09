@@ -31,7 +31,7 @@ public abstract class Enterprise extends Organization{
         Hospital("Hospital"),//,Finanace("Finanace"),  Manufacturer("Manufacturer");
         Insuarance("Insuarance");
         
-        private String value;
+        public String value;
 
         private EnterpriseType(String value) {
             this.value = value;

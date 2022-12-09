@@ -11,6 +11,7 @@ import Business.Enterprise.PHDEnterprise;
 import Business.Network.Network;
 import Business.WorkQueue.PHDHospitalApproval;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,8 +24,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
      * Creates new form ManageEnterpriseJPanel
      */
     EcoSystem system;
-    public ManageEnterpriseJPanel(EcoSystem sys) {
+    JPanel workArea;
+    public ManageEnterpriseJPanel(EcoSystem sys, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
+;
         this.system = sys;
         
         populateEntTable();
@@ -51,13 +55,14 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         cbEnterpriseName.removeAllItems();
         
         
-        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
-            cbEnterpriseName.addItem(type.toString());
+        for (Network network : system.getNetworkList()) {
+            cbNetwork.addItem(network);
         }
         
-        for (Network network : system.getNetworkList()) {
-            cbNetwork.addItem(network.toString());
+        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
+            cbEnterpriseName.addItem(type);
         }
+        
 
 
     }
@@ -76,8 +81,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cbNetwork = new javax.swing.JComboBox<>();
-        cbEnterpriseName = new javax.swing.JComboBox<>();
+        cbNetwork = new javax.swing.JComboBox();
+        cbEnterpriseName = new javax.swing.JComboBox();
         txtName = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
 
@@ -102,6 +107,12 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         jLabel3.setText("Enterprise Type :");
 
         jLabel4.setText("Name :");
+
+        cbEnterpriseName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnterpriseNameActionPerformed(evt);
+            }
+        });
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,22 +190,22 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
+        
         if (txtName.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter the Enterprise Name!");
+            JOptionPane.showMessageDialog(null, "Please enter Enterprise Name.");
         } else {
 
             Network network = (Network) cbNetwork.getSelectedItem();
             Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) cbEnterpriseName.getSelectedItem();
 
             if (network == null || type == null) {
-                JOptionPane.showMessageDialog(null, "Please select Network and Enterprise.");
+                JOptionPane.showMessageDialog(null, "Invalid Input!");
                 return;
             }
             /// if trying to certe hospital check for PHD exist
             boolean typeHospital = false;
             PHDEnterprise phde = null;
             int count = 0;
-//            Checking the Hospital Enterprise
             if (type.equals(Enterprise.EnterpriseType.Hospital)) {
                 typeHospital = true;
                 for (Enterprise enterprisePHD : network.getEnterpriseDirectory().getEnterpriseList()) {
@@ -209,30 +220,86 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 String name = txtName.getText();
                 Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(type, name);
             }
-            
-//            If the enterprise is hospital then check for PHD existance then create approval request for the hospital.
             if (typeHospital) {
                 if (phde == null) {
-                    JOptionPane.showMessageDialog(null, "Kindly create a PHD Enterprise before creating a Hospital.");
+                    JOptionPane.showMessageDialog(null, "Kindly create PHD Enterprise first");
                 } else if (phde != null && typeHospital && count == 1) {
                     String name = txtName.getText();
-                    Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise( type, name);
+                    System.out.println("Hospital Name " + name);
+                    Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(type, name);
                     HospitalEnterprise hospitalEnterprise = (HospitalEnterprise) enterprise;
 
                     PHDHospitalApproval phdHospitalApproval = new PHDHospitalApproval();
                     phdHospitalApproval.setHospitalEnterprise((HospitalEnterprise) hospitalEnterprise);
                     ((HospitalEnterprise) hospitalEnterprise).setHospitalApproved(false);
-                    phdHospitalApproval.setHospitalStatus("Requested to PHD for Approval of the Hospital!");
+                    phdHospitalApproval.setHospitalStatus("Waiting for PHD Approval");
                     phde.getHospitalApprovalList().add(phdHospitalApproval);
                 }
             }
             txtName.setText("");
-            cbNetwork.setSelectedIndex(-1);
-            cbEnterpriseName.setSelectedIndex(-1);
-
             populateEntTable();
             JOptionPane.showMessageDialog(null, "Enterprise added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        
+        
+//        if (txtName.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "Please enter the Enterprise Name!");
+//        } else {
+//
+//            Network network = (Network) cbNetwork.getSelectedItem();
+//            Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) cbEnterpriseName.getSelectedItem();
+//
+//            if (network == null || type == null) {
+//                JOptionPane.showMessageDialog(null, "Please select Network and Enterprise.");
+//                return;
+//            }
+//            
+//            /// if trying to Create hospital check for PHD existance.
+//            boolean typeHospital = false;
+//            PHDEnterprise phde = null;
+//            int count = 0;
+//            
+////            Checking the Hospital Enterprise
+//            if (type.equals(Enterprise.EnterpriseType.Hospital)) {
+//                typeHospital = true;
+//                for (Enterprise enterprisePHD : network.getEnterpriseDirectory().getEnterpriseList()) {
+//                    if (enterprisePHD instanceof PHDEnterprise) {
+//                        //((PHDEnterprise) enterprisePHD).getHospitalApprovalArrayList().);
+//                        phde = (PHDEnterprise) enterprisePHD;
+//                        count++;
+//                        //return;
+//                    }
+//                }
+//            }
+//            else {
+//                String name = txtName.getText();
+//                Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(type, name);
+//            }
+//            
+////            If the enterprise is hospital then check for PHD existance then create approval request for the hospital.
+//            if (typeHospital) {
+//                if (phde == null) {
+//                    JOptionPane.showMessageDialog(null, "Kindly create a PHD Enterprise before creating a Hospital.");
+//                } else if (phde != null && typeHospital && count == 1) {
+//                    String name = txtName.getText();
+//                    Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise( type, name);
+//                    HospitalEnterprise hospitalEnterprise = (HospitalEnterprise) enterprise;
+//
+//                    PHDHospitalApproval phdHospitalApproval = new PHDHospitalApproval();
+//                    phdHospitalApproval.setHospitalEnterprise((HospitalEnterprise) hospitalEnterprise);
+//                    ((HospitalEnterprise) hospitalEnterprise).setHospitalApproved(false);
+//                    phdHospitalApproval.setHospitalStatus("Requested to PHD for Approval of the Hospital!");
+//                    phde.getHospitalApprovalList().add(phdHospitalApproval);
+//                }
+//            }
+//            txtName.setText("");
+//            cbNetwork.setSelectedIndex(-1);
+//            cbEnterpriseName.setSelectedIndex(-1);
+//
+//            populateEntTable();
+//            JOptionPane.showMessageDialog(null, "Enterprise added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+//        }
         
     }//GEN-LAST:event_btnSubmitActionPerformed
 
@@ -240,11 +307,15 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
+    private void cbEnterpriseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnterpriseNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEnterpriseNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JComboBox<String> cbEnterpriseName;
-    private javax.swing.JComboBox<String> cbNetwork;
+    private javax.swing.JComboBox cbEnterpriseName;
+    private javax.swing.JComboBox cbNetwork;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
