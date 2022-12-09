@@ -25,26 +25,26 @@ public class EnterpriseDirectory {
         return enterpriseList;
     }
     
-    public Enterprise createAndAddEnterprise(String name, Enterprise.EnterpriseType type){
+    public Enterprise createAndAddEnterprise(Enterprise.EnterpriseType entType, String hospitalName){
         Enterprise enterprise = null;
-        if (type == Enterprise.EnterpriseType.Hospital){
-            enterprise = new HospitalEnterprise(name);
+        if (entType == Enterprise.EnterpriseType.Hospital){
+            enterprise = new HospitalEnterprise(hospitalName);
             enterpriseList.add(enterprise);
         }
-        if (type == Enterprise.EnterpriseType.CDC){
-            enterprise = new CDCEnterprise(name);
+        if (entType == Enterprise.EnterpriseType.CDC){
+            enterprise = new CDCEnterprise(hospitalName);
             enterpriseList.add(enterprise);
         }
-        if (type == Enterprise.EnterpriseType.PHD){
-            enterprise = new PHDEnterprise(name);
+        if (entType == Enterprise.EnterpriseType.PHD){
+            enterprise = new PHDEnterprise(hospitalName);
             enterpriseList.add(enterprise);
         }
-        if (type == Enterprise.EnterpriseType.Distributor){
-            enterprise = new DistributorEnterprise(name);
+        if (entType == Enterprise.EnterpriseType.Distributor){
+            enterprise = new DistributorEnterprise(hospitalName);
             enterpriseList.add(enterprise);
         }
-        if (type == Enterprise.EnterpriseType.Insuarance){
-            enterprise = new InsuaranceEnterprise(name);
+        if (entType == Enterprise.EnterpriseType.Insuarance){
+            enterprise = new InsuaranceEnterprise(hospitalName);
             enterpriseList.add(enterprise);
         }
         

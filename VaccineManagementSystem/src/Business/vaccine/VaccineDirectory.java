@@ -35,8 +35,8 @@ public class VaccineDirectory {
         return vaccine;
     }
     
-    //Removing an Employee from the Directory
-    public void removeVaccine(Vaccine vaccine) {
+    //Removing an vaccine from the Directory
+    public void deleteVaccine(Vaccine vaccine) {
         vaccineList.remove(vaccine);
     }
     

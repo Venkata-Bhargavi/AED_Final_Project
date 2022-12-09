@@ -4,6 +4,9 @@
  */
 package UI.SystemAdminWorkArea;
 import Business.EcoSystem;
+import Business.Network.Network;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author bhargavi
@@ -18,6 +21,18 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     public ManageNetworkJPanel(EcoSystem system) {
         initComponents();
         this.system = system;
+        
+        populateNetworkTable();
+    }
+    
+    private void populateNetworkTable() {
+        DefaultTableModel model = (DefaultTableModel) tblNetwork.getModel();
+        model.setRowCount(0);
+        for (Network network : system.getNetworkList()) {
+            Object[] row = new Object[1];
+            row[0] = network.getName();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -62,9 +77,10 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 112, 361, 100));
 
+        lblNetworkName.setFont(new java.awt.Font("Arial Black", 1, 15)); // NOI18N
         lblNetworkName.setText("Network Name :");
-        add(lblNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 258, -1, -1));
-        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 255, 170, -1));
+        add(lblNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
+        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 170, -1));
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -72,15 +88,29 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 255, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/kisspng-circle-structure-area-network-5abe0aa1daab97.4949489615224040018957.png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(800, 800));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 660));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 570));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        
+        if(txtNetworkName.getText().equalsIgnoreCase(""))
+        {
+           JOptionPane.showMessageDialog(null, "Please enter the Network Name.");
+        }
+        else
+        {
+        String name = txtNetworkName.getText().toUpperCase();
+        Network network = system.createAndAddNetwork();
+        network.setName(name);
+        populateNetworkTable();
+        txtNetworkName.setText("");
+        JOptionPane.showMessageDialog(null, "Network added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
 

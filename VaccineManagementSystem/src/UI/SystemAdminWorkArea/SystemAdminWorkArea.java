@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Network.Network;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,6 +25,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     public SystemAdminWorkArea(EcoSystem system) {
         initComponents();
         this.system = system;
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -117,12 +119,12 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
                 .addGap(18, 18, 18)
                 .addComponent(btnManageDisease)
                 .addGap(18, 18, 18)
+                .addComponent(btnManageVaccine)
+                .addGap(18, 18, 18)
                 .addComponent(btnManageEnterprise)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageEnterpriseAdmin)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageVaccine)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(51, 51, 51))
         );
@@ -205,9 +207,10 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
         
-         this.setVisible(false);
+        this.setVisible(false);
         MainLoginJFrame ml = new MainLoginJFrame(system,network);
         ml.setVisible(true); 
+        
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**

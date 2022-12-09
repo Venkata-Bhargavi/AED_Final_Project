@@ -19,20 +19,20 @@ import java.util.ArrayList;
 
 
 public class PHDEnterprise extends Enterprise{
-    private ArrayList<PHDHospitalApproval> hospitalApprovalArrayList;
+    private ArrayList<PHDHospitalApproval> hospitalApprovalList;
 
     public PHDEnterprise(String name)
     {
         super(name, Enterprise.EnterpriseType.PHD);
-        hospitalApprovalArrayList = new ArrayList<>();
+        hospitalApprovalList = new ArrayList<>();
     }
 
-    public ArrayList<PHDHospitalApproval> getHospitalApprovalArrayList() {
-        return hospitalApprovalArrayList;
+    public ArrayList<PHDHospitalApproval> getHospitalApprovalList() {
+        return hospitalApprovalList;
     }
 
-    public void setHospitalApprovalArrayList(ArrayList<PHDHospitalApproval> hospitalApprovalArrayList) {
-        this.hospitalApprovalArrayList = hospitalApprovalArrayList;
+    public void setHospitalApprovalList(ArrayList<PHDHospitalApproval> hospitalApprovalList) {
+        this.hospitalApprovalList = hospitalApprovalList;
     }
     
     
