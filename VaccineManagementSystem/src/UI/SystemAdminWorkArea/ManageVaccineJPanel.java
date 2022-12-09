@@ -107,6 +107,12 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
             }
         });
 
+        cbDisease.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDiseaseActionPerformed(evt);
+            }
+        });
+
         btnAddVaccine.setText("Add Vaccine");
         btnAddVaccine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +228,10 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Vaccine added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnAddVaccineActionPerformed
+
+    private void cbDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiseaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbDiseaseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

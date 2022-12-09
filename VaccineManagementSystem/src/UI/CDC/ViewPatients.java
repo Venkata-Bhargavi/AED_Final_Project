@@ -4,7 +4,22 @@
  */
 package UI.CDC;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.WorkQueue.CDCReportingWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import Business.vaccine.Vaccine;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -15,9 +30,29 @@ public class ViewPatients extends javax.swing.JPanel {
     /**
      * Creates new form ViewPatients
      */
-    Enterprise enterprise;
-    public ViewPatients(Enterprise enterprise) {
+    private Enterprise enterprise;
+    private Network network;
+    private EcoSystem system;
+    private ArrayList<Float> ageList;
+    private ArrayList<Integer> yearList;
+    
+    public ViewPatients( Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
+        this.enterprise = enterprise;
+         this.network= network;
+         this.system = system;
+         ageList = new ArrayList();
+         yearList = new ArrayList();
+         populateComboBox();
+    }
+    
+    void populateComboBox()
+    {
+        cbV.removeAllItems();
+        
+        for (Vaccine vaccine : system.getVaccineDirectory().getVaccineList()) {
+            cbV.addItem(vaccine);
+        }
     }
 
     /**
@@ -31,10 +66,10 @@ public class ViewPatients extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cbV = new javax.swing.JComboBox();
+        btnAge = new javax.swing.JButton();
+        btnYear = new javax.swing.JButton();
+        btnGender = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -45,10 +80,10 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        txt20 = new javax.swing.JTextField();
+        txt21 = new javax.swing.JTextField();
+        txt22 = new javax.swing.JTextField();
+        txtChange = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -60,21 +95,21 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtInfant = new javax.swing.JTextField();
+        txtTwo = new javax.swing.JTextField();
+        txtSix = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
+        txtTwenty = new javax.swing.JTextField();
+        txtGT = new javax.swing.JTextField();
+        txtTot = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        txtM = new javax.swing.JTextField();
+        txtF = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
@@ -88,25 +123,40 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel2.setText("Select Vaccine :");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 66, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(255, 244, 244));
-        jButton1.setText("Get Report By Age");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cbV.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cbVActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 128, -1, -1));
+        add(cbV, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 66, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 244, 244));
-        jButton2.setText("Get Report by year");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 128, -1, -1));
+        btnAge.setBackground(new java.awt.Color(255, 244, 244));
+        btnAge.setText("Get Report By Age");
+        btnAge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgeActionPerformed(evt);
+            }
+        });
+        add(btnAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 128, -1, -1));
 
-        jButton3.setBackground(new java.awt.Color(255, 244, 244));
-        jButton3.setText("Get Report by Gender");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, -1));
+        btnYear.setBackground(new java.awt.Color(255, 244, 244));
+        btnYear.setText("Get Report by year");
+        btnYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYearActionPerformed(evt);
+            }
+        });
+        add(btnYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 128, -1, -1));
+
+        btnGender.setBackground(new java.awt.Color(255, 244, 244));
+        btnGender.setText("Get Report by Gender");
+        btnGender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenderActionPerformed(evt);
+            }
+        });
+        add(btnGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Vaccine doses per age");
@@ -143,33 +193,33 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel20.setText("% change");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 248, -1, -1));
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txt20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txt20ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 75, 82, -1));
+        jPanel1.add(txt20, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 75, 82, -1));
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        txt21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                txt21ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 119, 82, -1));
+        jPanel1.add(txt21, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 119, 82, -1));
 
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txt22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txt22ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 166, 82, -1));
+        jPanel1.add(txt22, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 166, 82, -1));
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        txtChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                txtChangeActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 245, 82, -1));
+        jPanel1.add(txtChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 245, 82, -1));
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
         jLabel27.setText("jLabel27");
@@ -209,18 +259,18 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel14.setText("Total :");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 317, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtInfant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtInfantActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 68, 78, -1));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 109, 78, -1));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 150, 78, -1));
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 191, 78, -1));
-        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 232, 78, -1));
-        jPanel2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 273, 78, -1));
-        jPanel2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 314, 78, -1));
+        jPanel2.add(txtInfant, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 68, 78, -1));
+        jPanel2.add(txtTwo, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 109, 78, -1));
+        jPanel2.add(txtSix, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 150, 78, -1));
+        jPanel2.add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 191, 78, -1));
+        jPanel2.add(txtTwenty, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 232, 78, -1));
+        jPanel2.add(txtGT, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 273, 78, -1));
+        jPanel2.add(txtTot, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 314, 78, -1));
 
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
         jLabel28.setText("jLabel28");
@@ -245,19 +295,19 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel24.setText("Male :");
         jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 89, -1, -1));
 
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        txtM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                txtMActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 86, 82, -1));
+        jPanel3.add(txtM, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 86, 82, -1));
 
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        txtF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                txtFActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 131, 82, -1));
+        jPanel3.add(txtF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 131, 82, -1));
 
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
         jLabel26.setText("jLabel26");
@@ -271,44 +321,222 @@ public class ViewPatients extends javax.swing.JPanel {
         add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 800));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtInfantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInfantActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtInfantActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txt20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt20ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txt20ActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void txt21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt21ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_txt21ActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txt22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt22ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txt22ActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void txtChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChangeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_txtChangeActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+    private void txtMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_txtMActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void txtFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_txtFActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+           for(WorkRequest wr : network.getWorkQueue().getWorkRequestList())  
+       {
+           if(wr instanceof CDCReportingWorkRequest){               
+               if(cbV.getSelectedItem().equals(wr.getVaccine()))
+               {
+                   ageList.add(Float.parseFloat((((CDCReportingWorkRequest) wr).getPatient().getAge())));
+                   //ageList.add(Float.parseFloat(((CDCReportingWorkRequest) wr).getPatient().getAge()));
+               }                
+           }
+       }
+        System.out.println(ageList);
+        
+       int sixthval=0,tot=0,fifthval=0,newborn = 0, secondval = 0, thirdval =0, forthval=0;
+        
+        for(Float age : ageList)
+        {   
+            if(age<1.0)
+            {
+                newborn++;
+            }
+            if(age>2.0 && age<5.0)
+            {
+                secondval++;
+            }
+            if(age>6.0 && age<9.0)
+            {
+                thirdval++;
+            }
+            if(age>10.0 && age<20.0)
+            {
+                forthval++;
+            }
+            if(age>21.0 && age<30.0)
+            {
+                fifthval++;
+            }
+            if(age>30.0)
+            {
+                sixthval++;
+            }
+        }
+        ageList.clear();
+        
+        tot= newborn+secondval+thirdval+forthval+fifthval+sixthval;
+        txtInfant.setText(String.valueOf(newborn));
+        txtTwo.setText(String.valueOf(secondval));
+        txtSix.setText(String.valueOf(thirdval));
+        txtTen.setText(String.valueOf(forthval));
+        txtTwenty.setText(String.valueOf(fifthval));
+        txtGT.setText(String.valueOf(sixthval));
+        txtTot.setText(String.valueOf(tot));
+        
+//        txtNewBorn1.setText(String.valueOf((newborn*100)/tot));
+//        txtSecondVal1.setText(String.valueOf((secondval*100)/tot));
+//        txtThirdVal1.setText(String.valueOf((thirdval*100)/tot));
+//        txtForthVal1.setText(String.valueOf((forthval*100)/tot));
+        
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(newborn, "", "<1 year");
+        dataset.setValue(secondval, "", "2-5 years");
+        dataset.setValue(thirdval, "", "6-9 years");
+        dataset.setValue(forthval, "", "10-20 years");
+        dataset.setValue(forthval, "", "21-30 years");
+        dataset.setValue(forthval, "", ">30 years");
+        
+        JFreeChart chart = ChartFactory.createBarChart("Frequency of vaccines according to age groups", "", "", dataset, PlotOrientation.VERTICAL, false, true, false);
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+        
+        ChartFrame frame = new ChartFrame("Bar Chart for Age groups",chart);
+        frame.setVisible(true);
+        frame.setSize(650,350);
+    }//GEN-LAST:event_btnAgeActionPerformed
+
+    private void cbVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbVActionPerformed
+
+    private void btnYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYearActionPerformed
+        // TODO add your handling code here:
+         Calendar cal = Calendar.getInstance();
+        for(WorkRequest wr : network.getWorkQueue().getWorkRequestList())  
+        {
+           if(wr instanceof CDCReportingWorkRequest){
+               
+               if(cbV.getSelectedItem().equals(wr.getVaccine()))
+               {
+                   
+                   Date d = ((CDCReportingWorkRequest) wr).getPatient().getDate();
+                   cal.setTime(d);
+                   int year = cal.get(Calendar.YEAR);
+                   yearList.add(year);
+               }                
+           }
+         }
+        
+       int firstyear=0, secondyear=0, thirdyear=0; 
+        
+       for(Integer year: yearList)
+       {
+           if(String.valueOf(year).equals("2017"))
+           {
+              firstyear++;
+           }
+           if(String.valueOf(year).equals("2016"))
+           {
+              secondyear++;
+           }
+           if(String.valueOf(year).equals("2015"))
+           {
+              thirdyear++;
+           }
+           
+       }
+       yearList.clear();
+        
+       txt20.setText(String.valueOf(firstyear));
+       txt21.setText(String.valueOf(secondyear));
+       txt22.setText(String.valueOf(thirdyear));
+       
+       float perIncrease=0;
+       float perDecrease=0;
+       
+       if(firstyear-thirdyear>0)
+       {
+           txtChange.setOpaque(true);
+           txtChange.setBackground(Color.red);
+           perIncrease = (((firstyear-thirdyear)*100)/thirdyear);
+           txtChange.setText(String.valueOf(perIncrease));
+       }
+       if(firstyear-thirdyear<0)
+       {
+           txtChange.setOpaque(true);
+           txtChange.setBackground(Color.green);
+           perDecrease = (((thirdyear-firstyear)*100)/thirdyear);
+           txtChange.setText(String.valueOf(perDecrease));
+       }
+       
+      DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+      dataset.addValue( thirdyear , "" , "2015" );
+      dataset.addValue( secondyear , "" , "2016" );
+      dataset.addValue( firstyear , "" ,  "2017" );
+      
+       JFreeChart chart = ChartFactory.createLineChart("Vaccine doses per year", "", "", dataset, PlotOrientation.VERTICAL, false, true, false);
+       CategoryPlot catPlot = chart.getCategoryPlot();
+       catPlot.setRangeGridlinePaint(Color.BLACK);
+        
+       ChartFrame frame = new ChartFrame("line Chart for Vaccine doses",chart);
+       frame.setVisible(true);
+       frame.setSize(450,350);
+    }//GEN-LAST:event_btnYearActionPerformed
+
+    private void btnGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenderActionPerformed
+        // TODO add your handling code here:
+        
+        int maleCount=0, femaleCount=0;
+
+        for(WorkRequest wrkReq : network.getWorkQueue().getWorkRequestList())
+        {
+            if(wrkReq instanceof CDCReportingWorkRequest)
+            {
+                if(cbV.getSelectedItem().equals(wrkReq.getVaccine()))
+                {
+                    if(((CDCReportingWorkRequest) wrkReq).getPatient().getGender().equals("Male"))
+                    {
+                        maleCount++;
+                    }
+                    else if(((CDCReportingWorkRequest) wrkReq).getPatient().getGender().equals("Female"))
+                    {
+                        femaleCount++;
+                    }
+                }
+            }
+        }
+        txtM.setText(String.valueOf(maleCount));
+        txtF.setText(String.valueOf(femaleCount));
+    }//GEN-LAST:event_btnGenderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAge;
+    private javax.swing.JButton btnGender;
+    private javax.swing.JButton btnYear;
+    private javax.swing.JComboBox cbV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -340,18 +568,18 @@ public class ViewPatients extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt20;
+    private javax.swing.JTextField txt21;
+    private javax.swing.JTextField txt22;
+    private javax.swing.JTextField txtChange;
+    private javax.swing.JTextField txtF;
+    private javax.swing.JTextField txtGT;
+    private javax.swing.JTextField txtInfant;
+    private javax.swing.JTextField txtM;
+    private javax.swing.JTextField txtSix;
+    private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtTot;
+    private javax.swing.JTextField txtTwenty;
+    private javax.swing.JTextField txtTwo;
     // End of variables declaration//GEN-END:variables
 }

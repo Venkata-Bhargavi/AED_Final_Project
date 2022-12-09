@@ -9,8 +9,12 @@ import Business.Network.Network;
 import Business.Organization.CDCBillingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CDCBillingWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +25,39 @@ public class BillingWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form BillingWorkArea
      */
+    private UserAccount account;
+    private CDCBillingOrganization cdcBillingOrganization;
+    private Enterprise enterprise; 
+    private EcoSystem business;
+    private Network network;
     public BillingWorkArea(UserAccount account, CDCBillingOrganization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
-//        ImageIcon imgIcon = new ImageIcon("/Users/bhargavi/VenkataBhargavi-Sikhakolli-002724793/AED_FINAL_PROJECT/AED_Final_Project/VaccineManagementSystem/src/Images\\logout.png");
-//        Image i = imgIcon.getImage();
-//        Image dimg = i.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
-//        ImageIcon imgThisImg = new ImageIcon(dimg);
-//        jLabelLogout.setIcon(imgThisImg);
+        this.account= account;
+       this.cdcBillingOrganization = cdcBillingOrganization;
+       this.enterprise= enterprise;
+       this.business = business;
+       this.network= network;
+       populateTable();
+    }
+    
+      void populateTable()
+    {
+       DefaultTableModel dtm = (DefaultTableModel)tbl.getModel();
+       dtm.setRowCount(0);
+       
+       for(WorkRequest wr : network.getWorkQueue().getWorkRequestList())  
+       {
+           if(wr instanceof CDCBillingWorkRequest){
+               Object[] row = new Object[6];
+               row[0] = ((CDCBillingWorkRequest) wr).getName();
+               row[1] = wr.getVaccine();
+               row[2] = wr;
+               row[3] = wr.getSender();
+               row[4] = wr.getReceiver();
+               row[5] = wr.getMessage();
+               dtm.addRow(row);
+           }
+       }
     }
 
     /**
@@ -43,16 +73,16 @@ public class BillingWorkArea extends javax.swing.JFrame {
         btnlogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tbl = new javax.swing.JTable();
+        btnAssign = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("CDC Billing");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -63,11 +93,21 @@ public class BillingWorkArea extends javax.swing.JFrame {
                 "Patient Name", "Vaccine", "Status", "Sender", "Receiver", "Message"
             }
         ));
-        jScrollPane1.setViewportView(jTable2);
+        jScrollPane1.setViewportView(tbl);
 
-        jButton1.setText("Asign");
+        btnAssign.setText("Asign");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Pay");
+        btnPay.setText("Pay");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,9 +121,9 @@ public class BillingWorkArea extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnAssign)
                         .addGap(52, 52, 52)
-                        .addComponent(jButton2)
+                        .addComponent(btnPay)
                         .addGap(301, 301, 301))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -102,8 +142,8 @@ public class BillingWorkArea extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnPay)
+                    .addComponent(btnAssign))
                 .addContainerGap(511, Short.MAX_VALUE))
         );
 
@@ -120,6 +160,46 @@ public class BillingWorkArea extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = tbl.getSelectedRow();
+        if(selectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select the row to assign the Request", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            CDCBillingWorkRequest cwr = (CDCBillingWorkRequest)tbl.getValueAt(selectedRow,2);
+            cwr.setReceiver(account);
+            cwr.setStatus("Pending");
+            populateTable();
+              JOptionPane.showMessageDialog(null, "Request Assigned successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tbl.getSelectedRow();
+        if(selectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select the row to Pay", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            CDCBillingWorkRequest cbwr = (CDCBillingWorkRequest)tbl.getValueAt(selectedRow,2);
+            if(cbwr.getStatus().equals("Paid"))
+            {
+                JOptionPane.showMessageDialog(null, "Payment has already been made", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else
+            {
+                cbwr.setStatus("Paid by CDC");
+                populateTable();
+                  JOptionPane.showMessageDialog(null, "Payment made successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            }
+                
+        }
+    }//GEN-LAST:event_btnPayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,12 +237,12 @@ public class BillingWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssign;
+    private javax.swing.JButton btnPay;
     private javax.swing.JButton btnlogout;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 }

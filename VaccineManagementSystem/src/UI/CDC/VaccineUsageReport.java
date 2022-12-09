@@ -4,7 +4,16 @@
  */
 package UI.CDC;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.HospitalList.Hospital;
+import Business.HospitalList.HospitalDirectory;
+import Business.Network.Network;
+import Business.WorkQueue.CDCReportingWorkRequest;
+import Business.WorkQueue.PharmacyWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,11 +24,26 @@ public class VaccineUsageReport extends javax.swing.JPanel {
     /**
      * Creates new form VaccineUsageReport
      */
-    Enterprise enterprise;
-    public VaccineUsageReport(Enterprise enterprise) {
+    private Enterprise enterprise;
+    private Network network;
+    private EcoSystem system;
+    private HospitalDirectory hdir;
+    
+    public VaccineUsageReport(Enterprise enterprise, Network network, EcoSystem system) {
         initComponents();
+        this.enterprise = enterprise;
+        this.network = network;
+        this.system = system;
+        hdir = new HospitalDirectory();
+        populateComboBox();
     }
-
+void populateComboBox()
+    {
+        cbN.removeAllItems();
+        for(Network net :system.getNetworkList()){
+            cbN.addItem(net);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,31 +54,31 @@ public class VaccineUsageReport extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbN = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnReport = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Report");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbN.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Select Network :");
 
-        jButton1.setText("Get Report");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReport.setText("Get Report");
+        btnReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnReportActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Registered Hospital Wise Vaccine Usage in a Network");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,7 +89,7 @@ public class VaccineUsageReport extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,9 +110,9 @@ public class VaccineUsageReport extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(64, 64, 64)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(106, 106, 106)
-                        .addComponent(jButton1)))
+                        .addComponent(btnReport)))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,9 +122,9 @@ public class VaccineUsageReport extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(btnReport))
                 .addGap(41, 41, 41)
                 .addComponent(jLabel3)
                 .addGap(34, 34, 34)
@@ -109,18 +133,74 @@ public class VaccineUsageReport extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+         int val=0;
+            int cval=0; 
+            float vaccineUsage=0;
+            float vaccineWasteRate=0;
+            
+            for(Enterprise e:network.getEnterpriseDirectory().getEnterpriseList())
+            {
+                
+                if(e instanceof HospitalEnterprise)
+                {
+                    System.out.println("Creating Object");
+                    Hospital hos = hdir.addHospital();
+                    System.out.println(e.getName());
+                    hos.setName(e.getName());
+                    for(WorkRequest wr : e.getWorkQueue().getWorkRequestList())
+                    {
+                        if(wr instanceof PharmacyWorkRequest)
+                        {
+                            System.out.println("Got Pharmacy Req");
+                           val = val+((PharmacyWorkRequest) wr).getRequestedQty(); 
+                        }
+                        if(wr instanceof CDCReportingWorkRequest)
+                        {
+                            System.out.println("Got CDC Req");
+                           cval = cval+((CDCReportingWorkRequest) wr).getRequestedQty();
+                        }
+                        
+                    }
+                    hos.setRequestedQty(val);
+                    hos.setUsedQty(cval);
+                    
+                    vaccineUsage = (cval*100)/val;
+                    hos.setVaccineUsage(vaccineUsage);
+                    
+                    vaccineWasteRate = 100-vaccineUsage;
+                    hos.setVaccineWaste(vaccineWasteRate);
+                    
+                }
+            }
+            DefaultTableModel dtm = (DefaultTableModel)tbl.getModel();
+            dtm.setRowCount(0);
+            
+            for(Hospital h :hdir.gethList())
+            {
+                Object row[] = new Object[5];
+                row[0]= h.getName();
+                row[1]= h.getRequestedQty();
+                row[2]= h.getUsedQty();
+                row[3]= h.getVaccineUsage();
+                row[4]= h.getVaccineWaste();
+                dtm.addRow(row);
+            }
+            
+            hdir.gethList().clear();
+    }//GEN-LAST:event_btnReportActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnReport;
+    private javax.swing.JComboBox cbN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.OrganizationDirectory;
 import UI.MainLoginJFrame;
 
 /**
@@ -22,6 +23,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     
     EcoSystem system;
     Enterprise enterprise;
+    private OrganizationDirectory orgDirectory;
     Network network;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     
@@ -178,14 +180,14 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     private void btnMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMOActionPerformed
         // TODO add your handling code here:
         
-        ManageCdcOrganisation mo = new ManageCdcOrganisation(enterprise);
+        ManageCdcOrganisation mo = new ManageCdcOrganisation(enterprise.getOrganizationDirectory());
         workArea.add("managePatientJPanel", mo);
         splitPane.setRightComponent(mo);
     }//GEN-LAST:event_btnMOActionPerformed
 
     private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
         // TODO add your handling code here:
-        ManageCdcEmployee me = new ManageCdcEmployee(enterprise);
+        ManageCdcEmployee me = new ManageCdcEmployee(enterprise.getOrganizationDirectory());
         workArea.add("managePatientJPanel", me);
         splitPane.setRightComponent(me);
     }//GEN-LAST:event_btnMEActionPerformed
@@ -199,21 +201,21 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
 
     private void btnMEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEventsActionPerformed
         // TODO add your handling code here:
-        ManageEventsDirectory mu = new ManageEventsDirectory(enterprise);
+        ManageEventsDirectory mu = new ManageEventsDirectory(enterprise,network,system);
         workArea.add("managePatientJPanel", mu);
         splitPane.setRightComponent(mu);
     }//GEN-LAST:event_btnMEventsActionPerformed
 
     private void btnVPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVPActionPerformed
         // TODO add your handling code here:
-         ViewPatients vp = new ViewPatients(enterprise);
+         ViewPatients vp = new ViewPatients(enterprise,network,system);
         workArea.add("managePatientJPanel", vp);
         splitPane.setRightComponent(vp);
     }//GEN-LAST:event_btnVPActionPerformed
 
     private void btnVURActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVURActionPerformed
         // TODO add your handling code here:
-        VaccineUsageReport vp = new VaccineUsageReport(enterprise);
+        VaccineUsageReport vp = new VaccineUsageReport(enterprise,network,system);
         workArea.add("managePatientJPanel", vp);
         splitPane.setRightComponent(vp);
     }//GEN-LAST:event_btnVURActionPerformed

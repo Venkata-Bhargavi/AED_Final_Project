@@ -10,6 +10,10 @@ import Business.Network.Network;
 import Business.Organization.CDCOrderOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.PharmacyWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +21,39 @@ import Business.UserAccount.UserAccount;
  */
 public class CdcManagerWorkArea extends javax.swing.JFrame {
 
+     private UserAccount account;
+    private CDCOrderOrganization organization;
+    private Enterprise enterprise; 
+    private EcoSystem business;
+    private Network network;
     /**
      * Creates new form CDCManagerWorkArea
      */
     public CdcManagerWorkArea(UserAccount account, CDCOrderOrganization organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
+        this.account = account;
+        this.organization= organization;
+        this.enterprise= enterprise;
+        this.business= business;
+        this.network= network;
+        populatetbl();
     }
+    void populatetbl(){
+       DefaultTableModel dtm = (DefaultTableModel)tbl.getModel();
+       dtm.setRowCount(0);       
+       for(WorkRequest wr : network.getWorkQueue().getWorkRequestList())  
+       {
+           if(wr instanceof PharmacyWorkRequest){
+               Object[] row = new Object[5];
+               row[0] = wr.getVaccine().getVaccineName();
+               row[1] = ((PharmacyWorkRequest) wr).getRequestedQty();
+               row[2] = wr;
+               row[3] = wr.getReceiver();
+               row[4] = wr.getSender();
+               dtm.addRow(row);
+           }
+       }    
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,25 +65,40 @@ public class CdcManagerWorkArea extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAccept = new javax.swing.JButton();
+        btnAssign = new javax.swing.JButton();
+        btnReject = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Accept");
+        btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Assign to me ");
+        btnAssign.setText("Assign to me ");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Reject");
+        btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("CDC Manager Work Bench");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -63,7 +109,7 @@ public class CdcManagerWorkArea extends javax.swing.JFrame {
                 "Vaccine Name", "Quantity", "Status", "Receiver ", "Sender"
             }
         ));
-        jScrollPane1.setViewportView(jTable2);
+        jScrollPane1.setViewportView(tbl);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,11 +126,11 @@ public class CdcManagerWorkArea extends javax.swing.JFrame {
                 .addContainerGap(153, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(120, 120, 120)
-                .addComponent(jButton1)
+                .addComponent(btnAssign)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnAccept)
                 .addGap(33, 33, 33)
-                .addComponent(jButton3)
+                .addComponent(btnReject)
                 .addGap(172, 172, 172))
         );
         jPanel1Layout.setVerticalGroup(
@@ -96,9 +142,9 @@ public class CdcManagerWorkArea extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAssign)
+                    .addComponent(btnAccept)
+                    .addComponent(btnReject))
                 .addGap(396, 396, 396))
         );
 
@@ -116,51 +162,62 @@ public class CdcManagerWorkArea extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CdcManagerWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CdcManagerWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CdcManagerWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CdcManagerWorkArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CdcManagerWorkArea().setVisible(true);
-//            }
-//        });
-//    }
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tbl.getSelectedRow();
+        if(selectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select the row to assign", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            PharmacyWorkRequest cwr = (PharmacyWorkRequest)tbl.getValueAt(selectedRow,2);
+            cwr.setReceiver(account);
+            cwr.setStatus("Pending");
+            populatetbl();
+              JOptionPane.showMessageDialog(null, "Assigned successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        // TODO add your handling code here:
+        int cdcSelectedRow = tbl.getSelectedRow();
+        if(cdcSelectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select the row to accept", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            PharmacyWorkRequest cr = (PharmacyWorkRequest)tbl.getValueAt(cdcSelectedRow, 2);
+            cr.setStatus("Forwarded to Distributor");
+            populatetbl();
+              JOptionPane.showMessageDialog(null, "Vaccine request Accepted .", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        // TODO add your handling code here:
+        int cdcSelectedRow = tbl.getSelectedRow();
+        if(cdcSelectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select the row to reject.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            PharmacyWorkRequest cr = (PharmacyWorkRequest)tbl.getValueAt(cdcSelectedRow, 2);
+            cr.setStatus("Rejected");
+            populatetbl();
+              JOptionPane.showMessageDialog(null, "Vaccine request Rejected.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRejectActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnAssign;
+    private javax.swing.JButton btnReject;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 }

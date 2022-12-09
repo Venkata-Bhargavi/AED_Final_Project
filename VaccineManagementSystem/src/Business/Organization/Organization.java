@@ -30,18 +30,18 @@ public abstract class Organization {
     
     public enum Type{
         Admin("Admin"),
-        CDCOrderOrganization("CDCOrder Organization"),
+        CDCOrderOrganization("CDC Order Organization"),
         ClinicOrganization("Clinic Organization"),
-        DistributionCenter("DistributionCenter Organization"),
-        PHDOrderOrganization("PHDOrder Organization"),
+        DistributionCenter("Distribution Center Organization"),
+        PHDOrderOrganization("PHD Order Organization"),
         SupplierOrganization("Supplier Organization"),
         EventOrganisation("Events Organisation"),
         ReceptionOrganization("Reception Organization"),
         PharmacyOrganization("Pharmacy Organization"),
         CDCBillingOrganization("CDC Billing Organization"),
         HospitalBillingOrganization("Hospital Billing Organization"),
-        InsuaranceBillingOrganization("InsuaranceBillingOrganization"),
-        DistributorBillingOrganization("DistributorBillingOrganization");
+        InsuaranceBillingOrganization("Insuarance Billing Organization"),
+        DistributorBillingOrganization("Distributor Billing Organization");
         
         private String value;
         private Type(String value) {
