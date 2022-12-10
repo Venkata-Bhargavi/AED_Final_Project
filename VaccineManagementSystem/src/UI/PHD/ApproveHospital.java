@@ -4,6 +4,22 @@
  */
 package UI.PHD;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.Enterprise.PHDEnterprise;
+import Business.Network.Network;
+import Business.WorkQueue.PHDHospitalApproval;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author bhargavi
@@ -13,8 +29,39 @@ public class ApproveHospital extends javax.swing.JPanel {
     /**
      * Creates new form ApproveHospital
      */
-    public ApproveHospital() {
+//    public ApproveHospital() {
+//        initComponents();
+//    }
+    
+    private JPanel workArea;
+    private PHDEnterprise phde;
+    private Network network;
+
+    public ApproveHospital(PHDEnterprise phde, Network network, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
+        this.phde = phde;
+        this.network = network;
+        populateHospitalTable();
+        lblApprove.setEnabled(false);
+        lblPending.setEnabled(false);
+        lblTotal.setEnabled(false);
+        btnApprove.setEnabled(false);
+
+        
+    }
+
+    private void populateHospitalTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tblHos.getModel();
+        dtm.setRowCount(0);
+        for (PHDHospitalApproval hospitalApproval : phde.getHospitalApprovalList()) {
+            Object[] row = new Object[4];
+            row[0] = hospitalApproval;
+            row[1] = hospitalApproval.getHospitalEnterprise();
+            row[2] = hospitalApproval.getHospitalStatus();
+            row[3] = hospitalApproval.getHospitalEnterprise().isHospitalApproved();
+            dtm.addRow(row);
+        }
     }
 
     /**
@@ -28,20 +75,20 @@ public class ApproveHospital extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblHos = new javax.swing.JTable();
+        btnSummary = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        lblApprove = new javax.swing.JTextField();
+        btnApprove = new javax.swing.JButton();
+        lblTotal = new javax.swing.JTextField();
+        lblPending = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Hospital Approval");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -52,12 +99,12 @@ public class ApproveHospital extends javax.swing.JPanel {
                 "Hospital Name", "PHD Status", "Approval status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblHos);
 
-        jButton1.setText("Total Approvals and Pending Requests");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSummary.setText("Total Requests Summary");
+        btnSummary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSummaryActionPerformed(evt);
             }
         });
 
@@ -67,10 +114,10 @@ public class ApproveHospital extends javax.swing.JPanel {
 
         jLabel4.setText("Total :");
 
-        jButton2.setText("Approve");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnApprove.setText("Approve");
+        btnApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnApproveActionPerformed(evt);
             }
         });
 
@@ -78,30 +125,32 @@ public class ApproveHospital extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnApprove)
+                .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(351, 351, 351)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(62, 62, 62)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(360, 360, 360)
-                            .addComponent(jButton2))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(204, 204, 204)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addGap(125, 125, 125)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(351, 351, 351)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPending, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(299, 299, 299)
+                        .addComponent(btnSummary)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,45 +161,107 @@ public class ApproveHospital extends javax.swing.JPanel {
                 .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(jButton2)
-                .addGap(221, 221, 221))
+                .addComponent(btnApprove)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel3)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblApprove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblPending, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43)
+                .addComponent(btnSummary)
+                .addGap(197, 197, 197))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    
+    
+    
+    public void requestSummaryPlots()
+    {
+        int wipRequest=0, approvedRequest=0, totalRequests=0;
+        for(PHDHospitalApproval list : phde.getHospitalApprovalList())
+        {
+           if(list.getHospitalStatus().equals("Approved"))
+           {
+               approvedRequest++;
+           }
+           if(list.getHospitalStatus().equals("Waiting for PHD Approval"))
+           {
+               wipRequest++;
+           }
+        }
+        totalRequests = approvedRequest + wipRequest;
+        lblTotal.setText(String.valueOf(totalRequests));
+        lblApprove.setText(String.valueOf(approvedRequest));
+        lblPending.setText(String.valueOf(wipRequest));
+       
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(approvedRequest, "", "Approved");
+        dataset.setValue(wipRequest, "", "pending");
+        JFreeChart chart = ChartFactory.createBarChart("Total request from Hospitals for Approval.", "", "", dataset, PlotOrientation.VERTICAL, false, true, false);
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("Bar Chart for hospital requests",chart);
+        frame.setVisible(true);
+        frame.setSize(650,350);  
+    }
+    
+    
+    private void btnSummaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSummaryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        requestSummaryPlots();       
+    }//GEN-LAST:event_btnSummaryActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        if (tblHos.getSelectedRow() >= 0) {
+            btnApprove.setEnabled(true);
+            PHDHospitalApproval hosRequestApproval = (PHDHospitalApproval) tblHos.getValueAt(tblHos.getSelectedRow(), 0);
 
+            for (Enterprise hospitalEnterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                
+                if (hosRequestApproval.getHospitalEnterprise().equals(hospitalEnterprise)) {
+                    hosRequestApproval.getHospitalEnterprise().setHospitalApproved(true);
+                    ((HospitalEnterprise) hospitalEnterprise).setHospitalApproved(true);
+                    hosRequestApproval.setHospitalStatus("Approved");
+                    break;
+                }
+                
+            }
+              JOptionPane.showMessageDialog(null, "Hospital Approved successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a hospital to Approve!");
+        }
+        populateHospitalTable();
+        btnApprove.setEnabled(false);
+    }//GEN-LAST:event_btnApproveActionPerformed
+
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnSummary;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField lblApprove;
+    private javax.swing.JTextField lblPending;
+    private javax.swing.JTextField lblTotal;
+    private javax.swing.JTable tblHos;
     // End of variables declaration//GEN-END:variables
 }

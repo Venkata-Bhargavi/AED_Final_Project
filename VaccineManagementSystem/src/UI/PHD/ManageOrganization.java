@@ -4,6 +4,12 @@
  */
 package UI.PHD;
 
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bhargavi
@@ -13,9 +19,34 @@ public class ManageOrganization extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrganization
      */
-    public ManageOrganization() {
+    JPanel workArea;
+    private OrganizationDirectory orgDirectory;
+
+    public ManageOrganization(OrganizationDirectory dir, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
+        this.orgDirectory = dir;
+        
+        
+        populateOrgTable();
+        populateOrgCB();
     }
+    
+    private void populateOrgTable(){
+        DefaultTableModel model = (DefaultTableModel) tblOrg.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Organization organization : orgDirectory.getOrganizationList()){
+            Object[] row = new Object[1];
+            row[0] = organization.getName();
+            model.addRow(row);
+        }
+    }
+     private void populateOrgCB(){
+         cbOrg.removeAllItems();
+         cbOrg.addItem(Organization.Type.PHDOrderOrganization);
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,13 +58,13 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblOrg = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbOrg = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -44,11 +75,11 @@ public class ManageOrganization extends javax.swing.JPanel {
                 "Name"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblOrg);
 
         jLabel2.setText("Organization type :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Add Organization");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +106,7 @@ public class ManageOrganization extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(34, 34, 34)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(328, 328, 328)
@@ -92,7 +123,7 @@ public class ManageOrganization extends javax.swing.JPanel {
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jButton1)
                 .addContainerGap(469, Short.MAX_VALUE))
@@ -101,15 +132,20 @@ public class ManageOrganization extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Organization.Type type = (Organization.Type) cbOrg.getSelectedItem();
+        orgDirectory.createOrganization(type);
+        populateOrgTable();
+        JOptionPane.showMessageDialog(null, "New Organization added successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cbOrg;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblOrg;
     // End of variables declaration//GEN-END:variables
 }
