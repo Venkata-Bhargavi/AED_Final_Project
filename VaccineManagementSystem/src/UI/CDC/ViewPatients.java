@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -35,15 +36,16 @@ public class ViewPatients extends javax.swing.JPanel {
     private EcoSystem system;
     private ArrayList<Float> ageList;
     private ArrayList<Integer> yearList;
-    
-    public ViewPatients( Enterprise enterprise, Network network, EcoSystem system) {
+    JPanel workArea;
+    public ViewPatients( Enterprise enterprise, Network network, EcoSystem system, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
         this.enterprise = enterprise;
-         this.network= network;
-         this.system = system;
-         ageList = new ArrayList();
-         yearList = new ArrayList();
-         populateComboBox();
+        this.network= network;
+        this.system = system;
+        ageList = new ArrayList();
+        yearList = new ArrayList();
+        populateComboBox();
     }
     
     void populateComboBox()

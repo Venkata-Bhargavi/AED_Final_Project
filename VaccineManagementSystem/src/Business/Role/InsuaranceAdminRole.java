@@ -24,7 +24,7 @@ import javax.swing.JFrame;
 public class InsuaranceAdminRole extends Role{
     @Override
     public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new InsuranceAdminWorkArea( enterprise, business);
+        return new InsuranceAdminWorkArea( enterprise, business, network);
     }
     
 }

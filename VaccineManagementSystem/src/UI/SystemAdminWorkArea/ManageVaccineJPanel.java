@@ -216,6 +216,9 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
         {
             JOptionPane.showMessageDialog(null, "Please enter vaccine Name");
         }
+        else if(Float.parseFloat(txtPrice.getText()) < 0){
+            JOptionPane.showMessageDialog(null, "Price cannot be less than 0.");
+        }
         else
         {          
             
@@ -225,6 +228,8 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
             v.setPrice(Float.parseFloat(txtPrice.getText()));
             populateVaccineTable();
             txtName.setText("");
+            txtPrice.setText("");
+            cbDisease.setSelectedIndex(-1);
             JOptionPane.showMessageDialog(null, "Vaccine added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnAddVaccineActionPerformed

@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,11 +23,11 @@ public class ManageCdcEmployee extends javax.swing.JPanel {
      */
     Enterprise enterprise;
     private OrganizationDirectory directory;
-    public ManageCdcEmployee(OrganizationDirectory directory) {
+    JPanel workArea;
+    public ManageCdcEmployee(OrganizationDirectory directory, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
         this.directory = directory;
-        
-        
         
         populateOrganizationComboBox();
         populateOrganizationEmpComboBox();

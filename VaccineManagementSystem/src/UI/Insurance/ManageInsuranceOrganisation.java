@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.Hospital;
+package UI.Insurance;
 
+import UI.Hospital.*;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import javax.swing.JOptionPane;
@@ -14,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class ManageHospitalOrganisation extends javax.swing.JPanel {
+public class ManageInsuranceOrganisation extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageHospitalOrganisation
      */
     private OrganizationDirectory directory;
     JPanel workArea;
-    public ManageHospitalOrganisation(OrganizationDirectory directory, JPanel workArea) {
+    public ManageInsuranceOrganisation(OrganizationDirectory directory, JPanel workArea) {
         initComponents();
         this.directory = directory;
         this.workArea = workArea;
@@ -41,11 +42,7 @@ public class ManageHospitalOrganisation extends javax.swing.JPanel {
     }
      private void populateCombo(){
          cbO.removeAllItems();
-         cbO.addItem(Organization.Type.ClinicOrganization);
-         cbO.addItem(Organization.Type.ReceptionOrganization);
-         cbO.addItem(Organization.Type.PharmacyOrganization);
-         cbO.addItem(Organization.Type.EventOrganisation);
-         cbO.addItem(Organization.Type.HospitalBillingOrganization);
+         cbO.addItem(Organization.Type.InsuaranceBillingOrganization);
      }
 
     /**
@@ -139,10 +136,10 @@ public class ManageHospitalOrganisation extends javax.swing.JPanel {
 
     private void btnAOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAOActionPerformed
         // TODO add your handling code here:
-           Organization.Type type = (Organization.Type) cbO.getSelectedItem();
+        Organization.Type type = (Organization.Type) cbO.getSelectedItem();
         directory.createOrganization(type);
         populateTable();
-          JOptionPane.showMessageDialog(null, "Organization added successfully.", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Organization added successfully.", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
     
     }//GEN-LAST:event_btnAOActionPerformed
 

@@ -197,7 +197,6 @@ public class SupplierManagerWorkArea extends javax.swing.JFrame {
         txtQty.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         comboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        comboBox.setForeground(new java.awt.Color(255, 153, 0));
         comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton2.setBackground(new java.awt.Color(204, 204, 204));

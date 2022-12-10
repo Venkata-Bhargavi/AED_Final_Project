@@ -15,6 +15,7 @@ import Business.WorkQueue.CDCReportingWorkRequest;
 import Business.WorkQueue.ReceptionWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import Business.vaccine.Vaccine;
+import UI.MainLoginJFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -178,6 +179,11 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 20, 833, 42));
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\jkkn7\\Downloads\\lo.png")); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1028, 12, -1, -1));
 
         jButton1.setText("Logout");
@@ -295,6 +301,14 @@ public class ClinicWorkArea extends javax.swing.JFrame {
             txtGender.setText(rw.getPatient().getGender());
         }
     }//GEN-LAST:event_btnFetchActionPerformed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(business,network);
+        ml.setVisible(true); 
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments

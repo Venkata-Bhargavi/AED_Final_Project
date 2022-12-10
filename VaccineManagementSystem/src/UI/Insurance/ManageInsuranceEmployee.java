@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.Hospital;
+package UI.Insurance;
 
+import UI.Hospital.*;
 import UI.CDC.*;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author bhargavi
  */
-public class ManageHospitalEmployee extends javax.swing.JPanel {
+public class ManageInsuranceEmployee extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCdcEmployee
@@ -26,7 +27,7 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
     private OrganizationDirectory directory;
     JPanel workArea;
     
-    public ManageHospitalEmployee(OrganizationDirectory directory, JPanel workArea) {
+    public ManageInsuranceEmployee(OrganizationDirectory directory, JPanel workArea) {
         initComponents();
         this.workArea = workArea;
         this.directory = directory;

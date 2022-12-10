@@ -46,7 +46,7 @@ public class ApproveHospital extends javax.swing.JPanel {
         lblApprove.setEnabled(false);
         lblPending.setEnabled(false);
         lblTotal.setEnabled(false);
-        btnApprove.setEnabled(false);
+//        btnApprove.setEnabled(false);
 
         
     }

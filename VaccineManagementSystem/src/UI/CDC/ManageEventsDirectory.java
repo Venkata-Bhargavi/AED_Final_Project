@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,6 +34,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
     /**
      * Creates new form ManageEventsDirectory
      */
+    JPanel workArea;
     private Enterprise enterprise;
     private Network network;
     private Vaccine selectedVaccine;
@@ -41,8 +43,9 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
     private ArrayList<RequestedVaccineQty> vaccineRequestedArrayList;
     private boolean checkVaccineRequested = false;
     int totalVaccineRemains = 0, capacityEvent = 0;
-    public ManageEventsDirectory(Enterprise enterprise,Network network,EcoSystem system) {
+    public ManageEventsDirectory(Enterprise enterprise,Network network,EcoSystem system, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
         this.enterprise = enterprise;
         this.network = network;
         this.system = system;
