@@ -202,7 +202,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Invalid Input!");
                 return;
             }
-            /// if trying to certe hospital check for PHD exist
+            /// if trying to Create hospital check for PHD existance.
             boolean typeHospital = false;
             PHDEnterprise phde = null;
             int count = 0;
@@ -217,15 +217,19 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                     }
                 }
             } else {
-                String name = txtName.getText();
+                String name = txtName.getText().toUpperCase();
                 Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(type, name);
             }
+            
+            
+//          If the enterprise is hospital then check for PHD existance then create approval request for the hospital.
+
             if (typeHospital) {
                 if (phde == null) {
                     JOptionPane.showMessageDialog(null, "Kindly create PHD Enterprise first");
                 } else if (phde != null && typeHospital && count == 1) {
-                    String name = txtName.getText();
-                    System.out.println("Hospital Name " + name);
+                    String name = txtName.getText().toUpperCase();
+//                    System.out.println("Hospital Name " + name);
                     Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(type, name);
                     HospitalEnterprise hospitalEnterprise = (HospitalEnterprise) enterprise;
 
@@ -236,6 +240,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                     phde.getHospitalApprovalList().add(phdHospitalApproval);
                 }
             }
+            txtName.setEnabled(true);
             txtName.setText("");
             populateEntTable();
             JOptionPane.showMessageDialog(null, "Enterprise added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
@@ -309,6 +314,15 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void cbEnterpriseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnterpriseNameActionPerformed
         // TODO add your handling code here:
+        if((cbEnterpriseName.getSelectedItem().toString() == "CDC") || (cbEnterpriseName.getSelectedItem().toString() == "PHD") ){
+            txtName.setEnabled(false);
+            txtName.setText(cbEnterpriseName.getSelectedItem().toString());
+            
+        }
+        else{
+            txtName.setEnabled(true);
+            txtName.setText("");
+        }
     }//GEN-LAST:event_cbEnterpriseNameActionPerformed
 
 

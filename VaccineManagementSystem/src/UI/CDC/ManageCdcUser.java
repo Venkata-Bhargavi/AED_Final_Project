@@ -10,6 +10,7 @@ import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,8 +23,11 @@ public class ManageCdcUser extends javax.swing.JPanel {
      * Creates new form ManageCdcUser
      */
     Enterprise enterprise;
-    public ManageCdcUser(Enterprise enterprise) {
+    JPanel workArea;
+    
+    public ManageCdcUser(Enterprise enterprise, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
         this.enterprise = enterprise;
         populateOrganizationComboBox();
         populateDataToTable();

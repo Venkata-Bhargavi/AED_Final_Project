@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.OrganizationDirectory;
 import UI.MainLoginJFrame;
+import java.awt.CardLayout;
 
 /**
  *
@@ -180,44 +181,56 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     private void btnMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMOActionPerformed
         // TODO add your handling code here:
         
-        ManageCdcOrganisation mo = new ManageCdcOrganisation(enterprise.getOrganizationDirectory());
+        ManageCdcOrganisation mo = new ManageCdcOrganisation(enterprise.getOrganizationDirectory(), workArea);
         workArea.add("managePatientJPanel", mo);
-        splitPane.setRightComponent(mo);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+//        splitPane.setRightComponent(mo);
     }//GEN-LAST:event_btnMOActionPerformed
 
     private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
         // TODO add your handling code here:
-        ManageCdcEmployee me = new ManageCdcEmployee(enterprise.getOrganizationDirectory());
+        ManageCdcEmployee me = new ManageCdcEmployee(enterprise.getOrganizationDirectory(), workArea);
         workArea.add("managePatientJPanel", me);
-        splitPane.setRightComponent(me);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+//        splitPane.setRightComponent(me);
     }//GEN-LAST:event_btnMEActionPerformed
 
     private void btnMUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMUActionPerformed
         // TODO add your handling code here:
-        ManageCdcUser mu = new ManageCdcUser(enterprise);
+        ManageCdcUser mu = new ManageCdcUser(enterprise, workArea);
         workArea.add("managePatientJPanel", mu);
-        splitPane.setRightComponent(mu);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+//        splitPane.setRightComponent(mu);
     }//GEN-LAST:event_btnMUActionPerformed
 
     private void btnMEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEventsActionPerformed
         // TODO add your handling code here:
-        ManageEventsDirectory mu = new ManageEventsDirectory(enterprise,network,system);
+        ManageEventsDirectory mu = new ManageEventsDirectory(enterprise,network,system, workArea);
         workArea.add("managePatientJPanel", mu);
-        splitPane.setRightComponent(mu);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+//        splitPane.setRightComponent(mu);
     }//GEN-LAST:event_btnMEventsActionPerformed
 
     private void btnVPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVPActionPerformed
         // TODO add your handling code here:
-         ViewPatients vp = new ViewPatients(enterprise,network,system);
+         ViewPatients vp = new ViewPatients(enterprise,network,system, workArea);
         workArea.add("managePatientJPanel", vp);
-        splitPane.setRightComponent(vp);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+//        splitPane.setRightComponent(vp);
     }//GEN-LAST:event_btnVPActionPerformed
 
     private void btnVURActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVURActionPerformed
         // TODO add your handling code here:
-        VaccineUsageReport vp = new VaccineUsageReport(enterprise,network,system);
+        VaccineUsageReport vp = new VaccineUsageReport(enterprise,network,system,workArea);
         workArea.add("managePatientJPanel", vp);
-        splitPane.setRightComponent(vp);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+//        splitPane.setRightComponent(vp);
     }//GEN-LAST:event_btnVURActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -226,7 +239,6 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         this.setVisible(false);
         MainLoginJFrame ml = new MainLoginJFrame(system,network);
         ml.setVisible(true); 
-        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**

@@ -13,6 +13,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class ManageCdcOrganisation extends javax.swing.JPanel {
@@ -21,12 +22,13 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
      * Creates new form ManageCdcOrganisation
      */
     Enterprise enterprise;
-        private OrganizationDirectory orgDirectory;
-
+    private OrganizationDirectory orgDirectory;
+    JPanel workArea;
 
   
-    public ManageCdcOrganisation(OrganizationDirectory orgDirectory){
+    public ManageCdcOrganisation(OrganizationDirectory orgDirectory, JPanel workArea){
         initComponents();
+        this.workArea = workArea;
         this.orgDirectory = orgDirectory;
         populateTable();
         populateComboBox();

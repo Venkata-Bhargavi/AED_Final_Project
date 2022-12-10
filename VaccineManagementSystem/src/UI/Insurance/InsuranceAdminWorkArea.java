@@ -6,6 +6,9 @@ package UI.Insurance;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import UI.MainLoginJFrame;
+import java.awt.CardLayout;
 
 /**
  *
@@ -19,11 +22,12 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
     
     private Enterprise enterprise;
     private EcoSystem system;
-    
-    public InsuranceAdminWorkArea(Enterprise enterprise, EcoSystem sys) {
+    private Network network;
+    public InsuranceAdminWorkArea(Enterprise enterprise, EcoSystem sys, Network network) {
         initComponents();
         this.enterprise = enterprise;
         this.system= sys;
+        this.network = network;
     }
 
     /**
@@ -55,10 +59,25 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
         });
 
         jButton2.setText("Manage Employee");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Logout");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Manage Users");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
@@ -91,18 +110,7 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(controlPanel);
 
         workArea.setPreferredSize(new java.awt.Dimension(800, 800));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
-        );
-
+        workArea.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,7 +133,40 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        ManageInsuranceOrganisation mcojp = new ManageInsuranceOrganisation(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("ManageInsuaranceOrganizationJPanel", mcojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        ManageInsuranceEmployee mcojp = new ManageInsuranceEmployee(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("ManageInsuaranceOrganizationJPanel", mcojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        ManageInsuranceUser mcojp = new ManageInsuranceUser(enterprise, workArea);
+        workArea.add("ManageInsuaranceOrganizationJPanel", mcojp);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

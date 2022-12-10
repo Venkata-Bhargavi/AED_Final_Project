@@ -6,6 +6,8 @@ package UI.Hospital;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import UI.MainLoginJFrame;
 import java.awt.CardLayout;
 
 /**
@@ -19,11 +21,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
      */
     private EcoSystem system;
     private Enterprise enterprise;
-    
-    public HospitalAdmin(EcoSystem system, Enterprise enterprise) {
+    private Network network;
+    public HospitalAdmin(EcoSystem system, Enterprise enterprise, Network network) {
         initComponents();
         this.system = system;
         this.enterprise = enterprise;
+        this.network = network;
     }
 
     /**
@@ -44,7 +47,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1305, 800));
 
         jSplitPane1.setPreferredSize(new java.awt.Dimension(1305, 800));
 
@@ -65,6 +67,11 @@ public class HospitalAdmin extends javax.swing.JFrame {
         });
 
         btnLog.setText("Logout");
+        btnLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogActionPerformed(evt);
+            }
+        });
 
         btnMU.setText("Manage Users");
         btnMU.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +85,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnMU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -104,18 +111,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(controlPanel);
 
         workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 938, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 793, Short.MAX_VALUE)
-        );
-
+        workArea.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,20 +130,16 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
     private void btnMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMOActionPerformed
         // TODO add your handling code here:
-          ManageHospitalOrganisation mnp = new ManageHospitalOrganisation(enterprise.getOrganizationDirectory(), workArea);
+        ManageHospitalOrganisation mnp = new ManageHospitalOrganisation(enterprise.getOrganizationDirectory(), workArea);
         workArea.add("manageNetworkJPanel", mnp);
-//        splitPane.setRightComponent(mnp);
-
         CardLayout cardlayout = (CardLayout) workArea.getLayout();
         cardlayout.next(workArea);  
     }//GEN-LAST:event_btnMOActionPerformed
 
     private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
         // TODO add your handling code here:
-         ManageHospitalEmployee mnp = new ManageHospitalEmployee(enterprise.getOrganizationDirectory(), workArea);
-        workArea.add("manageNetworkJPanel", mnp);
-//        splitPane.setRightComponent(mnp);
-
+        ManageHospitalEmployee mep = new ManageHospitalEmployee(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", mep);
         CardLayout cardlayout = (CardLayout) workArea.getLayout();
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnMEActionPerformed
@@ -156,11 +148,16 @@ public class HospitalAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         ManageHospitalUser mhu = new ManageHospitalUser(enterprise, workArea);
         workArea.add("manageNetworkJPanel", mhu);
-//        splitPane.setRightComponent(mnp);
-
         CardLayout cardlayout = (CardLayout) workArea.getLayout();
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnMUActionPerformed
+
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+    }//GEN-LAST:event_btnLogActionPerformed
 
     /**
      * @param args the command line arguments

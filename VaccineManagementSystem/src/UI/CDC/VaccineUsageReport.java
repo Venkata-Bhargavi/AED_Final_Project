@@ -13,6 +13,7 @@ import Business.Network.Network;
 import Business.WorkQueue.CDCReportingWorkRequest;
 import Business.WorkQueue.PharmacyWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,9 +29,11 @@ public class VaccineUsageReport extends javax.swing.JPanel {
     private Network network;
     private EcoSystem system;
     private HospitalDirectory hdir;
+    JPanel workArea;
     
-    public VaccineUsageReport(Enterprise enterprise, Network network, EcoSystem system) {
+    public VaccineUsageReport(Enterprise enterprise, Network network, EcoSystem system, JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
         this.enterprise = enterprise;
         this.network = network;
         this.system = system;

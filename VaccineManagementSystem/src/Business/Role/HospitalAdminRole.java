@@ -25,7 +25,7 @@ public class HospitalAdminRole extends Role{
 
     @Override
     public JFrame createWorkArea( UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new HospitalAdmin(business, enterprise);
+        return new HospitalAdmin(business, enterprise, network);
     }
     
 }
