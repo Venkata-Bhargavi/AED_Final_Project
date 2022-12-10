@@ -7,8 +7,16 @@ package UI.Hospital.Clinic;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.ClinicOrganization;
 import Business.Organization.Organization;
+import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CDCReportingWorkRequest;
+import Business.WorkQueue.ReceptionWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import Business.vaccine.Vaccine;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,8 +27,53 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form ClinicWorkarean
      */
+    
+    private UserAccount account;
+    private ClinicOrganization clinicOrganization;
+    private Enterprise enterprise;
+    private EcoSystem business;
+    private Network network;
+    
     public ClinicWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
+         this.account = account;
+        this.clinicOrganization = clinicOrganization;
+        this.enterprise = enterprise;
+        this.business = business;
+        this.network = network;
+        populateCBVaccine();
+        populateSelectedPatient();
+    }
+    
+    void populateCBVaccine() {
+        cbVaccine.removeAllItems();
+        for (Vaccine vaccine : business.getVaccineDirectory().getVaccineList()) {
+            cbVaccine.addItem(vaccine);
+        }
+    }
+
+    void populateSelectedPatient() {
+        DefaultTableModel dtm_ = (DefaultTableModel) jTablePatientDetails.getModel();
+        dtm_.setRowCount(0);
+
+        for (WorkRequest work : enterprise.getWorkQueue().getWorkRequestList()) {
+
+            if (work instanceof ReceptionWorkRequest) {
+                //  for(WorkRequest work : receiptionOrganization.getWorkQueue().getWorkRequestList())
+                //{
+                Object[] row = new Object[8];
+                row[0] = ((ReceptionWorkRequest) work).getPatient().getName();
+                row[1] = ((ReceptionWorkRequest) work).getPatient().getAge();
+                row[2] = work;
+                row[3] = ((ReceptionWorkRequest) work).getPatient().getGender();
+                row[4] = ((ReceptionWorkRequest) work).getVaccine();
+                row[5] = ((ReceptionWorkRequest) work).getRequestQuantity();
+                row[6] = work.getSender();
+                row[7] = work.getReceiver();
+                dtm_.addRow(row);
+            }
+
+        }
     }
 
     /**
@@ -40,7 +93,7 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtGender = new javax.swing.JTextField();
-        vaccineComboBox = new javax.swing.JComboBox();
+        cbVaccine = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtQty = new javax.swing.JTextField();
@@ -48,8 +101,14 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnAssign = new javax.swing.JButton();
+        btnFetch = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(1100, 800));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTablePatientDetails.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTablePatientDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -62,9 +121,12 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTablePatientDetails);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 133, 1062, 145));
+
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Age:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(459, 438, -1, -1));
 
         txtAge.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtAge.setForeground(new java.awt.Color(255, 153, 0));
@@ -73,133 +135,93 @@ public class ClinicWorkArea extends javax.swing.JFrame {
                 txtAgeActionPerformed(evt);
             }
         });
+        jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 437, 153, -1));
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtName.setForeground(new java.awt.Color(255, 153, 0));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 393, 153, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Vaccine Required : ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 515, -1, -1));
 
         txtGender.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtGender.setForeground(new java.awt.Color(255, 153, 0));
+        jPanel1.add(txtGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 476, 153, -1));
 
-        vaccineComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbVaccine.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel1.add(cbVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 514, 153, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Gender:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 477, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Qty:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 559, -1, -1));
 
         txtQty.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtQty.setForeground(new java.awt.Color(255, 153, 0));
+        jPanel1.add(txtQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 558, 153, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Name:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 394, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Clinic WorkArea");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 20, 833, 42));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\jkkn7\\Downloads\\lo.png")); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1028, 12, -1, -1));
 
         jButton1.setText("Logout");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(916, 88, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(vaccineComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtGender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(71, 71, 71)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(vaccineComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(172, Short.MAX_VALUE))
-        );
+        btnAssign.setText("Assign");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAssign, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 306, 86, -1));
+
+        btnFetch.setText("Fetch Patient Details");
+        btnFetch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFetchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnFetch, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 306, 188, -1));
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 622, 86, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1160, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -208,6 +230,71 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private void txtAgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAgeActionPerformed
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = jTablePatientDetails.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select the row to assign the vaccine", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            ReceptionWorkRequest cwr = (ReceptionWorkRequest) jTablePatientDetails.getValueAt(selectedRow, 2);
+            cwr.setReceiver(account);
+            cwr.setStatus("Assigned");
+            populateSelectedPatient();
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = jTablePatientDetails.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Select patient details to prescribe a vaccine.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (txtName.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Patient Name");
+        } else if (txtAge.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Age");
+        } else if (txtQty.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter the Vaccine Quantity");
+        } else {
+
+            ReceptionWorkRequest rw = (ReceptionWorkRequest) jTablePatientDetails.getValueAt(selectedRow, 2);
+            rw.setStatus("Requested Vaccine to Pharmacy");
+            rw.setVaccine((Vaccine) cbVaccine.getSelectedItem());
+            rw.setRequestQuantity(Integer.parseInt(txtQty.getText()));
+            rw.setSender(account);
+            rw.setPrice(((Vaccine) cbVaccine.getSelectedItem()).getPrice());
+            Patient p = rw.getPatient();
+            CDCReportingWorkRequest crwr = new CDCReportingWorkRequest();
+            crwr.setPatient(p);
+            crwr.setVaccine((Vaccine) cbVaccine.getSelectedItem());
+            crwr.setRequestedQty(Integer.parseInt(txtQty.getText()));
+            enterprise.getWorkQueue().getWorkRequestList().add(crwr);
+            network.getWorkQueue().getWorkRequestList().add(crwr);
+            populateSelectedPatient();
+            txtName.setText("");
+            txtAge.setText("");
+            txtQty.setText("");
+            JOptionPane.showMessageDialog(null, "Vaccine Requested successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+
+
+    }                      
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnFetchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFetchActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = jTablePatientDetails.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Select a patient to prescribe a vaccine.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            ReceptionWorkRequest rw = (ReceptionWorkRequest) jTablePatientDetails.getValueAt(selectedRow, 2);
+            txtName.setText(rw.getPatient().getName());
+            txtAge.setText(String.valueOf(rw.getPatient().getAge()));
+            txtGender.setText(rw.getPatient().getGender());
+        }
+    }//GEN-LAST:event_btnFetchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,6 +333,10 @@ public class ClinicWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssign;
+    private javax.swing.JButton btnFetch;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox cbVaccine;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -261,6 +352,5 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private javax.swing.JTextField txtGender;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtQty;
-    private javax.swing.JComboBox vaccineComboBox;
     // End of variables declaration//GEN-END:variables
 }
