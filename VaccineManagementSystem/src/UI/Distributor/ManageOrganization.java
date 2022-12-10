@@ -4,6 +4,12 @@
  */
 package UI.Distributor;
 
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bhargavi
@@ -13,9 +19,33 @@ public class ManageOrganization extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrganization
      */
-    public ManageOrganization() {
+    private OrganizationDirectory directory;
+    JPanel workArea;
+    public ManageOrganization(OrganizationDirectory directory,JPanel workArea) {
         initComponents();
+        this.workArea = workArea;
+        this.directory = directory;
+        
+        populateTable();
+        populateCombo();
     }
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();        
+        model.setRowCount(0);        
+        for (Organization organization : directory.getOrganizationList())  
+        {
+            Object[] row = new Object[1];
+            row[0] = organization;
+            model.addRow(row);
+        }
+    }
+     private void populateCombo(){
+         cbO.removeAllItems();
+         cbO.addItem(Organization.Type.DistributionCenter);
+         cbO.addItem(Organization.Type.SupplierOrganization);
+         cbO.addItem(Organization.Type.DistributorBillingOrganization);
+         
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,15 +58,15 @@ public class ManageOrganization extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cbO = new javax.swing.JComboBox();
+        btnAO = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Manage Organization");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -47,16 +77,16 @@ public class ManageOrganization extends javax.swing.JPanel {
                 "Name"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl);
 
         jLabel2.setText("Organization type :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Add Organization");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAO.setText("Add Organization");
+        btnAO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAOActionPerformed(evt);
             }
         });
 
@@ -75,11 +105,11 @@ public class ManageOrganization extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(34, 34, 34)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(328, 328, 328)
-                        .addComponent(jButton1)))
+                        .addComponent(btnAO)))
                 .addContainerGap(264, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,24 +122,29 @@ public class ManageOrganization extends javax.swing.JPanel {
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(jButton1)
+                .addComponent(btnAO)
                 .addContainerGap(469, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+             Organization.Type type = (Organization.Type) cbO.getSelectedItem();
+        directory.createOrganization(type);
+        populateTable();
+          JOptionPane.showMessageDialog(null, "Organization added successfully.", "Message", JOptionPane.INFORMATION_MESSAGE);
+    
+    }//GEN-LAST:event_btnAOActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAO;
+    private javax.swing.JComboBox cbO;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 }
