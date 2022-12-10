@@ -6,8 +6,13 @@ package UI.Distributor;
 
 import Business.Enterprise.Enterprise;
 import Business.Organization.OrganizationDirectory;
+import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import static java.time.Clock.system;
 import javax.swing.JPanel;
+import Business.DB4OUtil.DB4OUtil;
+import Business.EcoSystem;
+import Business.Network.Network;
 
 /**
  *
@@ -20,9 +25,14 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
      */
     private OrganizationDirectory directory;
     private Enterprise enterprise;
-    public DistributorAdminWorkArea(Enterprise enterprise) {
+    private EcoSystem system;
+    private Network network;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    public DistributorAdminWorkArea(EcoSystem system, Enterprise enterprise, Network network) {
         initComponents();
+        this.system = system;
         this.enterprise = enterprise;
+        this.network = network;
     }
 
     /**
@@ -43,7 +53,6 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1305, 800));
 
         jSplitPane1.setPreferredSize(new java.awt.Dimension(1305, 800));
 
@@ -57,8 +66,18 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         });
 
         btnME.setText("Manage Employee");
+        btnME.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMEActionPerformed(evt);
+            }
+        });
 
         btnLog.setText("Logout");
+        btnLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogActionPerformed(evt);
+            }
+        });
 
         btnMU.setText("Manage Users");
         btnMU.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +154,22 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         CardLayout cardlayout = (CardLayout) workArea.getLayout();
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnMUActionPerformed
+
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+        dB4OUtil.storeSystem(system);
+    }//GEN-LAST:event_btnLogActionPerformed
+
+    private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
+        // TODO add your handling code here:
+         ManageEmployee me = new ManageEmployee(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", me);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btnMEActionPerformed
 
     /**
      * @param args the command line arguments

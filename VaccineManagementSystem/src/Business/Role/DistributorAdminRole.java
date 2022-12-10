@@ -25,8 +25,8 @@ import javax.swing.JFrame;
 public class DistributorAdminRole extends Role{
 
     @Override
-    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new DistributorAdminWorkArea(enterprise);
+    public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,Network network) {
+        return new DistributorAdminWorkArea(system,enterprise,network);
     }
     
 }

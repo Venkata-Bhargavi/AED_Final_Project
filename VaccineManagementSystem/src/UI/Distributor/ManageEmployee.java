@@ -2,29 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.CDC;
+package UI.Distributor;
 
+import UI.CDC.*;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author bhargavi
  */
-public class ManageCdcEmployee extends javax.swing.JPanel {
+public class ManageEmployee extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCdcEmployee
      */
     Enterprise enterprise;
     private OrganizationDirectory directory;
-    public ManageCdcEmployee(OrganizationDirectory directory) {
+    JPanel workArea;
+    public ManageEmployee(OrganizationDirectory directory,JPanel workArea) {
         initComponents();
         this.directory = directory;
+        this.workArea = workArea;
         
         
         
@@ -90,7 +94,7 @@ public class ManageCdcEmployee extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jLabel1.setText("Add Employee");
+        jLabel1.setText("Manage Employee");
 
         jLabel2.setText("Filter by Organization");
 
