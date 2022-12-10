@@ -139,6 +139,11 @@ public class ManageUser extends javax.swing.JPanel {
         });
 
         cbE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEActionPerformed(evt);
+            }
+        });
 
         cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -297,6 +302,10 @@ public class ManageUser extends javax.swing.JPanel {
             populateRoleComboBox(organization);
         }
     }//GEN-LAST:event_cbOActionPerformed
+
+    private void cbEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

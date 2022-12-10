@@ -6,6 +6,7 @@ package UI.Hospital;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import java.awt.CardLayout;
 
 /**
  *
@@ -16,8 +17,8 @@ public class HospitalAdmin extends javax.swing.JFrame {
     /**
      * Creates new form HospitalAdmin
      */
-    EcoSystem system;
-    Enterprise enterprise;
+    private EcoSystem system;
+    private Enterprise enterprise;
     
     public HospitalAdmin(EcoSystem system, Enterprise enterprise) {
         initComponents();
@@ -36,28 +37,41 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnMO = new javax.swing.JButton();
+        btnME = new javax.swing.JButton();
+        btnLog = new javax.swing.JButton();
+        btnMU = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1305, 800));
+
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(1305, 800));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
 
-        jButton1.setText("Manage Organisation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMO.setText("Manage Organisation");
+        btnMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMOActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage Employee");
+        btnME.setText("Manage Employee");
+        btnME.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMEActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Logout");
+        btnLog.setText("Logout");
 
-        jButton4.setText("Manage Users");
+        btnMU.setText("Manage Users");
+        btnMU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMUActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
@@ -67,29 +81,29 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnMU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnME, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addGap(314, 314, 314)
-                .addComponent(jButton1)
+                .addComponent(btnMO)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnME)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnMU)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnLog)
                 .addGap(35, 35, 35))
         );
 
         jSplitPane1.setLeftComponent(controlPanel);
 
-        workArea.setPreferredSize(new java.awt.Dimension(800, 800));
+        workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
 
         javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
         workArea.setLayout(workAreaLayout);
@@ -118,9 +132,35 @@ public class HospitalAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+          ManageHospitalOrganisation mnp = new ManageHospitalOrganisation(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", mnp);
+//        splitPane.setRightComponent(mnp);
+
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);  
+    }//GEN-LAST:event_btnMOActionPerformed
+
+    private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
+        // TODO add your handling code here:
+         ManageHospitalEmployee mnp = new ManageHospitalEmployee(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", mnp);
+//        splitPane.setRightComponent(mnp);
+
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btnMEActionPerformed
+
+    private void btnMUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMUActionPerformed
+        // TODO add your handling code here:
+        ManageHospitalUser mhu = new ManageHospitalUser(enterprise, workArea);
+        workArea.add("manageNetworkJPanel", mhu);
+//        splitPane.setRightComponent(mnp);
+
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btnMUActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,11 +201,11 @@ public class HospitalAdmin extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnME;
+    private javax.swing.JButton btnMO;
+    private javax.swing.JButton btnMU;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
