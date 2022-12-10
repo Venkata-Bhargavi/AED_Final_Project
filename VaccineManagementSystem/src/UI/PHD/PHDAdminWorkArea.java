@@ -8,6 +8,9 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.PHDEnterprise;
 import Business.Network.Network;
+import UI.MainLoginJFrame;
+import UI.SystemAdminWorkArea.ManageNetworkJPanel;
+import java.awt.CardLayout;
 
 /**
  *
@@ -41,71 +44,91 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnOrg = new javax.swing.JButton();
+        btnEmp = new javax.swing.JButton();
+        btnUsers = new javax.swing.JButton();
+        btnRequest = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(1305, 800));
+
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
 
-        jButton1.setText("Manage Organisation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnOrg.setText("Manage Organisation");
+        btnOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnOrgActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage Employee");
+        btnEmp.setText("Manage Employee");
+        btnEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Manage Users");
+        btnUsers.setText("Manage Users");
+        btnUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsersActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Manage Hospitals");
+        btnRequest.setText("Manage Requests");
+        btnRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestActionPerformed(evt);
+            }
+        });
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnOrg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUsers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRequest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jButton1)
+                .addGap(201, 201, 201)
+                .addComponent(btnOrg)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnEmp)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnUsers)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addComponent(btnRequest)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(29, 29, 29))
         );
 
         jSplitPane1.setLeftComponent(controlPanel);
 
-        workArea.setPreferredSize(new java.awt.Dimension(800, 800));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 758, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
-        );
-
+        workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
+        workArea.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,9 +147,47 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrgActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ManageOrganization mnp = new ManageOrganization(phdent.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", mnp);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);        
+    }//GEN-LAST:event_btnOrgActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpActionPerformed
+        // TODO add your handling code here:
+        ManageEmployee moe = new ManageEmployee(phdent.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", moe);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);  
+        
+        
+    }//GEN-LAST:event_btnEmpActionPerformed
+
+    private void btnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsersActionPerformed
+        // TODO add your handling code here:
+        ManageUser mou = new ManageUser(phdent, workArea);
+        workArea.add("manageNetworkJPanel", mou);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btnUsersActionPerformed
+
+    private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
+        // TODO add your handling code here:
+        ApproveHospital aoh = new ApproveHospital(phdent, network, workArea);
+        workArea.add("manageNetworkJPanel", aoh);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btnRequestActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -167,11 +228,12 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEmp;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnOrg;
+    private javax.swing.JButton btnRequest;
+    private javax.swing.JButton btnUsers;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables

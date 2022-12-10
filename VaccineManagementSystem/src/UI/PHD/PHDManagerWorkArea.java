@@ -78,7 +78,6 @@ public class PHDManagerWorkArea extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 10, true));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
