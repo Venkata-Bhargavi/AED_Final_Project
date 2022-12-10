@@ -82,6 +82,11 @@ public class ManageOrganization extends javax.swing.JPanel {
         jLabel2.setText("Organization type :");
 
         cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbOActionPerformed(evt);
+            }
+        });
 
         btnAO.setText("Add Organization");
         btnAO.addActionListener(new java.awt.event.ActionListener() {
@@ -105,12 +110,12 @@ public class ManageOrganization extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(34, 34, 34)
-                                .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(328, 328, 328)
                         .addComponent(btnAO)))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,6 +142,10 @@ public class ManageOrganization extends javax.swing.JPanel {
           JOptionPane.showMessageDialog(null, "Organization added successfully.", "Message", JOptionPane.INFORMATION_MESSAGE);
     
     }//GEN-LAST:event_btnAOActionPerformed
+
+    private void cbOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbOActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
