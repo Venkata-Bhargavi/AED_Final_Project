@@ -48,17 +48,17 @@ public class SupplierManagerWorkArea extends javax.swing.JFrame {
         this.enterprise = enterprise;
         this.business = business;
 
-        for (Supplier supplier : supplierOrganization.getSupplierList().getSupplierList()) {
-            if (account.getEmployee().getName().equals(supplier.getSupplierName())) {
-                s = supplier;
-                System.out.println("supplier name" + s.getSupplierName());
-            }
-        }
-        System.out.println("busi" + business.getWorkQueue().getWorkRequestList().size());
-        if (s.getWorkQueue() == null) {
-            WorkQueue w = new WorkQueue();
-            s.setWorkQueue(w);
-        }
+//        for (Supplier supplier : supplierOrganization.getSupplierList().getSupplierList()) {
+//            if (account.getEmployee().getName().equals(supplier.getSupplierName())) {
+//                s = supplier;
+//                System.out.println("supplier name" + s.getSupplierName());
+//            }
+//        }
+//        System.out.println("busi" + business.getWorkQueue().getWorkRequestList().size());
+//        if (s.getWorkQueue() == null) {
+//            WorkQueue w = new WorkQueue();
+//            s.setWorkQueue(w);
+//        }
 
         populateRequestTbl();
         populateCombo();
