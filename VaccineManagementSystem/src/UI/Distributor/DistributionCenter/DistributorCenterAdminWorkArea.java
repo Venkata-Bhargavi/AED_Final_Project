@@ -106,6 +106,8 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
+        lblL1.setIcon(logoImgThisImg);
+
     }
     
     

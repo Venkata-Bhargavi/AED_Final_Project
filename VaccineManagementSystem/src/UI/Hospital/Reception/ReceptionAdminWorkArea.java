@@ -172,16 +172,13 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         jLabel1.setText("Name:");
 
         txtName.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        txtName.setForeground(new java.awt.Color(255, 153, 0));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jLabel2.setText("Age:");
 
         txtAge.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        txtAge.setForeground(new java.awt.Color(255, 153, 0));
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +197,6 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         jLabel4.setText("Date:");
 
         txtDate.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        txtDate.setForeground(new java.awt.Color(255, 153, 0));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -378,7 +374,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Date date = null;
-        if (!txtDate.getText().equals("")) {
+        if ((!txtDate.getText().equals("")) || (txtDate.getText().length() == (10) )) {
             String format = "dd/MM/yyyy";
             String createFlightTimeValidate = txtDate.getText();
 
@@ -393,11 +389,14 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         if (txtName.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "Please enter Patient Name.");
-        } else if (txtAge.getText().equals("")) {
+        } else if (txtAge.getText().equals("") ) {
             JOptionPane.showMessageDialog(null, "Please enter Age.");
-        } else if (txtDate.getText().equals("")) {
+        } else if (Integer.parseInt(txtAge.getText()) <=0 ) {
+            JOptionPane.showMessageDialog(null, "Please enter Valid Age.");
+        }
+        else if ((txtDate.getText().equals("")) || (txtDate.getText().length() != 10 )) {
             JOptionPane.showMessageDialog(null, "Please enter Date.");
-        } else if (date == null) {
+        } else if ((date == null) || (txtDate.getText().length() != 10 )) {
             JOptionPane.showMessageDialog(null, "Please enter valid date");
         }
 

@@ -39,14 +39,13 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form PharmacyAdminWorkArea
      */
-    private JPanel userProcessContainer;
-    private UserAccount account;
-    private PharmacyOrganization pharmacyOrganization;
-    private HospitalEnterprise hospitalEnterprise;
-    private EcoSystem business;
-    private Network network;
-    private final int VACINE_THRESHOLD = 5;
-    private final int VACINE_AUTO_ORDER_QTY = 10;
+    private UserAccount ua;
+    private PharmacyOrganization pharOrganization;
+    private HospitalEnterprise hospEnt;
+    private EcoSystem system;
+    private Network net;
+    private final int VACCINE_THRESHOLD = 5;
+    private final int VACCINE_AUTOORDER_QTY = 10;
     //private Pharmacy pharmacy;
     //private VaccineInventory vaccineInventory;
     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
@@ -55,11 +54,11 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 
     public PharmacyAdminWorkArea(UserAccount account, PharmacyOrganization pharmacyOrganization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
-        this.account = account;
-        this.pharmacyOrganization = pharmacyOrganization;
-        this.hospitalEnterprise = (HospitalEnterprise) enterprise;
-        this.business = business;
-        this.network = network;
+        this.ua = account;
+        this.pharOrganization = pharmacyOrganization;
+        this.hospEnt = (HospitalEnterprise) enterprise;
+        this.system = business;
+        this.net = network;
           ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
         Image lI = logoimgIcon.getImage();
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
@@ -79,11 +78,11 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         boolean orderAutomtion = false, addInPWR = false;
         Vaccine v = null;
         WorkRequest wrTest = null;
-        if (!pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
-            if (hospitalEnterprise.isHospitalApproved()) {
-                for (Vaccine vaccine : pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
-                    if (vaccine.getQuantity() < VACINE_THRESHOLD) {
-                        for (WorkRequest wr : pharmacyOrganization.getWorkQueue().getWorkRequestList()) {
+        if (!pharOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
+            if (hospEnt.isHospitalApproved()) {
+                for (Vaccine vaccine : pharOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
+                    if (vaccine.getQuantity() < VACCINE_THRESHOLD) {
+                        for (WorkRequest wr : pharOrganization.getWorkQueue().getWorkRequestList()) {
                             if (vaccine.equals(wr.getVaccine())) {
 //                                if (!((wr.getStatus().equalsIgnoreCase("Sent to PHD"))
 //                                        || (wr.getStatus().equalsIgnoreCase("Pending"))
@@ -107,17 +106,17 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 
                                 PharmacyWorkRequest pwr = new PharmacyWorkRequest();
                                 pwr.setVaccine(v);
-                                pwr.setRequestedQty(VACINE_AUTO_ORDER_QTY);
+                                pwr.setRequestedQty(VACCINE_AUTOORDER_QTY);
                                 pwr.setStatus("Sent to PHD");
-                                pwr.setSender(account);
-                                pwr.setEnterpeise(hospitalEnterprise);
-                                pwr.setOrganization(pharmacyOrganization);
+                                pwr.setSender(ua);
+                                pwr.setEnterpeise(hospEnt);
+                                pwr.setOrganization(pharOrganization);
                                 pwr.setIncludedFlag(false);
 
-                                pharmacyOrganization.getWorkQueue().getWorkRequestList().add(pwr);
-                                hospitalEnterprise.getWorkQueue().getWorkRequestList().add(pwr);
-                                network.getWorkQueue().getWorkRequestList().add(pwr);
-                                account.getWorkQueue().getWorkRequestList().add(pwr);
+                                pharOrganization.getWorkQueue().getWorkRequestList().add(pwr);
+                                hospEnt.getWorkQueue().getWorkRequestList().add(pwr);
+                                net.getWorkQueue().getWorkRequestList().add(pwr);
+                                ua.getWorkQueue().getWorkRequestList().add(pwr);
                                 //business.getWorkQueue().getWorkRequestList().add(pwr);
                                 populateWorkQueueTable();
                             }
@@ -137,16 +136,16 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 
     public void populateBox() {
         vaccineComboBox.removeAllItems();
-        for (Vaccine vaccine : business.getVaccineDirectory().getVaccineList()) {
+        for (Vaccine vaccine : system.getVaccineDirectory().getVaccineList()) {
             vaccineComboBox.addItem(vaccine);
         }
     }
 
     void populateTbl() {
 
-        DefaultTableModel dtm_ = (DefaultTableModel) tblRequestfromClinic.getModel();
+        DefaultTableModel dtm_ = (DefaultTableModel) tblVaccineRequest.getModel();
         dtm_.setRowCount(0);
-        for (WorkRequest work : hospitalEnterprise.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest work : hospEnt.getWorkQueue().getWorkRequestList()) {
             if (work instanceof ReceptionWorkRequest) {
                 Object[] row = new Object[8];
                 row[0] = ((ReceptionWorkRequest) work).getPatient().getName();
@@ -164,7 +163,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 
     public void populateVaccineInventory() {
 
-        if (!pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
+        if (!pharOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
 
 //            System.out.println("isEmpty " + !pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty());
 //            System.out.println("size " + pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList().size());
@@ -172,7 +171,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 //            System.out.println("Vaccine "+vx);
             DefaultTableModel dtm = (DefaultTableModel) jTableVaccineInventory.getModel();
             dtm.setRowCount(0);
-            for (Vaccine v : pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
+            for (Vaccine v : pharOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
                 System.out.println("Vaccine " + v);
                 Object[] row = new Object[4];
                 row[0] = v.getVaccineId();
@@ -189,7 +188,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) tblWorkQueue.getModel();
         dtm.setRowCount(0);
 
-        for (WorkRequest wr : pharmacyOrganization.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest wr : pharOrganization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[4];
             row[0] = wr.getVaccine().getVaccineName();
             row[1] = ((PharmacyWorkRequest) wr).getRequestedQty();
@@ -218,7 +217,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         vaccineComboBox = new javax.swing.JComboBox();
         jButtonRequest = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblRequestfromClinic = new javax.swing.JTable();
+        tblVaccineRequest = new javax.swing.JTable();
         jButtonAssignToMe = new javax.swing.JButton();
         jButtonAccept = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -278,8 +277,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(204, 204, 204));
 
-        tblRequestfromClinic.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        tblRequestfromClinic.setModel(new javax.swing.table.DefaultTableModel(
+        tblVaccineRequest.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tblVaccineRequest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -287,8 +286,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 "Patient Name", "Patient Age", "Status", "Vaccine", "Price", "Qty", "Sender", "Receiver"
             }
         ));
-        tblRequestfromClinic.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tblRequestfromClinic);
+        tblVaccineRequest.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblVaccineRequest);
 
         jButtonAssignToMe.setBackground(new java.awt.Color(204, 204, 204));
         jButtonAssignToMe.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -456,22 +455,22 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please enter Quantity.");
         } else {
 
-            if (hospitalEnterprise.isHospitalApproved()) {
+            if (hospEnt.isHospitalApproved()) {
                 PharmacyWorkRequest pwr = new PharmacyWorkRequest();
                 pwr.setVaccine((Vaccine) vaccineComboBox.getSelectedItem());
                 pwr.setRequestedQty(Integer.parseInt(txtVaccineQty.getText()));
                 pwr.setStatus("Sent to PHD");
-                pwr.setSender(account);
-                pwr.setEnterpeise(hospitalEnterprise);
-                pwr.setOrganization(pharmacyOrganization);
+                pwr.setSender(ua);
+                pwr.setEnterpeise(hospEnt);
+                pwr.setOrganization(pharOrganization);
                 pwr.setIncludedFlag(false);
-                pwr.setEnterpriseName(hospitalEnterprise.getName());
+                pwr.setEnterpriseName(hospEnt.getName());
                 pwr.setPincode(txtPinCode.getText());
 
-                pharmacyOrganization.getWorkQueue().getWorkRequestList().add(pwr);
-                hospitalEnterprise.getWorkQueue().getWorkRequestList().add(pwr);
-                network.getWorkQueue().getWorkRequestList().add(pwr);
-                account.getWorkQueue().getWorkRequestList().add(pwr);
+                pharOrganization.getWorkQueue().getWorkRequestList().add(pwr);
+                hospEnt.getWorkQueue().getWorkRequestList().add(pwr);
+                net.getWorkQueue().getWorkRequestList().add(pwr);
+                ua.getWorkQueue().getWorkRequestList().add(pwr);
                 //business.getWorkQueue().getWorkRequestList().add(pwr);
                 populateWorkQueueTable();
                 txtVaccineQty.setText("");
@@ -485,12 +484,12 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
     private void jButtonAssignToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignToMeActionPerformed
         // TODO add your handling code here:
 
-        int selectedRow = tblRequestfromClinic.getSelectedRow();
+        int selectedRow = tblVaccineRequest.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select the row to assign Pharmacy.", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            ReceptionWorkRequest cwr = (ReceptionWorkRequest) tblRequestfromClinic.getValueAt(selectedRow, 2);
-            cwr.setReceiver(account);
+            ReceptionWorkRequest cwr = (ReceptionWorkRequest) tblVaccineRequest.getValueAt(selectedRow, 2);
+            cwr.setReceiver(ua);
             cwr.setStatus("Pending");
             populateTbl();
             JOptionPane.showMessageDialog(null, "Request Assigned successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
@@ -499,23 +498,24 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 
     private void jButtonAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcceptActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblRequestfromClinic.getSelectedRow();
+        int selectedRow = tblVaccineRequest.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please select the row to Accept the Pharmarcy.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a Patient to give prescribed vaccine.", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            ReceptionWorkRequest rwr = (ReceptionWorkRequest) tblRequestfromClinic.getValueAt(selectedRow, 2);
-            Vaccine vaccine = rwr.getVaccine();
-            boolean requestedQtyAvailable = false;
-            if (!pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
-                for (Vaccine v : pharmacyOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
-                    if (vaccine.equals(v)) {
+            ReceptionWorkRequest rwr = (ReceptionWorkRequest) tblVaccineRequest.getValueAt(selectedRow, 2);
+            Vaccine vac = rwr.getVaccine();
+            boolean requestedVacQtyAvailable = false;
+//          Enter loop if vaccine inventory is not empty
+            if (!pharOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
+                for (Vaccine v : pharOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
+                    if (vac.equals(v)) {
                         if (v.getQuantity() > rwr.getRequestQuantity()) {
-                            requestedQtyAvailable = true;
+                            requestedVacQtyAvailable = true;
                             v.setQuantity(v.getQuantity() - rwr.getRequestQuantity());
                             rwr.setStatus("Complete");
                             if (rwr.getStatus().equals("Complete")) {
                                 System.out.println("is Complete");
-                                CustomerDirectory cusDir = business.getCustomerDirectory();
+                                CustomerDirectory cusDir = system.getCustomerDirectory();
                                 for (Customer cus : cusDir.getCustomerList()) {
                                     System.out.println(cus.getName());
                                     if ((cus.getName()).equals(rwr.getPatient().getName())) {
@@ -524,23 +524,23 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                                             InsuaranceBillingWorkRequest ibwr = new InsuaranceBillingWorkRequest();
                                             ibwr.setVaccine(rwr.getVaccine());
                                             ibwr.setName(rwr.getPatient().getName());
-                                            ibwr.setSender(account);
+                                            ibwr.setSender(ua);
                                             ibwr.setStatus("Sent to Insuarance");
                                             ibwr.setMessage("Patient is insured");
                                             ibwr.setPrice(rwr.getRequestQuantity()*(rwr.getVaccine().getPrice()));
-                                            hospitalEnterprise.getWorkQueue().getWorkRequestList().add(ibwr);
-                                            network.getWorkQueue().getWorkRequestList().add(ibwr);
+                                            hospEnt.getWorkQueue().getWorkRequestList().add(ibwr);
+                                            net.getWorkQueue().getWorkRequestList().add(ibwr);
                                         } else {
                                             System.out.println("Not insured");
                                             CDCBillingWorkRequest cbwr = new CDCBillingWorkRequest();
                                             cbwr.setVaccine(rwr.getVaccine());
                                             cbwr.setName(rwr.getPatient().getName());
-                                            cbwr.setSender(account);
+                                            cbwr.setSender(ua);
                                             cbwr.setStatus("Sent to CDC");
                                             cbwr.setMessage("Patient is not insured");
                                             cbwr.setPrice(rwr.getRequestQuantity()*(rwr.getVaccine().getPrice()));
-                                            hospitalEnterprise.getWorkQueue().getWorkRequestList().add(cbwr);
-                                            network.getWorkQueue().getWorkRequestList().add(cbwr);
+                                            hospEnt.getWorkQueue().getWorkRequestList().add(cbwr);
+                                            net.getWorkQueue().getWorkRequestList().add(cbwr);
                                             //cdc work queue
                                         }
                                     }
@@ -555,8 +555,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                         }
                     }
                 }
-                if (!requestedQtyAvailable) {
-                    JOptionPane.showMessageDialog(null, "Requested qty is greater than available in inventory");
+                if (!requestedVacQtyAvailable) {
+                    JOptionPane.showMessageDialog(null, "Requested Vaccine Quantity is greater than available Quantity in Inventory");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Inventory is Empty, request your order to PHD");
@@ -567,7 +567,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
     private void lblLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoutMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        MainLoginJFrame ml = new MainLoginJFrame(business,network);
+        MainLoginJFrame ml = new MainLoginJFrame(system,net);
         ml.setVisible(true);
     }//GEN-LAST:event_lblLogoutMouseClicked
 
@@ -623,7 +623,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableVaccineInventory;
     private javax.swing.JLabel lblLogout;
-    private javax.swing.JTable tblRequestfromClinic;
+    private javax.swing.JTable tblVaccineRequest;
     private javax.swing.JTable tblWorkQueue;
     private javax.swing.JTextField txtPinCode;
     private javax.swing.JTextField txtVaccineQty;

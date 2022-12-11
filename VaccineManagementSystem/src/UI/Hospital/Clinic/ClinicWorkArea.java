@@ -54,6 +54,11 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         lblLogout.setIcon(logoImgThisImg);
         populateCBVaccine();
         populateSelectedPatient();
+        txtName.setEnabled(false);
+        txtAge.setEnabled(false);
+        txtGender.setEnabled(false);
+
+        
     }
     
     void populateCBVaccine() {
@@ -140,7 +145,6 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(459, 438, -1, -1));
 
         txtAge.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtAge.setForeground(new java.awt.Color(255, 153, 0));
         txtAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAgeActionPerformed(evt);
@@ -149,7 +153,6 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 437, 153, -1));
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtName.setForeground(new java.awt.Color(255, 153, 0));
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 393, 153, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -158,7 +161,6 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 515, -1, -1));
 
         txtGender.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtGender.setForeground(new java.awt.Color(255, 153, 0));
         jPanel1.add(txtGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 476, 153, -1));
 
         cbVaccine.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -175,7 +177,6 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 559, -1, -1));
 
         txtQty.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtQty.setForeground(new java.awt.Color(255, 153, 0));
         jPanel1.add(txtQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 558, 153, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
