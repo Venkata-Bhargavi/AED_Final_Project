@@ -71,6 +71,9 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         populateVaccineInventory();
         orderAutomation();
         
+        btnAssign.setEnabled(false);
+        btnAccept.setEnabled(false);
+        
     }
     
     
@@ -218,8 +221,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         jButtonRequest = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblVaccineRequest = new javax.swing.JTable();
-        jButtonAssignToMe = new javax.swing.JButton();
-        jButtonAccept = new javax.swing.JButton();
+        btnAssign = new javax.swing.JButton();
+        btnAccept = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableVaccineInventory = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -236,7 +239,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Pharmacy ");
+        jLabel1.setText("Pharmacy WorkRequest Dashboard");
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -259,14 +262,11 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Qty:");
 
-        txtVaccineQty.setBackground(new java.awt.Color(204, 204, 204));
         txtVaccineQty.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
-        vaccineComboBox.setBackground(new java.awt.Color(204, 204, 204));
         vaccineComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         vaccineComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButtonRequest.setBackground(new java.awt.Color(204, 204, 204));
         jButtonRequest.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jButtonRequest.setText("Request");
         jButtonRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -287,23 +287,26 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
             }
         ));
         tblVaccineRequest.getTableHeader().setReorderingAllowed(false);
+        tblVaccineRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVaccineRequestMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblVaccineRequest);
 
-        jButtonAssignToMe.setBackground(new java.awt.Color(204, 204, 204));
-        jButtonAssignToMe.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jButtonAssignToMe.setText("Assign");
-        jButtonAssignToMe.addActionListener(new java.awt.event.ActionListener() {
+        btnAssign.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btnAssign.setText("Assign");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAssignToMeActionPerformed(evt);
+                btnAssignActionPerformed(evt);
             }
         });
 
-        jButtonAccept.setBackground(new java.awt.Color(204, 204, 204));
-        jButtonAccept.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jButtonAccept.setText("Accept");
-        jButtonAccept.addActionListener(new java.awt.event.ActionListener() {
+        btnAccept.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAcceptActionPerformed(evt);
+                btnAcceptActionPerformed(evt);
             }
         });
 
@@ -325,7 +328,6 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("PinCode:");
 
-        txtPinCode.setBackground(new java.awt.Color(204, 204, 204));
         txtPinCode.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
@@ -376,9 +378,9 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(7, 7, Short.MAX_VALUE)
-                                .addComponent(jButtonAssignToMe, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -404,8 +406,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAssignToMe)
-                    .addComponent(jButtonAccept)
+                    .addComponent(btnAssign)
+                    .addComponent(btnAccept)
                     .addComponent(vaccineComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtVaccineQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,22 +483,31 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRequestActionPerformed
 
-    private void jButtonAssignToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAssignToMeActionPerformed
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
-
+        
+        
+        
         int selectedRow = tblVaccineRequest.getSelectedRow();
+        
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select the row to assign Pharmacy.", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
+        } 
+        else {
             ReceptionWorkRequest cwr = (ReceptionWorkRequest) tblVaccineRequest.getValueAt(selectedRow, 2);
+//            if(cwr.getStatus() != 'Complete')
+            WorkRequest wreq  = (WorkRequest) tblVaccineRequest.getValueAt(selectedRow, 2);
+            System.out.println("Select record status: "+wreq.getStatus().toUpperCase());
+            
             cwr.setReceiver(ua);
             cwr.setStatus("Pending");
             populateTbl();
             JOptionPane.showMessageDialog(null, "Request Assigned successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
         }
-    }//GEN-LAST:event_jButtonAssignToMeActionPerformed
+    }//GEN-LAST:event_btnAssignActionPerformed
 
-    private void jButtonAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcceptActionPerformed
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblVaccineRequest.getSelectedRow();
         if (selectedRow < 0) {
@@ -509,8 +520,9 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
             if (!pharOrganization.getVaccineInventory().getVaccineInventoryArrayList().isEmpty()) {
                 for (Vaccine v : pharOrganization.getVaccineInventory().getVaccineInventoryArrayList()) {
                     if (vac.equals(v)) {
-                        if (v.getQuantity() > rwr.getRequestQuantity()) {
+                        if ((v.getQuantity() > rwr.getRequestQuantity())) {
                             requestedVacQtyAvailable = true;
+                                
                             v.setQuantity(v.getQuantity() - rwr.getRequestQuantity());
                             rwr.setStatus("Complete");
                             if (rwr.getStatus().equals("Complete")) {
@@ -546,6 +558,10 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                                     }
                                 }
                             }
+                            
+                            else{
+                                JOptionPane.showMessageDialog(null, "Request is Already Completed");
+                            }
                             populateVaccineInventory();// update Inventory
                             populateTbl();//
 
@@ -562,7 +578,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Inventory is Empty, request your order to PHD");
             }
         }
-    }//GEN-LAST:event_jButtonAcceptActionPerformed
+    }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void lblLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoutMouseClicked
         // TODO add your handling code here:
@@ -570,6 +586,28 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         MainLoginJFrame ml = new MainLoginJFrame(system,net);
         ml.setVisible(true);
     }//GEN-LAST:event_lblLogoutMouseClicked
+
+    private void tblVaccineRequestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVaccineRequestMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = tblVaccineRequest.getSelectedRow();
+        ReceptionWorkRequest cwr = (ReceptionWorkRequest) tblVaccineRequest.getValueAt(selectedRow, 2);
+        WorkRequest wreq  = (WorkRequest) tblVaccineRequest.getValueAt(selectedRow, 2);
+        System.out.println("Select record status: "+wreq.getStatus().toUpperCase());
+            
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Patient to give prescribed vaccine.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if(wreq.getStatus().toUpperCase().equals("REQUESTED VACCINE TO PHARMACY")){
+            btnAssign.setEnabled(true);
+//            JOptionPane.showMessageDialog(null, "Selected a Patient to give prescribed vaccine.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(wreq.getStatus().equals("Pending")){
+            btnAccept.setEnabled(true);
+        }
+        else if((wreq.getStatus().toUpperCase() != "REQUESTED VACCINE TO PHARMACY") || (wreq.getStatus() != "Pending") || (cwr.getStatus() == "Complete")){
+            btnAssign.setEnabled(false);
+            btnAccept.setEnabled(false);
+        }
+    }//GEN-LAST:event_tblVaccineRequestMouseClicked
 
     /**
      * @param args the command line arguments
@@ -607,8 +645,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAccept;
-    private javax.swing.JButton jButtonAssignToMe;
+    private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnAssign;
     private javax.swing.JButton jButtonRequest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
