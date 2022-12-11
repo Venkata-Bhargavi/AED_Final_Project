@@ -7,6 +7,11 @@ package UI.CDC;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
+import Business.Role.CDCAdminRole;
+import Business.Role.DistributorAdminRole;
+import Business.Role.HospitalAdminRole;
+import Business.Role.InsuaranceAdminRole;
+import Business.Role.PHDAdminRole;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
@@ -46,6 +51,7 @@ public class ManageCdcUser extends javax.swing.JPanel {
     public void populateEmployeeComboBox(Organization organization){
         cbEmployee.removeAllItems();
         
+        cbEmployee.setSelectedIndex(-1);
         for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
             cbEmployee.addItem(employee);
         }
@@ -135,6 +141,11 @@ public class ManageCdcUser extends javax.swing.JPanel {
         });
 
         cbEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEmployeeActionPerformed(evt);
+            }
+        });
 
         cbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -142,6 +153,11 @@ public class ManageCdcUser extends javax.swing.JPanel {
         txtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserNameActionPerformed(evt);
+            }
+        });
+        txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUserNameKeyReleased(evt);
             }
         });
 
@@ -231,20 +247,84 @@ public class ManageCdcUser extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        String passwordToHash = String.valueOf(txtPassword.getText());
+        String password_ = null;
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean isDigit = false;
+        boolean spChar = false;
+        if (!passwordToHash.equals("")) {
+            String SPECIAL_CHARACTERS = "!@#$%^&*()~`-=_+[]{}|:\";',./<>?";
+
+            password_ = passwordToHash.trim();
+            char[] aC = password_.toCharArray();
+            for (char c : aC) {
+                if (Character.isUpperCase(c)) {
+                    upCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    loCase = true;
+                } else if (Character.isDigit(c)) {
+                    isDigit = true;
+                } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                    spChar = true;
+                }
+            }
+        }
         
         
+        if (txtUserName.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter User Name.");
+        } 
+        else if (txtPassword.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password.");
+        }  
+        else if ((password_.length() > 15) || (password_.length() < 5)) {
+            JOptionPane.showMessageDialog(null, "Password must have minimum lenght 5 and maximum length 15");
+//            lblPwdValid.setText("Password must have minimum lenght of 5 and maximum length of 15");
+        } 
+        else if (upCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Upper case");
+//            lblPwdValid.setText("Password must have one Upper case");
+        } 
+        else if (loCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Lower case");
+//            lblPwdValid.setText("Password must have one Lower case");
+        } 
+        else if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Digit");
+//            lblPwdValid.setText("Password must have one Digit");
+        } 
+        else if (spChar == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Special Character");
+//            lblPwdValid.setText("Password must have one Special Character");
+        }
+        else 
+        {
         String userName = txtUserName.getText();
-            String password = txtPassword.getText();
-            Organization organization = (Organization) cbOrg.getSelectedItem();
-            Employee employee = (Employee) cbEmployee.getSelectedItem();
-            Role role = (Role) cbRole.getSelectedItem();
-
+        String password = txtPassword.getText();
+        Organization organization = (Organization) cbOrg.getSelectedItem();
+        Employee employee = (Employee) cbEmployee.getSelectedItem();
+        Role role = (Role) cbRole.getSelectedItem();
+        
+        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+        
+        if(empExist){
+            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            btnCreate.setEnabled(false);
+        }
+        else{
+            btnCreate.setEnabled(true);
             organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
-
-            populateDataToTable();
-            txtUserName.setText("");
-            txtPassword.setText("");
             JOptionPane.showMessageDialog(null, "Account added successfully!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+        populateDataToTable();
+        txtUserName.setText("");
+        txtPassword.setText("");
+        
+        
+        }
         
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -256,6 +336,28 @@ public class ManageCdcUser extends javax.swing.JPanel {
             populateRoleComboBox(organization);
         }
     }//GEN-LAST:event_cbOrgActionPerformed
+
+    private void cbEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeeActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbEmployeeActionPerformed
+
+    private void txtUserNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyReleased
+        // TODO add your handling code here:
+        Organization organization = (Organization) cbOrg.getSelectedItem();
+        Employee employee = (Employee) cbEmployee.getSelectedItem();
+        
+        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+        
+        if(empExist){
+            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            btnCreate.setEnabled(false);
+        }
+        else{
+            btnCreate.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_txtUserNameKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

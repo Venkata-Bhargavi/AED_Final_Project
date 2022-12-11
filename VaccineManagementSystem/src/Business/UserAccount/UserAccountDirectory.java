@@ -53,6 +53,17 @@ public class UserAccountDirectory {
         return false;
     }
     
+    public boolean findEmployee(Employee emp){
+        for (UserAccount ua : userAccountList) 
+        {
+            if(ua.getEmployee().equals(emp)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     public UserAccount createUserAccount(String username, String password, Employee employee, Role role){
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(username);

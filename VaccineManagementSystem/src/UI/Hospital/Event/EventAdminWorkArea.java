@@ -6,10 +6,18 @@ package UI.Hospital.Event;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Events.Events;
 import Business.Network.Network;
 import Business.Organization.EventOrganisation;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.Hospital.ManageHospitalEmployee;
+import UI.Hospital.ManageHospitalOrganisation;
+import UI.Hospital.ManageHospitalUser;
+import UI.MainLoginJFrame;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,8 +28,38 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form EventAdminWorkArea
      */
+    UserAccount account;
+    EventOrganisation eventOrganisation;
+    Enterprise enterprise;
+    Network network;
+    EcoSystem system;
     public EventAdminWorkArea(UserAccount account, EventOrganisation organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
+        this.account = account;
+        this.eventOrganisation = eventOrganisation;
+        this.enterprise = enterprise;
+        this.network = network;
+        this.system = business;
+        
+//        jTableEventInventory.setVisible(false);
+        btno.setVisible(false);
+        btne.setVisible(false);
+        btnu.setVisible(false);
+        boolean isEventAvailableForHospital = false;
+        for (Events e : network.getEventsDirectory().getEventList()) {
+            if (e.getHospitalEnterprise() != null) {
+                if (e.getHospitalEnterprise().equals(enterprise)) {
+                    btno.setVisible(true);
+                    btne.setVisible(true);
+                    btnu.setVisible(true);
+                    isEventAvailableForHospital = true;
+                }
+            }
+        }
+        if (!isEventAvailableForHospital) {
+            JOptionPane.showMessageDialog(null, "No events are assigned to your hospital");
+        }
+//        populateEvents();
     }
 
     /**
@@ -35,53 +73,80 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btno = new javax.swing.JButton();
+        btne = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnu = new javax.swing.JButton();
+        btni = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
 
-        jButton1.setText("Manage Organisation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btno.setText("Manage Organisation");
+        btno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage Employee");
+        btne.setText("Manage Employee");
+        btne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Logout");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Manage Users");
+        btnu.setText("Manage Users");
+        btnu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuActionPerformed(evt);
+            }
+        });
+
+        btni.setText("Manage Inventory");
+        btni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addGap(0, 10, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addGap(314, 314, 314)
-                .addComponent(jButton1)
+                .addComponent(btno)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btne)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnu)
+                .addGap(18, 18, 18)
+                .addComponent(btni)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(35, 35, 35))
         );
@@ -89,18 +154,7 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(controlPanel);
 
         workArea.setPreferredSize(new java.awt.Dimension(800, 800));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 847, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 731, Short.MAX_VALUE)
-        );
-
+        workArea.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(workArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,9 +175,40 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ManageHospitalOrganisation mnp = new ManageHospitalOrganisation(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", mnp);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);  
+    }//GEN-LAST:event_btnoActionPerformed
+
+    private void btneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneActionPerformed
+        // TODO add your handling code here:
+        ManageHospitalEmployee mep = new ManageHospitalEmployee(enterprise.getOrganizationDirectory(), workArea);
+        workArea.add("manageNetworkJPanel", mep);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btneActionPerformed
+
+    private void btnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuActionPerformed
+        // TODO add your handling code here:
+        ManageHospitalUser mhu = new ManageHospitalUser(enterprise, workArea);
+        workArea.add("manageNetworkJPanel", mhu);
+        CardLayout cardlayout = (CardLayout) workArea.getLayout();
+        cardlayout.next(workArea);
+    }//GEN-LAST:event_btnuActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,11 +246,12 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btne;
+    private javax.swing.JButton btni;
+    private javax.swing.JButton btno;
+    private javax.swing.JButton btnu;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
