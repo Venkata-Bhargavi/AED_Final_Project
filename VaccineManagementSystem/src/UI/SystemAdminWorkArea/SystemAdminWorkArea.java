@@ -111,13 +111,13 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         });
         controlPanel.add(btnManageEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 341, 180, -1));
 
-        btnManageEnterpriseAdmin.setText("Manage Enterprise Admin");
+        btnManageEnterpriseAdmin.setText("Manage User");
         btnManageEnterpriseAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageEnterpriseAdminActionPerformed(evt);
             }
         });
-        controlPanel.add(btnManageEnterpriseAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 382, -1, -1));
+        controlPanel.add(btnManageEnterpriseAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 382, 180, -1));
 
         btnManageVaccine.setText("Manage Vaccine");
         btnManageVaccine.addActionListener(new java.awt.event.ActionListener() {

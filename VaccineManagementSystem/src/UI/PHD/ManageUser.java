@@ -33,29 +33,32 @@ public class ManageUser extends javax.swing.JPanel {
         popCBOrganization();
         populateDatatoTable();
         
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
+        
     }
     
     
     public void popCBOrganization() {
-        cbOrg.removeAllItems();
+        cbO.removeAllItems();
 
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-            cbOrg.addItem(organization);
+            cbO.addItem(organization);
         }
     }
     
     public void populateEmployeeComboBox(Organization organization){
-        cbEmp.removeAllItems();
+        cbE.removeAllItems();
         
         for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
-            cbEmp.addItem(employee);
+            cbE.addItem(employee);
         }
     }
     
     private void populateRoleComboBox(Organization organization){
-        cbRole.removeAllItems();
+        cbR.removeAllItems();
         for (Role role : organization.getSupportedRole()){
-            cbRole.addItem(role);
+            cbR.addItem(role);
         }
     }
 
@@ -93,23 +96,33 @@ public class ManageUser extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
-        cbOrg = new javax.swing.JComboBox();
-        cbEmp = new javax.swing.JComboBox();
+        cbO = new javax.swing.JComboBox();
+        cbE = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        cbRole = new javax.swing.JComboBox();
-        txtPwd = new javax.swing.JTextField();
-        txtUN = new javax.swing.JTextField();
+        cbR = new javax.swing.JComboBox();
+        txtP = new javax.swing.JTextField();
+        txtU = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(lblPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 419, 270, 23));
 
         jLabel4.setText("Employee :");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 287, -1, -1));
+        add(lblUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(545, 374, 270, 23));
 
         jLabel5.setText("UserName :");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 377, -1, -1));
 
         jLabel6.setText("Password :");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 422, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create User Account");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 24, 809, 51));
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +130,7 @@ public class ManageUser extends javax.swing.JPanel {
                 btnCreateActionPerformed(evt);
             }
         });
+        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 491, -1, -1));
 
         tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,99 +145,57 @@ public class ManageUser extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblUser);
 
-        cbOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbOrg.addActionListener(new java.awt.event.ActionListener() {
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 106, 520, 100));
+
+        cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOrgActionPerformed(evt);
+                cbOActionPerformed(evt);
             }
         });
+        add(cbO, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 239, 200, -1));
 
-        cbEmp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEActionPerformed(evt);
+            }
+        });
+        add(cbE, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 284, 200, -1));
 
         jLabel2.setText("Organization :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 242, -1, -1));
 
-        cbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(cbR, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 329, 200, -1));
+        add(txtP, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 419, 200, -1));
+        add(txtU, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 374, 200, -1));
 
         jLabel3.setText("Role :");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 332, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbEmp, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbRole, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPwd)
-                            .addComponent(txtUN)
-                            .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPwd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblUN, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(336, 336, 336)
-                        .addComponent(btnCreate))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(152, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUN, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(txtUN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(btnCreate)
-                .addContainerGap(309, Short.MAX_VALUE))
-        );
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 90, -1));
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
         
 //        Checking the Password Regex
-        String passwordToHash = txtPwd.getText();
+        String passwordToHash = txtP.getText();
         String password_ = null;
         boolean upCase = false;
         boolean loCase = false;
@@ -248,9 +220,9 @@ public class ManageUser extends javax.swing.JPanel {
         }
         
 //        Checking the Credentials and throwing respective errors.
-        if (txtUN.getText().equals("")) {
+        if (txtU.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter User Name.");
-        } else if (txtPwd.getText().equals("")) {
+        } else if (txtP.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter Password.");
         } 
          else if ((password_.length() > 7) || (password_.length() < 3)) {
@@ -270,37 +242,164 @@ public class ManageUser extends javax.swing.JPanel {
             lblPwd.setText("Password must have one Special Character");
         }
         else {
-            String userName = txtUN.getText();
-            String password = txtPwd.getText();
-            Organization organization = (Organization) cbOrg.getSelectedItem();
-            Employee employee = (Employee) cbEmp.getSelectedItem();
-            Role role = (Role) cbRole.getSelectedItem();
+            String userName = txtU.getText();
+            String password = txtP.getText();
+            Organization organization = (Organization) cbO.getSelectedItem();
+            Employee employee = (Employee) cbE.getSelectedItem();
+            Role role = (Role) cbR.getSelectedItem();
 
             organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
             JOptionPane.showMessageDialog(null, "New User created successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
             populateDatatoTable();
-            txtUN.setText("");
-            txtPwd.setText("");
+            txtU.setText("");
+            txtP.setText("");
         }
         
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void cbOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrgActionPerformed
+    private void cbOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOActionPerformed
         // TODO add your handling code here:
-        Organization organization = (Organization) cbOrg.getSelectedItem();
+        Organization organization = (Organization) cbO.getSelectedItem();
         if (organization != null){
             populateEmployeeComboBox(organization);
             populateRoleComboBox(organization);
         }
       
-    }//GEN-LAST:event_cbOrgActionPerformed
+    }//GEN-LAST:event_cbOActionPerformed
+
+    private void cbEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEActionPerformed
+        // TODO add your handling code here:
+         Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        
+        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+        
+        if(empExist){
+//            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            btnCreate.setEnabled(false);
+            btnUpdate.setEnabled(true);
+            btnDelete.setEnabled(true);
+            
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            txtU.setText(ua.getUsername());
+            txtP.setText(ua.getPassword());
+            
+//            txtUN.setText("");
+        }
+        else{
+            btnCreate.setEnabled(true);
+        }
+    }//GEN-LAST:event_cbEActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+
+        String passwordToHash = String.valueOf(txtP.getText());
+        String password_ = null;
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean isDigit = false;
+        boolean spChar = false;
+        if (!passwordToHash.equals("")) {
+            String SPECIAL_CHARACTERS = "!@#$%^&*()~`-=_+[]{}|:\";',./<>?";
+
+            password_ = passwordToHash.trim();
+            char[] aC = password_.toCharArray();
+            for (char c : aC) {
+                if (Character.isUpperCase(c)) {
+                    upCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    loCase = true;
+                } else if (Character.isDigit(c)) {
+                    isDigit = true;
+                } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                    spChar = true;
+                }
+            }
+        }
+
+        if (txtU.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter User Name.");
+        }
+        else if (txtP.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password.");
+        }
+        else if ((password_.length() > 7) || (password_.length() < 3)) {
+            JOptionPane.showMessageDialog(null, "Password must have minimum lenght 3 and maximum length 7");
+            //            lblEP.setText("Password must have minimum lenght 3 and maximum length 7");
+        } else if (upCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Upper case");
+            //            lblEP.setText("Password must have one Upper case");
+        } else if (loCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Lower case");
+            //            lblEP.setText("Password must have one Lower case");
+        } else if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Digit");
+            //            lblEP.setText("Password must have one Digit");
+        } else if (spChar == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Special Character");
+            //            lblEP.setText("Password must have one Special Character");
+        }
+
+        else {
+
+            String userName = txtU.getText();
+            String password = txtP.getText();
+            Organization organization = (Organization) cbO.getSelectedItem();
+            Employee employee = (Employee) cbE.getSelectedItem();
+            Role role = (Role) cbR.getSelectedItem();
+
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            //            txtUN.setText(ua.getUsername());
+            //            txtP.setText(ua.getPassword());
+            ua.setUsername(userName);
+            ua.setPassword(password);
+
+            //            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+            txtU.setText("");
+            txtP.setText("");
+            populateDatatoTable();
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+
+            JOptionPane.showMessageDialog(null, "Account Updated successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        Role role = (Role) cbR.getSelectedItem();
+
+        boolean x  = organization.getEmployeeDirectory().deleteEmployee(employee);
+
+        if(x){
+            boolean y = organization.getUserAccountDirectory().deleteEmployeeCredentials(employee);
+            txtU.setText("");
+            txtP.setText("");
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Account Deleted successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            //            popOrganizationComboBox();
+            //            cbO.setSelectedIndex(-1);
+
+            populateEmployeeComboBox(organization);
+            populateRoleComboBox(organization);
+            populateDatatoTable();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
-    private javax.swing.JComboBox cbEmp;
-    private javax.swing.JComboBox cbOrg;
-    private javax.swing.JComboBox cbRole;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox cbE;
+    private javax.swing.JComboBox cbO;
+    private javax.swing.JComboBox cbR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -311,7 +410,7 @@ public class ManageUser extends javax.swing.JPanel {
     private javax.swing.JLabel lblPwd;
     private javax.swing.JLabel lblUN;
     private javax.swing.JTable tblUser;
-    private javax.swing.JTextField txtPwd;
-    private javax.swing.JTextField txtUN;
+    private javax.swing.JTextField txtP;
+    private javax.swing.JTextField txtU;
     // End of variables declaration//GEN-END:variables
 }

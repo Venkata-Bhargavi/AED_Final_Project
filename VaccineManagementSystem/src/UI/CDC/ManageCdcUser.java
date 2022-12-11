@@ -37,30 +37,32 @@ public class ManageCdcUser extends javax.swing.JPanel {
         populateOrganizationComboBox();
         populateDataToTable();
        
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
     
     
      public void populateOrganizationComboBox() {
-        cbOrg.removeAllItems();
+        cbO.removeAllItems();
 
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-            cbOrg.addItem(organization);
+            cbO.addItem(organization);
         }
     }
     
     public void populateEmployeeComboBox(Organization organization){
-        cbEmployee.removeAllItems();
+        cbE.removeAllItems();
         
-        cbEmployee.setSelectedIndex(-1);
+        cbE.setSelectedIndex(-1);
         for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
-            cbEmployee.addItem(employee);
+            cbE.addItem(employee);
         }
     }
     
     private void populateRoleComboBox(Organization organization){
-        cbRole.removeAllItems();
+        cbR.removeAllItems();
         for (Role role : organization.getSupportedRole()){
-            cbRole.addItem(role);
+            cbR.addItem(role);
         }
     }
     
@@ -99,13 +101,15 @@ public class ManageCdcUser extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cbOrg = new javax.swing.JComboBox();
-        cbEmployee = new javax.swing.JComboBox();
-        cbRole = new javax.swing.JComboBox();
-        txtUserName = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
+        cbO = new javax.swing.JComboBox();
+        cbE = new javax.swing.JComboBox();
+        cbR = new javax.swing.JComboBox();
+        txtU = new javax.swing.JTextField();
+        txtP = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         lblErrorPassword = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Create User Account");
@@ -133,30 +137,27 @@ public class ManageCdcUser extends javax.swing.JPanel {
 
         jLabel6.setText("Password :");
 
-        cbOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbOrg.addActionListener(new java.awt.event.ActionListener() {
+        cbO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOrgActionPerformed(evt);
+                cbOActionPerformed(evt);
             }
         });
 
-        cbEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbEmployee.addActionListener(new java.awt.event.ActionListener() {
+        cbE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEmployeeActionPerformed(evt);
+                cbEActionPerformed(evt);
             }
         });
 
-        cbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtUserName.addActionListener(new java.awt.event.ActionListener() {
+        txtU.setToolTipText("");
+        txtU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserNameActionPerformed(evt);
+                txtUActionPerformed(evt);
             }
         });
-        txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtUserNameKeyReleased(evt);
+                txtUKeyReleased(evt);
             }
         });
 
@@ -164,6 +165,20 @@ public class ManageCdcUser extends javax.swing.JPanel {
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -177,33 +192,37 @@ public class ManageCdcUser extends javax.swing.JPanel {
                         .addGap(247, 247, 247)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(80, 80, 80)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(63, 63, 63)))
+                                .addGap(63, 63, 63))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnCreate)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addGap(80, 80, 80)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtU, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addComponent(lblErrorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(328, 328, 328)
-                        .addComponent(btnCreate))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbEmployee, cbOrg, cbRole, txtPassword, txtUserName});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbE, cbO, cbR, txtP, txtU});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,38 +234,41 @@ public class ManageCdcUser extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblErrorPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52)
-                .addComponent(btnCreate)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCreate)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
+    private void txtUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserNameActionPerformed
+    }//GEN-LAST:event_txtUActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        String passwordToHash = String.valueOf(txtPassword.getText());
+        String passwordToHash = String.valueOf(txtP.getText());
         String password_ = null;
         boolean upCase = false;
         boolean loCase = false;
@@ -271,10 +293,10 @@ public class ManageCdcUser extends javax.swing.JPanel {
         }
         
         
-        if (txtUserName.getText().equals("")) {
+        if (txtU.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter User Name.");
         } 
-        else if (txtPassword.equals("")) {
+        else if (txtP.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter Password.");
         }  
         else if ((password_.length() > 15) || (password_.length() < 5)) {
@@ -299,11 +321,11 @@ public class ManageCdcUser extends javax.swing.JPanel {
         }
         else 
         {
-        String userName = txtUserName.getText();
-        String password = txtPassword.getText();
-        Organization organization = (Organization) cbOrg.getSelectedItem();
-        Employee employee = (Employee) cbEmployee.getSelectedItem();
-        Role role = (Role) cbRole.getSelectedItem();
+        String userName = txtU.getText();
+        String password = txtP.getText();
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        Role role = (Role) cbR.getSelectedItem();
         
         boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
         
@@ -319,51 +341,172 @@ public class ManageCdcUser extends javax.swing.JPanel {
         }
 
         populateDataToTable();
-        txtUserName.setText("");
-        txtPassword.setText("");
+        txtU.setText("");
+        txtP.setText("");
         
         
         }
         
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void cbOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrgActionPerformed
+    private void cbOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOActionPerformed
         // TODO add your handling code here:
-        Organization organization = (Organization) cbOrg.getSelectedItem();
+        Organization organization = (Organization) cbO.getSelectedItem();
         if (organization != null){
             populateEmployeeComboBox(organization);
             populateRoleComboBox(organization);
         }
-    }//GEN-LAST:event_cbOrgActionPerformed
+    }//GEN-LAST:event_cbOActionPerformed
 
-    private void cbEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeeActionPerformed
+    private void cbEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbEmployeeActionPerformed
-
-    private void txtUserNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserNameKeyReleased
-        // TODO add your handling code here:
-        Organization organization = (Organization) cbOrg.getSelectedItem();
-        Employee employee = (Employee) cbEmployee.getSelectedItem();
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
         
         boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
         
         if(empExist){
-            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
             btnCreate.setEnabled(false);
+            btnUpdate.setEnabled(true);
+            btnDelete.setEnabled(true);
+            
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            txtU.setText(ua.getUsername());
+            txtP.setText(ua.getPassword());
+            
+//            txtUN.setText("");
         }
         else{
             btnCreate.setEnabled(true);
         }
+    }//GEN-LAST:event_cbEActionPerformed
+
+    private void txtUKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUKeyReleased
+        // TODO add your handling code here:
+//        Organization organization = (Organization) cbO.getSelectedItem();
+//        Employee employee = (Employee) cbE.getSelectedItem();
+//        
+//        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+//        
+//        if(empExist){
+//            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+//            btnCreate.setEnabled(false);
+//        }
+//        else{
+//            btnCreate.setEnabled(true);
+//        }
         
-    }//GEN-LAST:event_txtUserNameKeyReleased
+    }//GEN-LAST:event_txtUKeyReleased
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+
+        String passwordToHash = String.valueOf(txtP.getText());
+        String password_ = null;
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean isDigit = false;
+        boolean spChar = false;
+        if (!passwordToHash.equals("")) {
+            String SPECIAL_CHARACTERS = "!@#$%^&*()~`-=_+[]{}|:\";',./<>?";
+
+            password_ = passwordToHash.trim();
+            char[] aC = password_.toCharArray();
+            for (char c : aC) {
+                if (Character.isUpperCase(c)) {
+                    upCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    loCase = true;
+                } else if (Character.isDigit(c)) {
+                    isDigit = true;
+                } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                    spChar = true;
+                }
+            }
+        }
+
+        if (txtU.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter User Name.");
+        }
+        else if (txtP.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password.");
+        }
+        else if ((password_.length() > 7) || (password_.length() < 3)) {
+            JOptionPane.showMessageDialog(null, "Password must have minimum lenght 3 and maximum length 7");
+//            lblEP.setText("Password must have minimum lenght 3 and maximum length 7");
+        } else if (upCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Upper case");
+//            lblEP.setText("Password must have one Upper case");
+        } else if (loCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Lower case");
+//            lblEP.setText("Password must have one Lower case");
+        } else if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Digit");
+//            lblEP.setText("Password must have one Digit");
+        } else if (spChar == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Special Character");
+//            lblEP.setText("Password must have one Special Character");
+        }
+
+        else {
+
+            String userName = txtU.getText();
+            String password = txtP.getText();
+            Organization organization = (Organization) cbO.getSelectedItem();
+            Employee employee = (Employee) cbE.getSelectedItem();
+            Role role = (Role) cbR.getSelectedItem();
+
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            //            txtUN.setText(ua.getUsername());
+            //            txtP.setText(ua.getPassword());
+            ua.setUsername(userName);
+            ua.setPassword(password);
+
+            //            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+            txtU.setText("");
+            txtP.setText("");
+            populateDataToTable();
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+
+            JOptionPane.showMessageDialog(null, "Account Updated successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        Role role = (Role) cbR.getSelectedItem();
+
+        boolean x  = organization.getEmployeeDirectory().deleteEmployee(employee);
+
+        if(x){
+            boolean y = organization.getUserAccountDirectory().deleteEmployeeCredentials(employee);
+            txtU.setText("");
+            txtP.setText("");
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Account Deleted successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            populateEmployeeComboBox(organization);
+            populateRoleComboBox(organization);
+            populateDataToTable();
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
-    private javax.swing.JComboBox cbEmployee;
-    private javax.swing.JComboBox cbOrg;
-    private javax.swing.JComboBox cbRole;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox cbE;
+    private javax.swing.JComboBox cbO;
+    private javax.swing.JComboBox cbR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -373,7 +516,7 @@ public class ManageCdcUser extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblErrorPassword;
     private javax.swing.JTable tblUser;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtUserName;
+    private javax.swing.JTextField txtP;
+    private javax.swing.JTextField txtU;
     // End of variables declaration//GEN-END:variables
 }

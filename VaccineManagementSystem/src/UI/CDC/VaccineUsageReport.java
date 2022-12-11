@@ -150,7 +150,7 @@ void populateComboBox()
                 
                 if(e instanceof HospitalEnterprise)
                 {
-                    System.out.println("Creating Object");
+//                    System.out.println("Creating Object");
                     Hospital hos = hdir.addHospital();
                     System.out.println(e.getName());
                     hos.setName(e.getName());
@@ -158,12 +158,12 @@ void populateComboBox()
                     {
                         if(wr instanceof PharmacyWorkRequest)
                         {
-                            System.out.println("Got Pharmacy Req");
+                            System.out.println("Got Pharmacy Request");
                            val = val+((PharmacyWorkRequest) wr).getRequestedQty(); 
                         }
                         if(wr instanceof CDCReportingWorkRequest)
                         {
-                            System.out.println("Got CDC Req");
+                            System.out.println("Got CDC Request");
                            cval = cval+((CDCReportingWorkRequest) wr).getRequestedQty();
                         }
                         

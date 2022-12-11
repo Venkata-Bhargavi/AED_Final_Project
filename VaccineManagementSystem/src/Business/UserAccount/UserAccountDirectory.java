@@ -63,6 +63,16 @@ public class UserAccountDirectory {
         return false;
     }
     
+    public UserAccount fetchEmployeeCredentials(Employee emp){
+        for (UserAccount ua : userAccountList) 
+        {
+            if(ua.getEmployee().equals(emp)){
+                return ua;
+            }
+        }
+        return null;
+    }
+    
     
     public UserAccount createUserAccount(String username, String password, Employee employee, Role role){
         UserAccount userAccount = new UserAccount();
@@ -74,6 +84,28 @@ public class UserAccountDirectory {
         return userAccount;
     }
     
+    public boolean deleteUserAccount(String username){
+        for (UserAccount ua : userAccountList) 
+        {
+            if(ua.getUsername().toUpperCase() == username || ua.getUsername().toUpperCase().equals(username)){
+                userAccountList.remove(ua);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean deleteEmployeeCredentials(Employee emp){
+        for (UserAccount ua : userAccountList) 
+        {
+            if(ua.getEmployee().equals(emp)){
+                userAccountList.remove(emp);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean checkIfUsernameIsUnique(String username){
         for (UserAccount ua : userAccountList){
             if (ua.getUsername().equals(username))
@@ -81,4 +113,7 @@ public class UserAccountDirectory {
         }
         return true;
     }
+    
+    
+    
 }

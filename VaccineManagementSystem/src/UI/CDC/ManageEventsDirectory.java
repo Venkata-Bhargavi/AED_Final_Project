@@ -185,7 +185,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblEvent);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 123, 550, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 123, 660, 100));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Create New Event");
@@ -235,7 +235,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
                 btnRequestActionPerformed(evt);
             }
         });
-        add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 630, -1, -1));
+        add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 630, -1, -1));
 
         btnCreateEvent.setText("Create Event");
         btnCreateEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
                 btnCreateEventActionPerformed(evt);
             }
         });
-        add(btnCreateEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 630, -1, -1));
+        add(btnCreateEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, -1, -1));
 
         btnDEI.setText("Display Event Inventory");
         btnDEI.addActionListener(new java.awt.event.ActionListener() {
@@ -251,7 +251,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
                 btnDEIActionPerformed(evt);
             }
         });
-        add(btnDEI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 257, 180, -1));
+        add(btnDEI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 257, 220, -1));
 
         tblEI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

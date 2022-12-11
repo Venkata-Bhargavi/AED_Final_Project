@@ -64,16 +64,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnMU" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnMO" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnME" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="btnLog" alignment="1" min="-2" pref="178" max="-2" attributes="0"/>
+                          <Component id="btnMU" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnMO" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnME" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnLog" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
