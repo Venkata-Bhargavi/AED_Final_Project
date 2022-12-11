@@ -14,7 +14,10 @@ import Business.SubOrganization.SubOrganization;
 import Business.UserAccount.UserAccount;
 import UI.SystemAdminWorkArea.SystemAdminWorkArea;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
 import static java.time.Clock.system;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,12 +33,22 @@ public class MainLoginJFrame extends javax.swing.JFrame {
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     private Network network;
-    
+    private static final String FILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String imagePath = FILENAME+"/Images/vaccine main page.jpeg";
+
+//    /Users/bhargavi/VenkataBhargavi-Sikhakolli-002724793/AED_FINAL_PROJECT/AED_Final_Project/VaccineManagementSystem/vaccine main page.jpeg
     public MainLoginJFrame(){
         initComponents();
         system = dB4OUtil.retrieveSystem();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+        ImageIcon imgIcon = new ImageIcon(imagePath);
+        Image i = imgIcon.getImage();
+        Image dimg = i.getScaledInstance(1012, 533,Image.SCALE_SMOOTH);
+        System.out.println(FILENAME);
+        System.out.println(imagePath);
+        ImageIcon imgThisImg = new ImageIcon(dimg);
+        lblImage.setIcon(imgThisImg);
 
     }
     
@@ -69,25 +82,30 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         txt_username = new javax.swing.JTextField();
         pass_password = new javax.swing.JPasswordField();
         btn_login = new javax.swing.JButton();
+        lblImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titlebox.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         titlebox.setForeground(new java.awt.Color(51, 51, 51));
         titlebox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titlebox.setText("Vaccine Management System");
+        jPanel1.add(titlebox, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 35, 1006, 86));
 
         lbl_Password.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         lbl_Password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbl_Password.setText("Password:");
+        jPanel1.add(lbl_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 239, 129, 45));
 
         lbl_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         lbl_username.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbl_username.setText("Username:");
+        jPanel1.add(lbl_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 176, 129, 45));
 
         txt_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 176, 208, 45));
 
         pass_password.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         pass_password.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +113,7 @@ public class MainLoginJFrame extends javax.swing.JFrame {
                 pass_passwordActionPerformed(evt);
             }
         });
+        jPanel1.add(pass_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 239, 208, 45));
 
         btn_login.setText("Login");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
@@ -102,46 +121,8 @@ public class MainLoginJFrame extends javax.swing.JFrame {
                 btn_loginActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(titlebox, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(320, 320, 320)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pass_password, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_username, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(titlebox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_username, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pass_password, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
-        );
+        jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 318, 90, 39));
+        jPanel1.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1040, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -326,6 +307,7 @@ public class MainLoginJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lbl_Password;
     private javax.swing.JLabel lbl_username;
     private javax.swing.JPasswordField pass_password;
