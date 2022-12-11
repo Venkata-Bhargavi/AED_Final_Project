@@ -7,12 +7,16 @@ package UI.Distributor.DistributionCenter;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.DistributorBillingOrganization;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.DistributorBillingWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI.MainLoginJFrame;
 import java.awt.Image;
 import java.nio.file.Paths;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,26 +27,48 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form BillingManagerWorkArea
      */
+    private UserAccount account; 
+    private DistributorBillingOrganization distributorBillingOrganization;
+    private Enterprise enterprise;
     private EcoSystem business;
     private Network network;
-    private Enterprise enterprise;
-    private Organization organization;
     
     
     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
     public DistributorBillingWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
-        this.business = business;
-        this.network = network;
-        this.organization = organization;
+        this.account= account;
+        this.distributorBillingOrganization= distributorBillingOrganization;
         this.enterprise = enterprise;
+        this.business= business;
+        this.network = network;
+        populateTbl();
         
          ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
         Image lI = logoimgIcon.getImage();
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
+    }
+    
+    void populateTbl()
+    {
+        DefaultTableModel dtm = (DefaultTableModel) distBillingJTbl.getModel();
+        dtm.setRowCount(0);
+        for(WorkRequest wr: network.getWorkQueue().getWorkRequestList())
+        {
+            if(wr instanceof DistributorBillingWorkRequest)
+            {
+                Object row[] = new Object[5];
+                row[0]= wr.getEnterpeise().getName();
+                row[1]= wr.getVaccine();
+                row[2]= wr.getStatus();
+                row[3]=((DistributorBillingWorkRequest) wr).getPrice();
+                row[4]= wr.getSender();
+                dtm.addRow(row);
+            }
+        }
     }
 
     /**
@@ -97,7 +123,7 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
 
         pack();

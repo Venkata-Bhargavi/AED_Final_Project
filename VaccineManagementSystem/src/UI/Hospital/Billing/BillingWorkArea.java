@@ -31,7 +31,7 @@ public class BillingWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form BillingWorkArea
      */
-    private JPanel userProcessContainer;
+//    private JPanel userProcessContainer;
     private UserAccount account;
     private HospitalBillingOrganization hospitalBillingOrganization;
     private Enterprise enterprise;
@@ -42,7 +42,7 @@ public class BillingWorkArea extends javax.swing.JFrame {
 
     public BillingWorkArea(UserAccount account, HospitalBillingOrganization hospitalBillingOrganization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
+//        this.userProcessContainer = userProcessContainer;
         this.account= account;
         this.hospitalBillingOrganization = hospitalBillingOrganization;
         this.enterprise = enterprise;
@@ -53,9 +53,68 @@ public class BillingWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
-//        populateTbl();
-//        populateDistBillTbl();
+        populateTbl();
+        populateDistBillTbl();
     }
+    
+    void populateTbl()
+    {
+        DefaultTableModel dtm = (DefaultTableModel)tblPharmacyBills.getModel();
+       dtm.setRowCount(0);
+       
+       for(WorkRequest wr : network.getWorkQueue().getWorkRequestList())  
+       {
+           if(wr instanceof CDCBillingWorkRequest){
+               Object[] row = new Object[7];
+               row[0] = ((CDCBillingWorkRequest) wr).getName();
+               row[1] = wr.getVaccine();
+               row[2] = wr;
+               row[3] = ((CDCBillingWorkRequest) wr).getPrice();
+               row[4] = wr.getSender();
+               row[5] = wr.getReceiver();
+               row[6] = wr.getMessage();
+               dtm.addRow(row);
+           }
+           if(wr instanceof InsuaranceBillingWorkRequest){
+               Object[] row = new Object[7];
+               row[0] = ((InsuaranceBillingWorkRequest) wr).getName();
+               row[1] = wr.getVaccine();
+               row[2] = wr;
+               row[3] = ((InsuaranceBillingWorkRequest) wr).getPrice();
+               row[4] = wr.getSender();
+               row[5] = wr.getReceiver();
+               row[6] = wr.getMessage();
+               dtm.addRow(row);
+           }
+       }
+    }
+    
+    
+    void populateDistBillTbl()
+    {
+        DefaultTableModel model = (DefaultTableModel)distBillsJTbl.getModel();
+        model.setRowCount(0);
+        
+        for(WorkRequest dwr : network.getWorkQueue().getWorkRequestList())
+        {
+            if(dwr instanceof DistributorBillingWorkRequest)
+            {
+                if(dwr.getEnterpeise().getName().equals(enterprise.getName()))
+                {
+                    Object row[]= new Object[6];
+                    row[0]= dwr.getVaccine();
+                    row[1]= ((DistributorBillingWorkRequest) dwr).getQty();
+                    row[2]= ((DistributorBillingWorkRequest) dwr).getPrice();
+                    row[3]= dwr;
+                    row[4]= dwr.getReceiver();
+                    row[5]= dwr.getSender();
+                    model.addRow(row);
+                }
+            }
+        }
+        
+    }
+
     
    
     /**
