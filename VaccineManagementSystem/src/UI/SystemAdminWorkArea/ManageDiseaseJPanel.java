@@ -6,6 +6,9 @@ package UI.SystemAdminWorkArea;
 
 import Business.Disease.Disease;
 import Business.EcoSystem;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -23,11 +26,28 @@ public class ManageDiseaseJPanel extends javax.swing.JPanel {
     EcoSystem system;
     JPanel WorkArea;
     
+    private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/disease_back.jpeg";
+    
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/disease_icon.png";
+    
     public ManageDiseaseJPanel(EcoSystem system, JPanel workArea) {
         initComponents();
         this.WorkArea = workArea;
         this.system = system;
         populateDiseaseTable();
+        ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(700, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
+        
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
     }
     
     public void populateDiseaseTable() {
@@ -56,11 +76,20 @@ public class ManageDiseaseJPanel extends javax.swing.JPanel {
         txtDisease = new javax.swing.JTextField();
         btnAddDisease = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        lblB = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1100, 800));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblTitle.setBackground(new java.awt.Color(255, 255, 255));
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(102, 102, 102));
         lblTitle.setText("Manage Disease");
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblDiseases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,67 +104,33 @@ public class ManageDiseaseJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDiseases);
 
-        jLabel2.setText("Disease :");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 350, 100));
 
+        jLabel2.setText("Disease :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+
+        txtDisease.setForeground(new java.awt.Color(102, 102, 102));
+        add(txtDisease, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 146, -1));
+
+        btnAddDisease.setForeground(new java.awt.Color(102, 102, 102));
         btnAddDisease.setText("Create New Disease");
         btnAddDisease.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddDiseaseActionPerformed(evt);
             }
         });
+        add(btnAddDisease, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
 
+        btnDelete.setForeground(new java.awt.Color(102, 102, 102));
         btnDelete.setText("Delete Disease");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(61, 61, 61)
-                                    .addComponent(jLabel2)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(txtDisease, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(118, 118, 118)
-                                    .addComponent(btnAddDisease)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(131, 131, 131))
-                        .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(262, 262, 262)))
-                .addGap(47, 47, 47))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(lblTitle)
-                .addGap(64, 64, 64)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnDelete)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDisease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(btnAddDisease)
-                .addContainerGap(346, Short.MAX_VALUE))
-        );
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(602, 269, -1, -1));
+        add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 500, 380));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 540, 150, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -182,6 +177,8 @@ public class ManageDiseaseJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblI;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblDiseases;
     private javax.swing.JTextField txtDisease;

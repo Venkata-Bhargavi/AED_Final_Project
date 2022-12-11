@@ -93,9 +93,11 @@ public class PHDManagerWorkArea extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
+        requestTable.setBackground(new java.awt.Color(255, 156, 141));
         requestTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        requestTable.setForeground(new java.awt.Color(255, 255, 255));
         requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -108,8 +110,9 @@ public class PHDManagerWorkArea extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 47, 703, 174));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setBackground(new java.awt.Color(255, 156, 141));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Assign to me");
         jButton1.setPreferredSize(new java.awt.Dimension(200, 40));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,8 +122,9 @@ public class PHDManagerWorkArea extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 239, 201, -1));
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setBackground(new java.awt.Color(255, 156, 141));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Forward to CDC");
         jButton2.setPreferredSize(new java.awt.Dimension(200, 40));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -130,8 +134,9 @@ public class PHDManagerWorkArea extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 239, 201, -1));
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setBackground(new java.awt.Color(255, 156, 141));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Reject");
         jButton3.setPreferredSize(new java.awt.Dimension(200, 40));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -141,8 +146,9 @@ public class PHDManagerWorkArea extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 239, 201, -1));
 
-        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Requests from Pharmacy");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 6, 315, -1));

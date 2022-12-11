@@ -10,6 +10,9 @@ import Business.Enterprise.PHDEnterprise;
 import Business.Network.Network;
 import Business.WorkQueue.PHDHospitalApproval;
 import java.awt.Color;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -37,6 +40,9 @@ public class ApproveHospital extends javax.swing.JPanel {
     private PHDEnterprise phde;
     private Network network;
 
+    private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/approve_hosp.png";
+    
     public ApproveHospital(PHDEnterprise phde, Network network, JPanel workArea) {
         initComponents();
         this.workArea = workArea;
@@ -47,6 +53,12 @@ public class ApproveHospital extends javax.swing.JPanel {
         lblPending.setEnabled(false);
         lblTotal.setEnabled(false);
 //        btnApprove.setEnabled(false);
+
+ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        jLabel5.setIcon(logoImgThisImg);
 
         
     }
@@ -84,10 +96,22 @@ public class ApproveHospital extends javax.swing.JPanel {
         btnApprove = new javax.swing.JButton();
         lblTotal = new javax.swing.JTextField();
         lblPending = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 156, 141));
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Hospital Approval");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(393, 45, -1, -1));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        tblHos.setBackground(new java.awt.Color(255, 156, 141));
+        tblHos.setForeground(new java.awt.Color(255, 255, 255));
         tblHos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -101,85 +125,41 @@ public class ApproveHospital extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblHos);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 94, 685, 191));
+
+        btnSummary.setBackground(new java.awt.Color(255, 156, 141));
+        btnSummary.setForeground(new java.awt.Color(255, 255, 255));
         btnSummary.setText("Total Requests Summary");
+        btnSummary.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSummary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSummaryActionPerformed(evt);
             }
         });
+        add(btnSummary, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 536, -1, 32));
 
         jLabel2.setText("Approved :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 366, -1, -1));
 
         jLabel3.setText("Pending for Approval :");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 421, -1, -1));
 
         jLabel4.setText("Total :");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(417, 476, -1, -1));
+        add(lblApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 360, 108, -1));
 
+        btnApprove.setBackground(new java.awt.Color(255, 156, 141));
+        btnApprove.setForeground(new java.awt.Color(255, 255, 255));
         btnApprove.setText("Approve");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApproveActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnApprove)
-                .addGap(78, 78, 78))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(351, 351, 351)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPending, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(299, 299, 299)
-                        .addComponent(btnSummary)))
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnApprove)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel3)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblApprove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(lblPending, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
-                .addComponent(btnSummary)
-                .addGap(197, 197, 197))
-        );
+        add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 297, -1, -1));
+        add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 470, 108, -1));
+        add(lblPending, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 415, 108, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 559, 148, 114));
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -258,6 +238,7 @@ public class ApproveHospital extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lblApprove;
     private javax.swing.JTextField lblPending;

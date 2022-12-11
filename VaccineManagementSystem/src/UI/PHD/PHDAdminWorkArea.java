@@ -11,6 +11,9 @@ import Business.Network.Network;
 import UI.MainLoginJFrame;
 import UI.SystemAdminWorkArea.ManageNetworkJPanel;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -25,13 +28,41 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
     private EcoSystem system;
     private Network network;
     
+     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+    private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
+    
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/sysadmin.png";
+    
     public PHDAdminWorkArea(EcoSystem sys, Enterprise enterprise, Network network) {
         initComponents();
         
         phdent = (PHDEnterprise) enterprise;
         this.system= sys;
         this.network = network;
+        
+         ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(200, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
+        
+         ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
+        
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(60, 60,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblAI.setIcon(aImgThisImg);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,14 +79,19 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
         btnEmp = new javax.swing.JButton();
         btnUsers = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
+        lblT = new javax.swing.JLabel();
+        lblAI = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1300, 800));
 
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(1305, 800));
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(1300, 800));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
+        controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnOrg.setText("Manage Organisation");
         btnOrg.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +99,7 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
                 btnOrgActionPerformed(evt);
             }
         });
+        controlPanel.add(btnOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 201, 178, -1));
 
         btnEmp.setText("Manage Employee");
         btnEmp.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +107,7 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
                 btnEmpActionPerformed(evt);
             }
         });
+        controlPanel.add(btnEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 242, 178, -1));
 
         btnUsers.setText("Manage Users");
         btnUsers.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +115,7 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
                 btnUsersActionPerformed(evt);
             }
         });
+        controlPanel.add(btnUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 283, 178, -1));
 
         btnRequest.setText("Manage Requests");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -84,46 +123,22 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
                 btnRequestActionPerformed(evt);
             }
         });
+        controlPanel.add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 324, 178, -1));
 
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
             }
         });
+        controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 70, 50));
 
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOrg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUsers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRequest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(btnOrg)
-                .addGap(18, 18, 18)
-                .addComponent(btnEmp)
-                .addGap(18, 18, 18)
-                .addComponent(btnUsers)
-                .addGap(18, 18, 18)
-                .addComponent(btnRequest)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(29, 29, 29))
-        );
+        lblT.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblT.setText("PHD Admin");
+        controlPanel.add(lblT, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 100, 30));
+        controlPanel.add(lblAI, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 100, 70));
+
+        lblB.setPreferredSize(new java.awt.Dimension(200, 800));
+        controlPanel.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 690));
 
         jSplitPane1.setLeftComponent(controlPanel);
 
@@ -155,14 +170,6 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
         cardlayout.next(workArea);        
     }//GEN-LAST:event_btnOrgActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
-        
-        this.setVisible(false);
-        MainLoginJFrame ml = new MainLoginJFrame(system,network);
-        ml.setVisible(true); 
-    }//GEN-LAST:event_btnLogoutActionPerformed
-
     private void btnEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpActionPerformed
         // TODO add your handling code here:
         ManageEmployee moe = new ManageEmployee(phdent.getOrganizationDirectory(), workArea);
@@ -188,6 +195,13 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
         CardLayout cardlayout = (CardLayout) workArea.getLayout();
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnRequestActionPerformed
+
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
+        // TODO add your handling code here:
+         this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+    }//GEN-LAST:event_lblLMouseClicked
 
 //    /**
 //     * @param args the command line arguments
@@ -229,12 +243,15 @@ public class PHDAdminWorkArea extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmp;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrg;
     private javax.swing.JButton btnRequest;
     private javax.swing.JButton btnUsers;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblAI;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblL;
+    private javax.swing.JLabel lblT;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

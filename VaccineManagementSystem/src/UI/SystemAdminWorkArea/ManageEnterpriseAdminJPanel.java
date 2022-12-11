@@ -14,6 +14,9 @@ import Business.Role.HospitalAdminRole;
 import Business.Role.InsuaranceAdminRole;
 import Business.Role.PHDAdminRole;
 import Business.UserAccount.UserAccount;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +32,9 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel workArea;
+    
+     private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/enterprise_admin_icon.png";
     public ManageEnterpriseAdminJPanel(EcoSystem sys, JPanel workArea) {
         initComponents();
         this.workArea = workArea;
@@ -36,6 +42,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         this.system = sys;
         populateTable();
         populateCBNetwork();
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
     }
     
     
@@ -98,10 +109,20 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         lblPwdValid = new javax.swing.JLabel();
         lblUN = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Create Enterprise Account");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(393, 14, -1, -1));
 
+        tblEnterprise.setBackground(new java.awt.Color(255, 156, 141));
+        tblEnterprise.setForeground(new java.awt.Color(255, 255, 255));
         tblEnterprise.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -115,29 +136,42 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblEnterprise);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 99, 557, 128));
+
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Network :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 248, 146, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Enterprise :");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 289, 146, -1));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("UserName :");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 373, 146, -1));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Password :");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 416, 146, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Name :");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 330, 146, -1));
 
+        cbNet.setBackground(new java.awt.Color(255, 156, 141));
+        cbNet.setForeground(new java.awt.Color(255, 255, 255));
         cbNet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbNet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbNetActionPerformed(evt);
             }
         });
+        add(cbNet, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 245, 283, -1));
 
+        cbEnter.setBackground(new java.awt.Color(255, 156, 141));
+        cbEnter.setForeground(new java.awt.Color(255, 255, 255));
         cbEnter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(cbEnter, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 286, 283, -1));
 
         txtUN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,86 +183,25 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 txtUNKeyReleased(evt);
             }
         });
+        add(txtUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 283, -1));
+        add(txtPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 413, 283, -1));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 327, 283, -1));
 
+        btnSubmit.setBackground(new java.awt.Color(255, 156, 141));
+        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
+        btnSubmit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
             }
         });
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 490, 170, 30));
+        add(lblPwdValid, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 413, 219, 27));
 
         lblUN.setText(" ");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(238, 238, 238)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPwd)
-                    .addComponent(cbEnter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbNet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtUN, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPwdValid, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                    .addComponent(lblUN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(135, 135, 135))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(369, 369, 369)
-                        .addComponent(btnSubmit))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel1)))
-                .addContainerGap(217, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbNet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtUN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUN, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPwdValid, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(48, 48, 48)
-                .addComponent(btnSubmit)
-                .addGap(297, 297, 297))
-        );
+        add(lblUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 368, 219, 27));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 580, 170, 140));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUNActionPerformed
@@ -369,6 +342,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblI;
     private javax.swing.JLabel lblPwdValid;
     private javax.swing.JLabel lblUN;
     private javax.swing.JTable tblEnterprise;

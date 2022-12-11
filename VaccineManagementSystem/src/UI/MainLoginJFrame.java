@@ -134,6 +134,7 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(pass_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 208, 30));
 
+        btn_login.setBackground(new java.awt.Color(204, 204, 204));
         btn_login.setText("Login");
         btn_login.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_login.addActionListener(new java.awt.event.ActionListener() {

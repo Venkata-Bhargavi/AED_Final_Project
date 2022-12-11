@@ -79,10 +79,14 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         btnManageVaccine = new javax.swing.JButton();
         lblL = new javax.swing.JLabel();
         lblA = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         lblCB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1300, 800));
+
+        splitPane.setPreferredSize(new java.awt.Dimension(1100, 800));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
         controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,10 +144,16 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         });
         controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 610, 50, 30));
         controlPanel.add(lblA, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 90, 70));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setText("System Admin");
+        controlPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
         controlPanel.add(lblCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 800));
 
         splitPane.setLeftComponent(controlPanel);
 
+        workArea.setBackground(new java.awt.Color(255, 255, 255));
+        workArea.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 4, new java.awt.Color(153, 153, 153)));
         workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
         workArea.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(workArea);
@@ -156,7 +166,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -273,6 +283,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     private javax.swing.JButton btnManageNetwork;
     private javax.swing.JButton btnManageVaccine;
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblA;
     private javax.swing.JLabel lblCB;
     private javax.swing.JLabel lblL;

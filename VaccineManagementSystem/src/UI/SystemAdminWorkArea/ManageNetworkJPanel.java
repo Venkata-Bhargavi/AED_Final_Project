@@ -5,9 +5,14 @@
 package UI.SystemAdminWorkArea;
 import Business.EcoSystem;
 import Business.Network.Network;
+import java.awt.Color;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 /**
  *
  * @author bhargavi
@@ -19,11 +24,33 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
      */
     EcoSystem system;
     JPanel WorkArea;
+      private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/network.png";
+    
+     private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/network_icon.png";
     public ManageNetworkJPanel(EcoSystem system, JPanel workArea) {
         initComponents();
         this.WorkArea = workArea;
         this.system = system;
         populateNetworkTable();
+        ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(600, 600,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblN.setIcon(logoImgThisImg);
+        
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
+        
+//        JTableHeader theader = tblNetwork.getTableHeader();
+//        theader.setBackground(Color.black);
+        
+        JTableHeader tableHeader = tblNetwork.getTableHeader();
+      tableHeader.setBackground(Color.black);
     }
     
     private void populateNetworkTable() {
@@ -52,17 +79,25 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         txtNetworkName = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblN = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1100, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 156, 141));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Manage Network");
         lblTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 41, -1, -1));
+        lblTitle.setRequestFocusEnabled(false);
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 210, -1));
 
+        jScrollPane.setBackground(new java.awt.Color(255, 156, 141));
+
+        tblNetwork.setBackground(new java.awt.Color(255, 156, 141));
+        tblNetwork.setForeground(new java.awt.Color(255, 255, 255));
         tblNetwork.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -74,26 +109,37 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 "Name"
             }
         ));
+        tblNetwork.setGridColor(new java.awt.Color(255, 156, 141));
+        tblNetwork.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblNetwork.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane.setViewportView(tblNetwork);
 
-        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 112, 361, 100));
+        add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 370, 100));
 
         lblNetworkName.setFont(new java.awt.Font("Arial Black", 1, 15)); // NOI18N
+        lblNetworkName.setForeground(new java.awt.Color(255, 156, 141));
         lblNetworkName.setText("Network Name :");
-        add(lblNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
-        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 170, -1));
+        add(lblNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 140, -1));
 
+        txtNetworkName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 180, 30));
+
+        btnAdd.setBackground(new java.awt.Color(255, 156, 141));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
+        btnAdd.setBorder(null);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 140, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/kisspng-circle-structure-area-network-5abe0aa1daab97.4949489615224040018957.png"))); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setPreferredSize(new java.awt.Dimension(1100, 800));
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 560));
+        add(lblN, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 480, 390));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 540, 150, 140));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -119,6 +165,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JLabel lblI;
+    private javax.swing.JLabel lblN;
     private javax.swing.JLabel lblNetworkName;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblNetwork;
