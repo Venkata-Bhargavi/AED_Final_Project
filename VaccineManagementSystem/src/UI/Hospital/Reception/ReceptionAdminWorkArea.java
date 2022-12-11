@@ -409,8 +409,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 txtName.setText("");
                 txtDate.setText("");
                 txtAge.setText("");
-                JOptionPane.showMessageDialog(null, "Request created successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
-                sendConfirmationEmail( "bhargvnaman@gmail.com", "Patient Appointment Booked" , "New Appointment");
+                JOptionPane.showMessageDialog(null, "Patient record saved.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                sendConfirmationEmail( "jkkn.iitkgp@gmail.com", "Patient Appointment Booked Successfully!" , "New Appointment");
             } catch (ParseException ex) {
                 Logger.getLogger(ReceptionAdminWorkArea.class.getName()).log(Level.SEVERE, null, ex);
             }

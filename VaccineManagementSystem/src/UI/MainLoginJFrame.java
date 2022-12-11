@@ -48,8 +48,8 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         ImageIcon imgIcon = new ImageIcon(imagePath);
         Image i = imgIcon.getImage();
         Image dimg = i.getScaledInstance(1010, 550,Image.SCALE_SMOOTH);
-        System.out.println(FILENAME);
-        System.out.println(imagePath);
+//        System.out.println(FILENAME);
+//        System.out.println(imagePath);
         ImageIcon imgThisImg = new ImageIcon(dimg);
         lblBG.setIcon(imgThisImg);
         
@@ -66,6 +66,20 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         initComponents();
 //        Storing the data to database
         setVisible(true);
+         ImageIcon imgIcon = new ImageIcon(imagePath);
+        Image i = imgIcon.getImage();
+        Image dimg = i.getScaledInstance(1010, 550,Image.SCALE_SMOOTH);
+        System.out.println(FILENAME);
+        System.out.println(imagePath);
+        ImageIcon imgThisImg = new ImageIcon(dimg);
+        lblBG.setIcon(imgThisImg);
+        
+        ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(100, 100,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblIcon.setIcon(logoImgThisImg);
+        
         
         this.system = system;
         dB4OUtil.storeSystem(system);
@@ -109,12 +123,10 @@ public class MainLoginJFrame extends javax.swing.JFrame {
 
         txt_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         txt_username.setForeground(new java.awt.Color(204, 204, 204));
-        txt_username.setText("UserName");
         jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 208, 30));
 
         pass_password.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         pass_password.setForeground(new java.awt.Color(204, 204, 204));
-        pass_password.setText("password");
         pass_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pass_passwordActionPerformed(evt);
@@ -269,22 +281,44 @@ public class MainLoginJFrame extends javax.swing.JFrame {
                 }
             }
 
-        if(userAccount == null && userAccounttoFind == null){
-            JOptionPane.showMessageDialog(null, "User not Found!, Please check Credentails!");
-            return;
-        }
-        else if(userAccount == null && userAccounttoFind != null){
-            JFrame workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
-            workArea.setVisible(true);
-            setVisible(false);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "valid Credentails!");
-            JFrame workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
-            workArea.setVisible(true);
-            setVisible(false);
+//        if(userAccount == null && userAccounttoFind == null){
+//            JOptionPane.showMessageDialog(null, "User not Found!, Please check Credentails!");
+//            return;
+//        }
+//        else if(userAccount == null && userAccounttoFind != null){
+//            JFrame workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+//            workArea.setVisible(true);
+//            setVisible(false);
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(null, "valid Credentails!");
+//            JFrame workArea = userAccount.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+//            workArea.setVisible(true);
+//            setVisible(false);
+//
+//        }
+            if (userAccount == null) {
+                if (userAccounttoFind == null) {
+                    JOptionPane.showMessageDialog(null, "Invalid Credentails!");
+                    return;
+                } else {
+//                    CardLayout layout = (CardLayout) container.getLayout();
+//                    container.add("workArea", ua.getRole().createWorkArea(container, ua, inOrganization, inEnterprise, system, network));
+//                    layout.next(container);
+                        JFrame workArea = userAccounttoFind.getRole().createWorkArea( userAccounttoFind, userOrganization, userEnterprise, system, network);
+                        workArea.setVisible(true);
+                        setVisible(false);
+                }
 
-        }
+            } else {
+//                CardLayout layout = (CardLayout) container.getLayout();
+//                container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system, network));
+//                layout.next(container);
+                
+                JFrame workArea = userAccount.getRole().createWorkArea( userAccount, userOrganization, userEnterprise, system, network);
+                        workArea.setVisible(true);
+                        setVisible(false);
+            }
     }//GEN-LAST:event_btn_loginActionPerformed
     }
     /**

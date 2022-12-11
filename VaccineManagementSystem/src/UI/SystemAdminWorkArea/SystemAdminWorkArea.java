@@ -8,6 +8,9 @@ import Business.EcoSystem;
 import Business.Network.Network;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -23,10 +26,28 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     
     EcoSystem system;
     Network network;
+    
+    private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+    private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public SystemAdminWorkArea(EcoSystem system) {
         initComponents();
         this.system = system;
+         ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // for control panel
+        ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(200, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblCB.setIcon(cImgThisImg);
     }
 
     /**
@@ -44,13 +65,15 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         btnManageDisease = new javax.swing.JButton();
         btnManageEnterprise = new javax.swing.JButton();
         btnManageEnterpriseAdmin = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
         btnManageVaccine = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
+        lblCB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
+        controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnManageNetwork.setText("Manage Network");
         btnManageNetwork.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +81,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
                 btnManageNetworkActionPerformed(evt);
             }
         });
+        controlPanel.add(btnManageNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 218, 180, -1));
 
         btnManageDisease.setText("Manage Disease");
         btnManageDisease.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +89,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
                 btnManageDiseaseActionPerformed(evt);
             }
         });
+        controlPanel.add(btnManageDisease, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 259, 180, -1));
 
         btnManageEnterprise.setText("Manage Enterprise");
         btnManageEnterprise.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +97,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
                 btnManageEnterpriseActionPerformed(evt);
             }
         });
+        controlPanel.add(btnManageEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 341, 180, -1));
 
         btnManageEnterpriseAdmin.setText("Manage Enterprise Admin");
         btnManageEnterpriseAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -79,13 +105,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
                 btnManageEnterpriseAdminActionPerformed(evt);
             }
         });
-
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
-            }
-        });
+        controlPanel.add(btnManageEnterpriseAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 382, -1, -1));
 
         btnManageVaccine.setText("Manage Vaccine");
         btnManageVaccine.addActionListener(new java.awt.event.ActionListener() {
@@ -93,42 +113,21 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
                 btnManageVaccineActionPerformed(evt);
             }
         });
+        controlPanel.add(btnManageVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 300, 180, -1));
 
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageDisease, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageEnterpriseAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageVaccine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageDisease, btnManageEnterprise, btnManageEnterpriseAdmin, btnManageNetwork});
-
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(218, 218, 218)
-                .addComponent(btnManageNetwork)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageDisease)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageVaccine)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageEnterprise)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageEnterpriseAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(51, 51, 51))
-        );
+        lblL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logout.png"))); // NOI18N
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
+            }
+        });
+        lblL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lblLKeyReleased(evt);
+            }
+        });
+        controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 610, 50, 30));
+        controlPanel.add(lblCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 800));
 
         splitPane.setLeftComponent(controlPanel);
 
@@ -205,14 +204,19 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         cardlayout.next(workArea);  
     }//GEN-LAST:event_btnManageEnterpriseAdminActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+    private void lblLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblLKeyReleased
         // TODO add your handling code here:
-        
+         this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true);
+    }//GEN-LAST:event_lblLKeyReleased
+
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
+        // TODO add your handling code here:
         this.setVisible(false);
         MainLoginJFrame ml = new MainLoginJFrame(system,network);
-        ml.setVisible(true); 
-        
-    }//GEN-LAST:event_btnLogoutActionPerformed
+        ml.setVisible(true);
+    }//GEN-LAST:event_lblLMouseClicked
 
     /**
      * @param args the command line arguments
@@ -250,13 +254,14 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnManageDisease;
     private javax.swing.JButton btnManageEnterprise;
     private javax.swing.JButton btnManageEnterpriseAdmin;
     private javax.swing.JButton btnManageNetwork;
     private javax.swing.JButton btnManageVaccine;
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel lblCB;
+    private javax.swing.JLabel lblL;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables

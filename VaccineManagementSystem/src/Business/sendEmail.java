@@ -17,8 +17,8 @@ public class sendEmail
     public static void sendConfirmationEmail(String mailIdTo, String message , String subject)
     {
          
-        final String username = "dbms.neu.edu@gmail.com";
-        final String password = "Asdfgh1@"; 
+        final String username = "bhargavi.sikhakolli31@gmail.com";
+        final String password = "jmdehajluogcnyfy"; 
         String smtpHost = "smtp.gmail.com";
         String smtpPort = "587";
          
@@ -44,7 +44,7 @@ public class sendEmail
            
             Message msg = new MimeMessage(session);
            
-            msg.setFrom(new InternetAddress("dbms.neu.edu@gmail.com"));
+            msg.setFrom(new InternetAddress("jkkn.iitkgp@gmail.com"));
  
             
             InternetAddress  ia = new InternetAddress(mailIdTo);
