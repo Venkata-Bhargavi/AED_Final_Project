@@ -11,7 +11,9 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CDCBillingWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import UI.MainLoginJFrame;
 import java.awt.Image;
+import java.nio.file.Paths;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +32,9 @@ public class BillingWorkArea extends javax.swing.JFrame {
     private Enterprise enterprise; 
     private EcoSystem business;
     private Network network;
+     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
     public BillingWorkArea(UserAccount account, CDCBillingOrganization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.account= account;
@@ -38,6 +43,11 @@ public class BillingWorkArea extends javax.swing.JFrame {
        this.business = business;
        this.network= network;
        populateTable();
+       ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
     }
     
       void populateTable()
@@ -70,12 +80,12 @@ public class BillingWorkArea extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnlogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new javax.swing.JTable();
         btnAssign = new javax.swing.JButton();
         btnPay = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +119,12 @@ public class BillingWorkArea extends javax.swing.JFrame {
             }
         });
 
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,18 +143,21 @@ public class BillingWorkArea extends javax.swing.JFrame {
                         .addGap(301, 301, 301))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(281, 281, 281)
-                        .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
+                        .addGap(250, 250, 250)
+                        .addComponent(lblL, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(80, 80, 80)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblL, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -201,6 +220,13 @@ public class BillingWorkArea extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPayActionPerformed
 
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
+        // TODO add your handling code here:
+         this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(business,network);
+        ml.setVisible(true);
+    }//GEN-LAST:event_lblLMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -239,10 +265,10 @@ public class BillingWorkArea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnPay;
-    private javax.swing.JButton btnlogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblL;
     private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 }

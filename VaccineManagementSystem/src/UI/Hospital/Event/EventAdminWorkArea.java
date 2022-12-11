@@ -16,6 +16,9 @@ import UI.Hospital.ManageHospitalOrganisation;
 import UI.Hospital.ManageHospitalUser;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -33,6 +36,8 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
     Enterprise enterprise;
     Network network;
     EcoSystem system;
+    private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
     public EventAdminWorkArea(UserAccount account, EventOrganisation organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
         this.account = account;
@@ -40,6 +45,11 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
         this.enterprise = enterprise;
         this.network = network;
         this.system = business;
+        ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
         
 //        jTableEventInventory.setVisible(false);
         btno.setVisible(false);
@@ -75,9 +85,9 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
         controlPanel = new javax.swing.JPanel();
         btno = new javax.swing.JButton();
         btne = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         btnu = new javax.swing.JButton();
         btni = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,13 +108,6 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Logout");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         btnu.setText("Manage Users");
         btnu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +122,12 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
             }
         });
 
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -126,14 +135,15 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btno, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(lblL, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,9 +156,9 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
                 .addComponent(btnu)
                 .addGap(18, 18, 18)
                 .addComponent(btni)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(35, 35, 35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addComponent(lblL, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(123, 123, 123))
         );
 
         jSplitPane1.setLeftComponent(controlPanel);
@@ -199,16 +209,16 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnuActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        MainLoginJFrame ml = new MainLoginJFrame(system,network);
-        ml.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void btniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btniActionPerformed
+
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
+        // TODO add your handling code here:
+         this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true);
+    }//GEN-LAST:event_lblLMouseClicked
 
     /**
      * @param args the command line arguments
@@ -251,8 +261,8 @@ public class EventAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JButton btno;
     private javax.swing.JButton btnu;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton jButton3;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblL;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

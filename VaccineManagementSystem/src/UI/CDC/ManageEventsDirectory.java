@@ -205,7 +205,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel8.setText("Request Vaccines for the event");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(519, 536, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, -1, -1));
 
         txtEN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,14 +220,14 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         add(txtEventCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 437, 160, -1));
 
         jLabel9.setText("Vaccine :");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 575, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, -1, -1));
 
         jLabel10.setText("Quantity :");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 625, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 570, -1, -1));
 
         cbVaccine.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cbVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 572, 108, -1));
-        add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(638, 622, 108, -1));
+        add(cbVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 108, -1));
+        add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 108, -1));
 
         btnRequest.setText("Request");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +235,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
                 btnRequestActionPerformed(evt);
             }
         });
-        add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 667, -1, -1));
+        add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 630, -1, -1));
 
         btnCreateEvent.setText("Create Event");
         btnCreateEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
                 btnCreateEventActionPerformed(evt);
             }
         });
-        add(btnCreateEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 478, -1, -1));
+        add(btnCreateEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 630, -1, -1));
 
         btnDEI.setText("Display Event Inventory");
         btnDEI.addActionListener(new java.awt.event.ActionListener() {

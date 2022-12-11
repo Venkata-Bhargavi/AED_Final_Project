@@ -32,6 +32,9 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     
     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
+    
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/sysadmin.png";
     public SystemAdminWorkArea(EcoSystem system) {
         initComponents();
         this.system = system;
@@ -48,6 +51,14 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         Image cDimg = bI.getScaledInstance(200, 800,Image.SCALE_SMOOTH);
         ImageIcon cImgThisImg = new ImageIcon(cDimg);
         lblCB.setIcon(cImgThisImg);
+        
+        //for admin image
+        
+          ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(60, 60,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblA.setIcon(aImgThisImg);
     }
 
     /**
@@ -67,6 +78,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
         btnManageEnterpriseAdmin = new javax.swing.JButton();
         btnManageVaccine = new javax.swing.JButton();
         lblL = new javax.swing.JLabel();
+        lblA = new javax.swing.JLabel();
         lblCB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
@@ -127,6 +139,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
             }
         });
         controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 610, 50, 30));
+        controlPanel.add(lblA, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 90, 70));
         controlPanel.add(lblCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 800));
 
         splitPane.setLeftComponent(controlPanel);
@@ -260,6 +273,7 @@ public class SystemAdminWorkArea extends javax.swing.JFrame{
     private javax.swing.JButton btnManageNetwork;
     private javax.swing.JButton btnManageVaccine;
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel lblA;
     private javax.swing.JLabel lblCB;
     private javax.swing.JLabel lblL;
     private javax.swing.JSplitPane splitPane;

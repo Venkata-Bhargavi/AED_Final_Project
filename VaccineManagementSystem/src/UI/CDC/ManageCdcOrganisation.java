@@ -9,9 +9,15 @@ package UI.CDC;
  * @author bhargavi
  */
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import UI.MainLoginJFrame;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -24,14 +30,19 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
     Enterprise enterprise;
     private OrganizationDirectory orgDirectory;
     JPanel workArea;
-
+    private EcoSystem system;
+    private Network network;
+   
   
     public ManageCdcOrganisation(OrganizationDirectory orgDirectory, JPanel workArea){
         initComponents();
         this.workArea = workArea;
         this.orgDirectory = orgDirectory;
+        this.system = null;
+        this.network = null;
         populateTable();
         populateComboBox();
+       
     }
     
       private void populateTable(){
@@ -111,14 +122,13 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(242, 242, 242)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(216, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(334, 334, 334)
+                .addComponent(jLabel1)
+                .addGap(73, 362, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

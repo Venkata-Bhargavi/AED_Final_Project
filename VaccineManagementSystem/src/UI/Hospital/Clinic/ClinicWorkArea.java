@@ -16,6 +16,9 @@ import Business.WorkQueue.ReceptionWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import Business.vaccine.Vaccine;
 import UI.MainLoginJFrame;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,6 +37,8 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private Enterprise enterprise;
     private EcoSystem business;
     private Network network;
+        private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
     
     public ClinicWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
@@ -42,6 +47,11 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         this.enterprise = enterprise;
         this.business = business;
         this.network = network;
+        ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblLogout.setIcon(logoImgThisImg);
         populateCBVaccine();
         populateSelectedPatient();
     }
@@ -101,10 +111,10 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         btnAssign = new javax.swing.JButton();
         btnFetch = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        lblLogout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,16 +188,12 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jLabel1.setText("Clinic WorkArea");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 20, 833, 42));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\jkkn7\\Downloads\\lo.png")); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
             }
         });
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1028, 12, -1, -1));
-
-        jButton1.setText("Logout");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(916, 88, -1, -1));
 
         btnAssign.setText("Assign");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
@@ -212,6 +218,13 @@ public class ClinicWorkArea extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(496, 622, 86, -1));
+
+        lblLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoutMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 50, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -310,6 +323,13 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         ml.setVisible(true); 
     }//GEN-LAST:event_jLabel7MouseClicked
 
+    private void lblLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoutMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(business,network);
+        ml.setVisible(true);
+    }//GEN-LAST:event_lblLogoutMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -351,7 +371,6 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private javax.swing.JButton btnFetch;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox cbVaccine;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -362,6 +381,7 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePatientDetails;
+    private javax.swing.JLabel lblLogout;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtGender;
     private javax.swing.JTextField txtName;
