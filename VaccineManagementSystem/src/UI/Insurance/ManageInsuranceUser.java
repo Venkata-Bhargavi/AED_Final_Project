@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +31,9 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
         this.enterprise = enterprise;
         popOrganizationComboBox();
         popData();
+        
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
     public void popOrganizationComboBox() {
         cbO.removeAllItems();
@@ -92,9 +96,11 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
         cbR = new javax.swing.JComboBox();
         txtUN = new javax.swing.JTextField();
         txtP = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
         lblEP = new javax.swing.JLabel();
         lblEU = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Create User Account");
@@ -130,6 +136,11 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
         });
 
         cbE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEActionPerformed(evt);
+            }
+        });
 
         cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbR.addActionListener(new java.awt.event.ActionListener() {
@@ -145,10 +156,24 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Create");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -184,11 +209,15 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
                             .addComponent(lblEU, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(328, 328, 328)
-                        .addComponent(jButton1))
+                        .addComponent(btnCreate)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(281, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,10 +248,14 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEP, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addComponent(jButton1))
+                            .addComponent(lblEP, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblEU, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCreate)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnUpdate)
+                        .addComponent(btnDelete)))
                 .addContainerGap(269, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -231,9 +264,9 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUNActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     private void cbRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRActionPerformed
         // TODO add your handling code here:
@@ -248,12 +281,140 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbOActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+
+        String passwordToHash = String.valueOf(txtP.getText());
+        String password_ = null;
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean isDigit = false;
+        boolean spChar = false;
+        if (!passwordToHash.equals("")) {
+            String SPECIAL_CHARACTERS = "!@#$%^&*()~`-=_+[]{}|:\";',./<>?";
+
+            password_ = passwordToHash.trim();
+            char[] aC = password_.toCharArray();
+            for (char c : aC) {
+                if (Character.isUpperCase(c)) {
+                    upCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    loCase = true;
+                } else if (Character.isDigit(c)) {
+                    isDigit = true;
+                } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                    spChar = true;
+                }
+            }
+        }
+
+        if (txtUN.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter User Name.");
+        }
+        else if (txtP.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password.");
+        }
+        else if ((password_.length() > 7) || (password_.length() < 3)) {
+            JOptionPane.showMessageDialog(null, "Password must have minimum lenght 3 and maximum length 7");
+            //            lblEP.setText("Password must have minimum lenght 3 and maximum length 7");
+        } else if (upCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Upper case");
+            //            lblEP.setText("Password must have one Upper case");
+        } else if (loCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Lower case");
+            //            lblEP.setText("Password must have one Lower case");
+        } else if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Digit");
+            //            lblEP.setText("Password must have one Digit");
+        } else if (spChar == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Special Character");
+            //            lblEP.setText("Password must have one Special Character");
+        }
+
+        else {
+
+            String userName = txtUN.getText();
+            String password = txtP.getText();
+            Organization organization = (Organization) cbO.getSelectedItem();
+            Employee employee = (Employee) cbE.getSelectedItem();
+            Role role = (Role) cbR.getSelectedItem();
+
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            //            txtUN.setText(ua.getUsername());
+            //            txtP.setText(ua.getPassword());
+            ua.setUsername(userName);
+            ua.setPassword(password);
+
+            //            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+            txtUN.setText("");
+            txtP.setText("");
+            popData();
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+
+            JOptionPane.showMessageDialog(null, "Account Updated successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        Role role = (Role) cbR.getSelectedItem();
+
+        boolean x  = organization.getEmployeeDirectory().deleteEmployee(employee);
+
+        if(x){
+            boolean y = organization.getUserAccountDirectory().deleteEmployeeCredentials(employee);
+            txtUN.setText("");
+            txtP.setText("");
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Account Deleted successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            //            popOrganizationComboBox();
+            //            cbO.setSelectedIndex(-1);
+
+            populateEmployeeComboBox(organization);
+            populateRoleComboBox(organization);
+            popData();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void cbEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEActionPerformed
+        // TODO add your handling code here:
+        
+         Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        
+        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+        
+        if(empExist){
+//            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            btnCreate.setEnabled(false);
+            btnUpdate.setEnabled(true);
+            btnDelete.setEnabled(true);
+            
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            txtUN.setText(ua.getUsername());
+            txtP.setText(ua.getPassword());
+            
+//            txtUN.setText("");
+        }
+        else{
+            btnCreate.setEnabled(true);
+        }
+    }//GEN-LAST:event_cbEActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cbE;
     private javax.swing.JComboBox cbO;
     private javax.swing.JComboBox cbR;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

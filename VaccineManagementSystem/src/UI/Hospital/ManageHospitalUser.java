@@ -29,7 +29,15 @@ public class ManageHospitalUser extends javax.swing.JPanel {
         this.workArea = workArea;
         this.enterprise = enterprise;
         popOrganizationComboBox();
+        cbO.setSelectedIndex(-1);
         popData();
+        
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
+        
+//        btnUpdate.setEnabled(false);
+//        btnDelete.setEnabled(false);
+        
     }
     public void popOrganizationComboBox() {
         cbO.removeAllItems();
@@ -95,9 +103,14 @@ public class ManageHospitalUser extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
         lblEP = new javax.swing.JLabel();
         lblEU = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Create User Account");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 40, -1, -1));
 
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,15 +125,22 @@ public class ManageHospitalUser extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbl);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 127, 620, 100));
+
         jLabel2.setText("Organization :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, -1, -1));
 
         jLabel3.setText("Employee :");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
 
         jLabel4.setText("Role :");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
 
         jLabel5.setText("UserName :");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
         jLabel6.setText("Password :");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, -1, -1));
 
         cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbO.addActionListener(new java.awt.event.ActionListener() {
@@ -128,8 +148,15 @@ public class ManageHospitalUser extends javax.swing.JPanel {
                 cbOActionPerformed(evt);
             }
         });
+        add(cbO, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 159, -1));
 
         cbE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEActionPerformed(evt);
+            }
+        });
+        add(cbE, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 159, -1));
 
         cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbR.addActionListener(new java.awt.event.ActionListener() {
@@ -137,13 +164,20 @@ public class ManageHospitalUser extends javax.swing.JPanel {
                 cbRActionPerformed(evt);
             }
         });
+        add(cbR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 159, -1));
 
-        txtUN.setText(" ");
         txtUN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUNActionPerformed(evt);
             }
         });
+        txtUN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUNKeyReleased(evt);
+            }
+        });
+        add(txtUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 159, -1));
+        add(txtP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 159, -1));
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -151,80 +185,25 @@ public class ManageHospitalUser extends javax.swing.JPanel {
                 btnCreateActionPerformed(evt);
             }
         });
+        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
+        add(lblEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 290, 23));
+        add(lblEU, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 290, 23));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(80, 80, 80)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUN, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                    .addComponent(cbO, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbE, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbR, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtP)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(68, 68, 68)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEP, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEU, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(328, 328, 328)
-                        .addComponent(btnCreate))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(117, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtUN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEP, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addComponent(btnCreate))
-                    .addComponent(lblEU, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(269, Short.MAX_VALUE))
-        );
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 90, -1));
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUNActionPerformed
@@ -233,7 +212,7 @@ public class ManageHospitalUser extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-         String passwordToHash = String.valueOf(txtP.getText());
+        String passwordToHash = String.valueOf(txtP.getText());
         String password_ = null;
         boolean upCase = false;
         boolean loCase = false;
@@ -294,7 +273,7 @@ public class ManageHospitalUser extends javax.swing.JPanel {
             txtUN.setText("");
             txtP.setText("");
             popData();
-              JOptionPane.showMessageDialog(null, "Account created successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+             JOptionPane.showMessageDialog(null, "Account created successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -304,16 +283,179 @@ public class ManageHospitalUser extends javax.swing.JPanel {
 
     private void cbOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOActionPerformed
         // TODO add your handling code here:
-         Organization organization = (Organization) cbO.getSelectedItem();
-        if (organization != null){
+        Organization organization = (Organization) cbO.getSelectedItem();
+        if(cbO.getSelectedIndex() != -1){
             populateEmployeeComboBox(organization);
             populateRoleComboBox(organization);
         }
+//        if (organization != null){
+//            populateEmployeeComboBox(organization);
+//            populateRoleComboBox(organization);
+//        }
     }//GEN-LAST:event_cbOActionPerformed
+
+    private void txtUNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUNKeyReleased
+        // TODO add your handling code here:
+        
+//        Organization organization = (Organization) cbO.getSelectedItem();
+//        Employee employee = (Employee) cbE.getSelectedItem();
+//        
+//        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+//        
+//        if(empExist){
+//            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+//            btnCreate.setEnabled(false);
+//            btnUpdate.setEnabled(true);
+//            btnDelete.setEnabled(true);
+//            
+//            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+//            txtUN.setText(ua.getUsername());
+//            txtP.setText(ua.getPassword());
+//            
+////            txtUN.setText("");
+//        }
+//        else{
+//            btnCreate.setEnabled(true);
+//        }
+    }//GEN-LAST:event_txtUNKeyReleased
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        String passwordToHash = String.valueOf(txtP.getText());
+        String password_ = null;
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean isDigit = false;
+        boolean spChar = false;
+        if (!passwordToHash.equals("")) {
+            String SPECIAL_CHARACTERS = "!@#$%^&*()~`-=_+[]{}|:\";',./<>?";
+
+            password_ = passwordToHash.trim();
+            char[] aC = password_.toCharArray();
+            for (char c : aC) {
+                if (Character.isUpperCase(c)) {
+                    upCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    loCase = true;
+                } else if (Character.isDigit(c)) {
+                    isDigit = true;
+                } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                    spChar = true;
+                }
+            }
+        }
+        
+        
+        if (txtUN.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter User Name.");
+        }
+       else if (txtP.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password.");
+        } 
+       else if ((password_.length() > 7) || (password_.length() < 3)) {
+            JOptionPane.showMessageDialog(null, "Password must have minimum lenght 3 and maximum length 7");
+            lblEP.setText("Password must have minimum lenght 3 and maximum length 7");
+        } else if (upCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Upper case");
+            lblEP.setText("Password must have one Upper case");
+        } else if (loCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Lower case");
+            lblEP.setText("Password must have one Lower case");
+        } else if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Digit");
+            lblEP.setText("Password must have one Digit");
+        } else if (spChar == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Special Character");
+            lblEP.setText("Password must have one Special Character");
+        }
+       
+       
+       else {
+
+            String userName = txtUN.getText();
+            String password = txtP.getText();
+            Organization organization = (Organization) cbO.getSelectedItem();
+            Employee employee = (Employee) cbE.getSelectedItem();
+            Role role = (Role) cbR.getSelectedItem();
+            
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+//            txtUN.setText(ua.getUsername());
+//            txtP.setText(ua.getPassword());
+            ua.setUsername(userName);
+            ua.setPassword(password);
+            
+//            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+            txtUN.setText("");
+            txtP.setText("");
+            popData();
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+
+            JOptionPane.showMessageDialog(null, "Account Updated successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        Role role = (Role) cbR.getSelectedItem();
+        
+        
+        boolean x  = organization.getEmployeeDirectory().deleteEmployee(employee);
+        
+        if(x){
+            boolean y = organization.getUserAccountDirectory().deleteEmployeeCredentials(employee);
+            txtUN.setText("");
+            txtP.setText("");
+            popData();
+            btnCreate.setEnabled(true);
+            btnUpdate.setEnabled(false);
+            btnDelete.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Account Deleted successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+//            popOrganizationComboBox();
+//            cbO.setSelectedIndex(-1);
+
+            populateEmployeeComboBox(organization);
+            populateRoleComboBox(organization);
+            popData();
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void cbEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEActionPerformed
+        // TODO add your handling code here:
+        
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        
+        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+        
+        if(empExist){
+//            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            btnCreate.setEnabled(false);
+            btnUpdate.setEnabled(true);
+            btnDelete.setEnabled(true);
+            
+            UserAccount ua = organization.getUserAccountDirectory().fetchEmployeeCredentials(employee);
+            txtUN.setText(ua.getUsername());
+            txtP.setText(ua.getPassword());
+            
+//            txtUN.setText("");
+        }
+        else{
+            btnCreate.setEnabled(true);
+        }
+    }//GEN-LAST:event_cbEActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cbE;
     private javax.swing.JComboBox cbO;
     private javax.swing.JComboBox cbR;

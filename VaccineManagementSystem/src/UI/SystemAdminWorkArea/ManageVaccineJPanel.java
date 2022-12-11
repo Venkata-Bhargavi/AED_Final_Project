@@ -71,9 +71,11 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
         btnAddVaccine = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1100, 800));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblTitle.setText("Manage Vaccine");
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 41, -1, -1));
 
         tblVaccine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,30 +90,39 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblVaccine);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 140, 504, 100));
+
         btnDeleteVaccine.setText("Delete Vaccine");
         btnDeleteVaccine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteVaccineActionPerformed(evt);
             }
         });
+        add(btnDeleteVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(553, 252, -1, -1));
 
         lblName.setText("Name :");
+        add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 300, -1, -1));
 
         lblDisease.setText("Disease :");
+        add(lblDisease, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 351, -1, -1));
 
         lblPrice.setText("Price :");
+        add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 397, -1, -1));
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 297, 161, -1));
+        add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 394, 161, -1));
 
         cbDisease.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDiseaseActionPerformed(evt);
             }
         });
+        add(cbDisease, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 348, 161, -1));
 
         btnAddVaccine.setText("Add Vaccine");
         btnAddVaccine.addActionListener(new java.awt.event.ActionListener() {
@@ -119,69 +130,7 @@ public class ManageVaccineJPanel extends javax.swing.JPanel {
                 btnAddVaccineActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDisease)
-                            .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPrice, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbDisease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(btnAddVaccine))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(lblTitle)))
-                .addContainerGap(473, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnDeleteVaccine)
-                .addGap(378, 378, 378))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbDisease, txtName, txtPrice});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lblTitle)
-                .addGap(67, 67, 67)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDeleteVaccine)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDisease)
-                            .addComponent(cbDisease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPrice)))
-                .addGap(41, 41, 41)
-                .addComponent(btnAddVaccine)
-                .addContainerGap(311, Short.MAX_VALUE))
-        );
+        add(btnAddVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 462, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteVaccineActionPerformed

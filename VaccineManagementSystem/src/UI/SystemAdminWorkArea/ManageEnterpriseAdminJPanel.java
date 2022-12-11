@@ -171,15 +171,13 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPwd)
                     .addComponent(cbEnter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbNet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtUN, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(txtName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblPwdValid, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
@@ -279,23 +277,23 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         } 
         else if ((password_.length() > 15) || (password_.length() < 5)) {
             JOptionPane.showMessageDialog(null, "Password must have minimum lenght 3 and maximum length 7");
-            lblPwdValid.setText("Password must have minimum lenght of 5 and maximum length of 15");
+//            lblPwdValid.setText("Password must have minimum lenght of 5 and maximum length of 15");
         } 
         else if (upCase == false) {
             JOptionPane.showMessageDialog(null, "Password must have one Upper case");
-            lblPwdValid.setText("Password must have one Upper case");
+//            lblPwdValid.setText("Password must have one Upper case");
         } 
         else if (loCase == false) {
             JOptionPane.showMessageDialog(null, "Password must have one Lower case");
-            lblPwdValid.setText("Password must have one Lower case");
+//            lblPwdValid.setText("Password must have one Lower case");
         } 
         else if (isDigit == false) {
             JOptionPane.showMessageDialog(null, "Password must have one Digit");
-            lblPwdValid.setText("Password must have one Digit");
+//            lblPwdValid.setText("Password must have one Digit");
         } 
         else if (spChar == false) {
             JOptionPane.showMessageDialog(null, "Password must have one Special Character");
-            lblPwdValid.setText("Password must have one Special Character");
+//            lblPwdValid.setText("Password must have one Special Character");
         }
         else 
         {

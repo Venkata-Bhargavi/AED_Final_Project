@@ -4,6 +4,7 @@
  */
 package Business.Employee;
 
+import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,17 @@ public class EmployeeDirectory {
         employee.setName(name);
         employeeList.add(employee);
         return employee;
+    }
+    
+    public boolean deleteEmployee(Employee emp){
+        for (Employee employee : employeeList) 
+        {
+            if(employee.equals(emp)){
+                employeeList.remove(emp);
+                return true;
+            }
+        }
+        return false;
     }
     
 }

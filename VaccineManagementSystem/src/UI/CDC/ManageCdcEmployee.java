@@ -95,7 +95,6 @@ public class ManageCdcEmployee extends javax.swing.JPanel {
 
         jLabel2.setText("Filter by Organization");
 
-        cbFilterOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbFilterOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFilterOrgActionPerformed(evt);
@@ -119,7 +118,7 @@ public class ManageCdcEmployee extends javax.swing.JPanel {
 
         jLabel4.setText("Name :");
 
-        cbOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtName.setToolTipText("");
 
         btnCreate.setText("Create Employee");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
