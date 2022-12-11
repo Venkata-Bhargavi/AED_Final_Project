@@ -34,7 +34,10 @@ public class MainLoginJFrame extends javax.swing.JFrame {
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     private Network network;
     private static final String FILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
-    private String imagePath = FILENAME+"/Images/vaccine main page.jpeg";
+    private String imagePath = FILENAME+"/Images/my-gradient.png";
+
+    private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/vaccine_logo.png";
 
 //    /Users/bhargavi/VenkataBhargavi-Sikhakolli-002724793/AED_FINAL_PROJECT/AED_Final_Project/VaccineManagementSystem/vaccine main page.jpeg
     public MainLoginJFrame(){
@@ -44,11 +47,18 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         setVisible(true);
         ImageIcon imgIcon = new ImageIcon(imagePath);
         Image i = imgIcon.getImage();
-        Image dimg = i.getScaledInstance(1012, 533,Image.SCALE_SMOOTH);
+        Image dimg = i.getScaledInstance(1010, 550,Image.SCALE_SMOOTH);
         System.out.println(FILENAME);
         System.out.println(imagePath);
         ImageIcon imgThisImg = new ImageIcon(dimg);
-        lblImage.setIcon(imgThisImg);
+        lblBG.setIcon(imgThisImg);
+        
+        ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(100, 100,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblIcon.setIcon(logoImgThisImg);
+        
 
     }
     
@@ -77,52 +87,60 @@ public class MainLoginJFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         titlebox = new javax.swing.JLabel();
-        lbl_Password = new javax.swing.JLabel();
-        lbl_username = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
         pass_password = new javax.swing.JPasswordField();
         btn_login = new javax.swing.JButton();
-        lblImage = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
+        lblG = new javax.swing.JLabel();
+        lblIcon = new javax.swing.JLabel();
+        lblBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        titlebox.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        titlebox.setForeground(new java.awt.Color(51, 51, 51));
+        titlebox.setFont(new java.awt.Font("Cochin", 1, 24)); // NOI18N
+        titlebox.setForeground(new java.awt.Color(255, 255, 255));
         titlebox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titlebox.setText("Vaccine Management System");
-        jPanel1.add(titlebox, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 35, 1006, 86));
-
-        lbl_Password.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        lbl_Password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbl_Password.setText("Password:");
-        jPanel1.add(lbl_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 239, 129, 45));
-
-        lbl_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        lbl_username.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbl_username.setText("Username:");
-        jPanel1.add(lbl_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 176, 129, 45));
+        titlebox.setText("Vaccine Inventory Management");
+        jPanel1.add(titlebox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 470, 60));
 
         txt_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 176, 208, 45));
+        txt_username.setForeground(new java.awt.Color(204, 204, 204));
+        txt_username.setText("UserName");
+        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 208, 30));
 
         pass_password.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        pass_password.setForeground(new java.awt.Color(204, 204, 204));
+        pass_password.setText("password");
         pass_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pass_passwordActionPerformed(evt);
             }
         });
-        jPanel1.add(pass_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 239, 208, 45));
+        jPanel1.add(pass_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 208, 30));
 
         btn_login.setText("Login");
+        btn_login.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loginActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 318, 90, 39));
-        jPanel1.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1040, 550));
+        jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 210, 30));
+
+        lblLogin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lblLogin.setText("Login");
+        jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 50, -1));
+
+        lblG.setBackground(new java.awt.Color(14, 29, 49));
+        lblG.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(lblG, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 350, 440));
+        jPanel1.add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 450, 130, 110));
+        jPanel1.add(lblBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 570));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,9 +325,10 @@ public class MainLoginJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblImage;
-    private javax.swing.JLabel lbl_Password;
-    private javax.swing.JLabel lbl_username;
+    private javax.swing.JLabel lblBG;
+    private javax.swing.JLabel lblG;
+    private javax.swing.JLabel lblIcon;
+    private javax.swing.JLabel lblLogin;
     private javax.swing.JPasswordField pass_password;
     private javax.swing.JLabel titlebox;
     private javax.swing.JTextField txt_username;
