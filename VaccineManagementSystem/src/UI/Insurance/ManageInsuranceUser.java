@@ -149,7 +149,6 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
             }
         });
 
-        txtUN.setText(" ");
         txtUN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUNActionPerformed(evt);
@@ -266,6 +265,71 @@ public class ManageInsuranceUser extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        String passwordToHash = String.valueOf(txtP.getText());
+        String password_ = null;
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean isDigit = false;
+        boolean spChar = false;
+        if (!passwordToHash.equals("")) {
+            String SPECIAL_CHARACTERS = "!@#$%^&*()~`-=_+[]{}|:\";',./<>?";
+
+            password_ = passwordToHash.trim();
+            char[] aC = password_.toCharArray();
+            for (char c : aC) {
+                if (Character.isUpperCase(c)) {
+                    upCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    loCase = true;
+                } else if (Character.isDigit(c)) {
+                    isDigit = true;
+                } else if (SPECIAL_CHARACTERS.indexOf(String.valueOf(c)) >= 0) {
+                    spChar = true;
+                }
+            }
+        }
+        
+        
+        if (txtUN.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter User Name.");
+        }
+       else if (txtP.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter Password.");
+        } 
+       else if ((password_.length() > 15) || (password_.length() < 5)) {
+            JOptionPane.showMessageDialog(null, "Password must have minimum lenght 3 and maximum length 7");
+//            lblEP.setText("Password must have minimum lenght 3 and maximum length 7");
+        } else if (upCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Upper case");
+//            lblEP.setText("Password must have one Upper case");
+        } else if (loCase == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Lower case");
+//            lblEP.setText("Password must have one Lower case");
+        } else if (isDigit == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Digit");
+//            lblEP.setText("Password must have one Digit");
+        } else if (spChar == false) {
+            JOptionPane.showMessageDialog(null, "Password must have one Special Character");
+//            lblEP.setText("Password must have one Special Character");
+        }
+       
+       
+       else {
+
+            String userName = txtUN.getText();
+            String password = txtP.getText();
+            Organization organization = (Organization) cbO.getSelectedItem();
+            Employee employee = (Employee) cbE.getSelectedItem();
+            Role role = (Role) cbR.getSelectedItem();
+
+            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+            txtUN.setText("");
+            txtP.setText("");
+            popData();
+            JOptionPane.showMessageDialog(null, "Account created successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void cbRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRActionPerformed

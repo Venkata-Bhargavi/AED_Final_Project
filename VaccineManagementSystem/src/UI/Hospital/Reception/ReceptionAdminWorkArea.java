@@ -4,6 +4,7 @@
  */
 package UI.Hospital.Reception;
 
+import Business.Customers.Customer;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Events.Events;
@@ -147,6 +148,9 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         radioMale = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         lblL = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        rbYes = new javax.swing.JRadioButton();
+        rbNo = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEvents = new javax.swing.JTable();
@@ -155,6 +159,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 10, true));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ReftoDoctorTbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         ReftoDoctorTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -167,17 +172,23 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(ReftoDoctorTbl);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 106, 1043, 180));
+
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jLabel1.setText("Name:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 348, -1, -1));
 
         txtName.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 344, 140, -1));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jLabel2.setText("Age:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 391, 59, -1));
 
         txtAge.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 387, 140, -1));
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jButton1.setText("Save");
@@ -186,21 +197,26 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 572, 140, -1));
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Reception WorkArea");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 24, 445, 52));
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 204));
         jLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jLabel4.setText("Date:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 475, 59, -1));
 
         txtDate.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jPanel1.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 471, 140, -1));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jLabel5.setText("date : dd/MM/yyyy");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 475, -1, -1));
 
         radioFemale.setBackground(new java.awt.Color(255, 255, 255));
         radioFemale.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -210,6 +226,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 radioFemaleActionPerformed(evt);
             }
         });
+        jPanel1.add(radioFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 430, -1, -1));
 
         radioMale.setBackground(new java.awt.Color(255, 255, 255));
         radioMale.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -219,95 +236,44 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 radioMaleActionPerformed(evt);
             }
         });
+        jPanel1.add(radioMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 430, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         jLabel6.setText("Gender:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 432, -1, -1));
 
         lblL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblLMouseClicked(evt);
             }
         });
+        jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(943, 24, 55, 52));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 421, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(25, 25, 25)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtAge)
-                                            .addComponent(txtName)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtDate)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(radioMale)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(radioFemale)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addGap(285, 285, 285))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(430, 430, 430))))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(311, 311, 311)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblL, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblL, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(radioMale)
-                    .addComponent(radioFemale))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addContainerGap(188, Short.MAX_VALUE))
-        );
+        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jLabel7.setText("Insured");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 516, 59, -1));
+
+        rbYes.setBackground(new java.awt.Color(255, 255, 255));
+        rbYes.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        rbYes.setText("Yes");
+        rbYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbYesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 514, -1, -1));
+
+        rbNo.setBackground(new java.awt.Color(255, 255, 255));
+        rbNo.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        rbNo.setText("No");
+        rbNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 514, -1, -1));
 
         jTabbedPane1.addTab("Add Patients", jPanel1);
 
@@ -429,7 +395,20 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
 
                 enterprise.getWorkQueue().getWorkRequestList().add(rwr);
                 populateWorkQueueTable();
-
+                
+//                Adding Cust to Cust Dir
+                Customer cust = business.getCustomerDirectory().addCustomer();
+                cust.setName(txtName.getText());
+                cust.setInsuarance(rootPaneCheckingEnabled);
+                if(rbYes.isSelected())
+                {
+                    cust.setInsuarance(true);
+                }
+                if(rbNo.isSelected())
+                {
+                    cust.setInsuarance(false);
+                }
+                
                 txtName.setText("");
                 txtDate.setText("");
                 txtAge.setText("");
@@ -464,6 +443,14 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         MainLoginJFrame ml = new MainLoginJFrame(business,network);
         ml.setVisible(true);
     }//GEN-LAST:event_lblLMouseClicked
+
+    private void rbYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbYesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbYesActionPerformed
+
+    private void rbNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbNoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,6 +496,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -517,6 +505,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JLabel lblL;
     private javax.swing.JRadioButton radioFemale;
     private javax.swing.JRadioButton radioMale;
+    private javax.swing.JRadioButton rbNo;
+    private javax.swing.JRadioButton rbYes;
     private javax.swing.JTable tblEvents;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtDate;
