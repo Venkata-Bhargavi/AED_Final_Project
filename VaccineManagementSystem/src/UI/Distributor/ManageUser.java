@@ -92,7 +92,7 @@ public class ManageUser extends javax.swing.JPanel {
         lblUN = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnUser = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
         cbO = new javax.swing.JComboBox();
         cbE = new javax.swing.JComboBox();
         cbR = new javax.swing.JComboBox();
@@ -124,10 +124,10 @@ public class ManageUser extends javax.swing.JPanel {
 
         jLabel6.setText("Password :");
 
-        btnUser.setText("Create");
-        btnUser.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserActionPerformed(evt);
+                btnCreateActionPerformed(evt);
             }
         });
 
@@ -146,6 +146,12 @@ public class ManageUser extends javax.swing.JPanel {
         });
 
         cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtUN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUNKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,7 +187,7 @@ public class ManageUser extends javax.swing.JPanel {
                                     .addComponent(lblUN, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
-                                .addComponent(btnUser))))
+                                .addComponent(btnCreate))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
@@ -216,14 +222,14 @@ public class ManageUser extends javax.swing.JPanel {
                     .addComponent(txtP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblP, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addComponent(btnUser)
+                .addComponent(btnCreate)
                 .addContainerGap(315, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-         String passwordToHash = String.valueOf(txtP.getText());
+        String passwordToHash = String.valueOf(txtP.getText());
         String password_ = null;
         boolean upCase = false;
         boolean loCase = false;
@@ -247,7 +253,6 @@ public class ManageUser extends javax.swing.JPanel {
             }
         }
         
-        
         if (txtUN.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter  Name.");
         } else if (txtP.getText().equals("")) {
@@ -269,8 +274,6 @@ public class ManageUser extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Password must have one Special Character");
             lblP.setText("Password must have one Special Character");
         }
-        
-        
         else {
 
             String userName = txtUN.getText();
@@ -279,20 +282,30 @@ public class ManageUser extends javax.swing.JPanel {
             Employee employee = (Employee) cbE.getSelectedItem();
             Role role = (Role) cbR.getSelectedItem();
 
-            if (organization instanceof SupplierOrganization) {
-                Supplier s = new Supplier();
-
-                s.setSupplierName(employee.getName());
-                ((SupplierOrganization) organization).getSupplierList().getSupplierList().add(s);
-
+            boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+            
+            if(empExist){
+                JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+                btnCreate.setEnabled(false);
             }
-            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
-           txtUN.setText("");
-           txtP.setText("");
+            else{
+                btnCreate.setEnabled(true);
+                
+                if (organization instanceof SupplierOrganization) {
+                    Supplier s = new Supplier();
+
+                    s.setSupplierName(employee.getName());
+                    ((SupplierOrganization) organization).getSupplierList().getSupplierList().add(s);
+                }
+                organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+                JOptionPane.showMessageDialog(null, "Account added successfully!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            txtUN.setText("");
+            txtP.setText("");
             populateDataToTable();
-              JOptionPane.showMessageDialog(null, "User Account created successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_btnUserActionPerformed
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     private void cbOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOActionPerformed
         // TODO add your handling code here:
@@ -307,9 +320,26 @@ public class ManageUser extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEActionPerformed
 
+    private void txtUNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUNKeyReleased
+        // TODO add your handling code here:
+        
+        Organization organization = (Organization) cbO.getSelectedItem();
+        Employee employee = (Employee) cbE.getSelectedItem();
+        
+        boolean empExist = organization.getUserAccountDirectory().findEmployee(employee);
+        
+        if(empExist){
+            JOptionPane.showMessageDialog(null, "Employee already exists!", "Dialogue", JOptionPane.INFORMATION_MESSAGE);
+            btnCreate.setEnabled(false);
+        }
+        else{
+            btnCreate.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtUNKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnUser;
+    private javax.swing.JButton btnCreate;
     private javax.swing.JComboBox cbE;
     private javax.swing.JComboBox cbO;
     private javax.swing.JComboBox cbR;

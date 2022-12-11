@@ -87,14 +87,127 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
             WorkQueue w = new WorkQueue();
             dc.setWorkQueue(w);
         }
-//        populatetbl();
-//        populateUpdatedInventory();
-//        populateInventory();
-//        populateComboBox();
-//        populateSupCombo();
-//        populateDistRequestTbl();
+        populatetbl();
+        populateUpdatedInventory();
+        populateInventory();
+        populateComboBox();
+        populateSupCombo();
+        populateDistRequestTbl();
+    }
+    
+    
+    void populatetbl() {
+        DefaultTableModel dtm = (DefaultTableModel) distJTbl.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : network.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof PharmacyWorkRequest || wr instanceof CDCEventInventoryWorkRequest) {
+                Object[] row = new Object[5];
+                row[0] = wr.getVaccine().getVaccineName();
+                if (wr instanceof PharmacyWorkRequest) {
+                    row[1] = ((PharmacyWorkRequest) wr).getRequestedQty();
+                } else if (wr instanceof CDCEventInventoryWorkRequest) {
+                    row[1] = ((CDCEventInventoryWorkRequest) wr).getRequestedQty();
+                }
+                row[2] = wr;
+                row[3] = wr.getReceiver();
+                row[4] = wr.getSender();
+                dtm.addRow(row);
+            }
+        }
     }
 
+    public void populateSupCombo() {
+        supCombo.removeAllItems();
+        for (Organization organization1 : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            System.out.println(organization1);
+            if (organization1 instanceof SupplierOrganization) {
+                SupplierOrganization s = (SupplierOrganization) organization1;
+                for (Supplier supplier : s.getSupplierList().getSupplierList()) {
+                    supCombo.addItem(supplier);
+                }
+            }
+        }
+    }
+
+    void populateDistRequestTbl() {
+
+        DefaultTableModel model1 = (DefaultTableModel) distRequestTbl.getModel();
+        model1.setRowCount(0);
+
+        for (WorkRequest distReq : business.getWorkQueue().getWorkRequestList()) {
+            if (distReq instanceof DistributorWorkRequest) {
+                Object[] row = new Object[5];
+                row[0] = distReq.getVaccine().getVaccineName();
+                row[1] = ((DistributorWorkRequest) distReq).getRequestQuantity();
+                row[2] = distReq;
+                row[3] = ((DistributorWorkRequest) distReq).getSupplier().getSupplierName();
+                row[4] = distReq.getSender();
+                model1.addRow(row);
+            }
+        }
+
+    }
+
+    void populateInventory() {
+
+        DefaultTableModel dtm2 = (DefaultTableModel) availVaccineJTbl.getModel();
+        dtm2.setRowCount(0);
+
+        try {
+            for (Vaccine vac : dc.getDistVaccineDirectory().getVaccineList()) {
+                Object[] rowVac = new Object[2];
+                rowVac[0] = vac.getVaccineName();
+                rowVac[1] = vac.getQuantity();
+                dtm2.addRow(rowVac);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No stocks in the inventory");
+        }
+
+    }
+
+    public void populateUpdatedInventory() {
+        boolean foundUpdated = false;
+        for (WorkRequest workRequest : dc.getWorkQueue().getWorkRequestList()) {
+            System.out.println(workRequest.getStatus());
+            DistributorWorkRequest p = (DistributorWorkRequest) workRequest;
+            if (workRequest instanceof DistributorWorkRequest) {
+                System.out.println(workRequest.getStatus());
+
+                if (workRequest.getStatus().equals("Complete") && !workRequest.isIncludedFlag()) {
+                    Vaccine v = workRequest.getVaccine();
+
+                    for (Vaccine vaccine : dc.getDistVaccineDirectory().getVaccineList()) {
+                        if (v.getVaccineName().equals(vaccine.getVaccineName())) {
+                            vaccine.setQuantity(p.getRequestQuantity() + vaccine.getQuantity());
+                            foundUpdated = true;
+                        } else {
+                            foundUpdated = false;
+                        }
+                    }
+                    if (!foundUpdated) {
+                        Vaccine vac = dc.getDistVaccineDirectory().addVaccine();
+                        vac.setVaccineName(v.getVaccineName());
+                        vac.setQuantity(p.getRequestQuantity());
+                        vac.setDisease(v.getDisease());
+                    }
+
+                }
+            }
+            workRequest.setIncludedFlag(true);// count once
+        }
+
+    }
+
+    void populateComboBox() {
+
+        vaccineCombo.removeAllItems();
+        for (Vaccine vacCombo : business.getVaccineDirectory().getVaccineList()) {
+            vaccineCombo.addItem(vacCombo);
+        }
+
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -403,7 +516,7 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
                     }
                 }
             }
-//            populatetbl();
+            populatetbl();
 
             JOptionPane.showMessageDialog(null, " Request assigned successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -442,8 +555,8 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
                     }
                     pharmacyWorkRequest.setStatus("Complete");
                     JOptionPane.showMessageDialog(null, "You have successfully completed the request");
-//                    populateInventory();
-//                    populatetbl();
+                    populateInventory();
+                    populatetbl();
 
                     DistributorBillingWorkRequest dbwr = new DistributorBillingWorkRequest();
 
@@ -503,8 +616,8 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
                     }
 
                     JOptionPane.showMessageDialog(null, "You have successfully completed the request");
-//                    populateInventory();
-//                    populatetbl();
+                    populateInventory();
+                    populatetbl();
                 } else {
                     JOptionPane.showMessageDialog(null, "Please assign first");
                 }
@@ -533,7 +646,7 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
             dc.getWorkQueue().getWorkRequestList().add(dwr);
             business.getWorkQueue().getWorkRequestList().add(dwr);
             account.getWorkQueue().getWorkRequestList().add(dwr);
-//            populateDistRequestTbl();
+            populateDistRequestTbl();
 
             txtQty.setText("");
 
@@ -550,33 +663,33 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
             try {
                 PharmacyWorkRequest p = (PharmacyWorkRequest) distJTbl.getValueAt(SelectedRow, 2);
                 String postCode = String.valueOf(p.getPincode());
-//                String latLongs[] = getLatLongPositions(postCode);
-//                System.out.println("latitude" + latLongs[0] + "longitude" + latLongs[1]);
+                String latLongs[] = getLatLongPositions(postCode);
+                System.out.println("latitude" + latLongs[0] + "longitude" + latLongs[1]);
                 System.out.println(postCode);
                 JFrame test = new JFrame("Google Maps");
-//                try {
-//                    String latitude = latLongs[0];
-//                    String longitude = latLongs[1];
-//
-//                    String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=18&size=612x612&markers=color:red%7Clabel:S%7C" + latitude + "," + longitude + "&scale=2&maptype=roadmap";
-//                    String destinationFile = "image.jpg";
-//                    // read the map image from Google
-//                    // then save it to a local file: image.jpg
-//                    //
-//                    URL url = new URL(imageUrl);
-//                    InputStream is = url.openStream();
-//                    OutputStream os = new FileOutputStream(destinationFile);
-//                    byte[] b = new byte[2048];
-//                    int length;
-//                    while ((length = is.read(b)) != -1) {
-//                        os.write(b, 0, length);
-//                    }
-//                    is.close();
-//                    os.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    System.exit(1);
-//                }
+                try {
+                    String latitude = latLongs[0];
+                    String longitude = latLongs[1];
+
+                    String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=18&size=612x612&markers=color:red%7Clabel:S%7C" + latitude + "," + longitude + "&scale=2&maptype=roadmap";
+                    String destinationFile = "image.jpg";
+                    // read the map image from Google
+                    // then save it to a local file: image.jpg
+                    //
+                    URL url = new URL(imageUrl);
+                    InputStream is = url.openStream();
+                    OutputStream os = new FileOutputStream(destinationFile);
+                    byte[] b = new byte[2048];
+                    int length;
+                    while ((length = is.read(b)) != -1) {
+                        os.write(b, 0, length);
+                    }
+                    is.close();
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
                 // create a GUI component that loads the image: image.jpg
                 //
                 ImageIcon imageIcon = new ImageIcon((new ImageIcon("image.jpg")).getImage().getScaledInstance(630, 600, java.awt.Image.SCALE_SMOOTH));
@@ -590,6 +703,36 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    
+                                           
+    public static String[] getLatLongPositions(String address) throws Exception {
+        int responseCode = 0;
+        String api = "http://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=true";
+        URL url = new URL(api);
+        HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+        httpConnection.connect();
+        responseCode = httpConnection.getResponseCode();
+        if (responseCode == 200) {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();;
+            Document document = builder.parse(httpConnection.getInputStream());
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile("/GeocodeResponse/status");
+            String status = (String) expr.evaluate(document, XPathConstants.STRING);
+            if (status.equals("OK")) {
+                expr = xpath.compile("//geometry/location/lat");
+                String latitude = (String) expr.evaluate(document, XPathConstants.STRING);
+                expr = xpath.compile("//geometry/location/lng");
+                String longitude = (String) expr.evaluate(document, XPathConstants.STRING);
+                return new String[]{latitude, longitude};
+            } else {
+                throw new Exception("Error from the API - response status: " + status);
+            }
+        }
+        return null;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

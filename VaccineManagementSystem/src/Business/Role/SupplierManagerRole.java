@@ -25,6 +25,6 @@ import javax.swing.JFrame;
 public class SupplierManagerRole extends Role{
     @Override
     public JFrame createWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
-        return new SupplierManagerWorkArea(account, (SupplierOrganization)organization,enterprise,business);
+        return new SupplierManagerWorkArea(account, (SupplierOrganization) organization,enterprise,business);
     }
 }
