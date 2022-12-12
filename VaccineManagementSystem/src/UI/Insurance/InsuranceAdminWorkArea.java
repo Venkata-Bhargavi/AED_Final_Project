@@ -9,6 +9,9 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,8 +26,33 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
     private Enterprise enterprise;
     private EcoSystem system;
     private Network network;
+      private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/sysadmin.png";
+    
+     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public InsuranceAdminWorkArea(Enterprise enterprise, EcoSystem sys, Network network) {
         initComponents();
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(60, 60,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
+        
+         ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(200, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
         this.enterprise = enterprise;
         this.system= sys;
         this.network = network;
@@ -43,13 +71,17 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
         controlPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
+        controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Manage Organisation");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +89,7 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        controlPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 309, 178, -1));
 
         jButton2.setText("Manage Employee");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -64,13 +97,7 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Logout");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        controlPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 350, 178, -1));
 
         jButton4.setText("Manage Users");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -78,34 +105,20 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        controlPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 391, 178, -1));
 
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(314, 314, 314)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(35, 35, 35))
-        );
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
+            }
+        });
+        controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 60, 40));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setText("Insurance Admin");
+        controlPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        controlPanel.add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 90, 90));
+        controlPanel.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 730));
 
         jSplitPane1.setLeftComponent(controlPanel);
 
@@ -160,13 +173,12 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
         // TODO add your handling code here:
-        
         this.setVisible(false);
         MainLoginJFrame ml = new MainLoginJFrame(system,network);
         ml.setVisible(true); 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_lblLMouseClicked
 
     /**
      * @param args the command line arguments
@@ -207,9 +219,12 @@ public class InsuranceAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JPanel controlPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblI;
+    private javax.swing.JLabel lblL;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

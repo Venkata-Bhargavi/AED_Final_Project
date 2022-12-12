@@ -15,6 +15,9 @@ import Business.WorkQueue.InsuaranceBillingWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -34,10 +37,34 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
     private Enterprise enterprise; 
     private EcoSystem business;
     private Network network;
+      private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/insurance.png";
     
+     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
 
     public InsuranceBillingWorkArea(UserAccount account, InsuaranceBillingOrganization insuaranceBillingOrganization, Enterprise enterprise, EcoSystem business, Network network) {
        initComponents();
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
+        
+         ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
        this.account= account;
        this.insuaranceBillingOrganization = insuaranceBillingOrganization;
        this.enterprise= enterprise;
@@ -84,13 +111,21 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
-        btnlogout = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 156, 141));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        tblCDCBills.setBackground(new java.awt.Color(255, 156, 141));
+        tblCDCBills.setForeground(new java.awt.Color(255, 255, 255));
         tblCDCBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -99,108 +134,64 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
                 "Patient Name", "Vaccine", "Status", "Price", "Sender", "Receiver", "Message"
             }
         ));
+        tblCDCBills.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblCDCBills.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tblCDCBills);
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Zapf Dingbats", 1, 18)); // NOI18N
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 54, 829, 118));
+
+        jButton1.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 156, 141));
         jButton1.setText("Assign");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 184, 139, 30));
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setFont(new java.awt.Font("Zapf Dingbats", 1, 18)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 156, 141));
         jButton2.setText("Pay");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 184, 163, 30));
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Insurance ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 480, -1));
 
-        jButton3.setBackground(new java.awt.Color(153, 153, 153));
-        jButton3.setFont(new java.awt.Font("Zapf Dingbats", 1, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Zapf Dingbats", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 156, 141));
         jButton3.setText("Reject");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 163, 30));
 
         jLabel2.setBackground(new java.awt.Color(153, 153, 153));
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("Comments:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 239, 140, -1));
 
         txtMessage.setForeground(new java.awt.Color(255, 153, 0));
+        jPanel1.add(txtMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(667, 241, 168, 30));
 
-        btnlogout.setText("logout");
-        btnlogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnlogoutActionPerformed(evt);
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 55, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(145, 145, 145)
-                .addComponent(btnlogout)
-                .addGap(39, 39, 39))
-        );
+        jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 60, 40));
+        jPanel1.add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 130, 130));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,19 +199,13 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 851, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 8, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 8, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,13 +270,12 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
         // TODO add your handling code here:
-        
         this.setVisible(false);
         MainLoginJFrame ml = new MainLoginJFrame(business, network);
-        ml.setVisible(true); 
-    }//GEN-LAST:event_btnlogoutActionPerformed
+        ml.setVisible(true);
+    }//GEN-LAST:event_lblLMouseClicked
 
     /**
      * @param args the command line arguments
@@ -329,7 +313,6 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnlogout;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -337,6 +320,9 @@ public class InsuranceBillingWorkArea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblI;
+    private javax.swing.JLabel lblL;
     private javax.swing.JTable tblCDCBills;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables

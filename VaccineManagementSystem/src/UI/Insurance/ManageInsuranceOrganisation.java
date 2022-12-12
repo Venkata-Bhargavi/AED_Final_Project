@@ -7,6 +7,9 @@ package UI.Insurance;
 import UI.Hospital.*;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +25,17 @@ public class ManageInsuranceOrganisation extends javax.swing.JPanel {
      */
     private OrganizationDirectory directory;
     JPanel workArea;
+     private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/manage_org.png";
     public ManageInsuranceOrganisation(OrganizationDirectory directory, JPanel workArea) {
         initComponents();
         this.directory = directory;
         this.workArea = workArea;
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
         
         populateTable();
         populateCombo();
@@ -60,10 +70,20 @@ public class ManageInsuranceOrganisation extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cbO = new javax.swing.JComboBox();
         btnAO = new javax.swing.JButton();
+        lblI = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Add Organisation");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 37, -1, -1));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 156, 141));
+
+        tbl.setBackground(new java.awt.Color(255, 156, 141));
+        tbl.setForeground(new java.awt.Color(255, 255, 255));
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -75,63 +95,35 @@ public class ManageInsuranceOrganisation extends javax.swing.JPanel {
                 "Name"
             }
         ));
+        tbl.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tbl);
 
-        jLabel2.setText("Organisation Type :");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 109, 569, 139));
 
+        jLabel2.setText("Organisation Type :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 269, -1, -1));
+
+        cbO.setBackground(new java.awt.Color(255, 156, 141));
+        cbO.setForeground(new java.awt.Color(255, 255, 255));
         cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOActionPerformed(evt);
             }
         });
+        add(cbO, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 266, 129, -1));
 
+        btnAO.setBackground(new java.awt.Color(255, 156, 141));
+        btnAO.setForeground(new java.awt.Color(255, 255, 255));
         btnAO.setText("Add Organisation");
         btnAO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAOActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(44, 44, 44)
-                                .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(btnAO))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(180, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(38, 38, 38)
-                .addComponent(btnAO)
-                .addContainerGap(450, Short.MAX_VALUE))
-        );
+        add(btnAO, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 327, -1, -1));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 550, 150, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAOActionPerformed
@@ -154,6 +146,7 @@ public class ManageInsuranceOrganisation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblI;
     private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
 }
