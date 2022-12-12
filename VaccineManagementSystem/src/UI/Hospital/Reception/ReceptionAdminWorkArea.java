@@ -26,19 +26,13 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-
-
 /**
  *
  * @author Krishnakanth Naik Jarapala
@@ -55,7 +49,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private Network network;
      private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
-    boolean emailRegexFlagError;
+private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public ReceptionAdminWorkArea(UserAccount account, ReceptionOrganization receptionOrganization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.account = account;
@@ -68,6 +63,14 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
+        
+        ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
+        lblB2.setIcon(cImgThisImg);
+        
         populateWorkQueueTable();
         populateEvents();
     }
@@ -148,7 +151,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         radioFemale = new javax.swing.JRadioButton();
         radioMale = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
@@ -156,9 +160,11 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         rbYes = new javax.swing.JRadioButton();
         rbNo = new javax.swing.JRadioButton();
+        lblB = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEvents = new javax.swing.JTable();
+        lblB2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,6 +181,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 "Name", "Age", "Status", "Gender", "Receiver", "Date"
             }
         ));
+        ReftoDoctorTbl.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        ReftoDoctorTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(ReftoDoctorTbl);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 106, 1043, 180));
@@ -212,16 +220,16 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 204));
         jLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        jLabel4.setText("Email:");
+        jLabel4.setText("Date:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 475, 59, -1));
 
-        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtEmailKeyReleased(evt);
-            }
-        });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 471, 140, -1));
+        txtDate.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jPanel1.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 471, 140, -1));
+
+        jLabel5.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jLabel5.setText("date : dd/MM/yyyy");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 475, -1, -1));
 
         radioFemale.setBackground(new java.awt.Color(255, 255, 255));
         radioFemale.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -279,8 +287,11 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
             }
         });
         jPanel1.add(rbNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 514, -1, -1));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 760));
 
         jTabbedPane1.addTab("Add Patients", jPanel1);
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -298,6 +309,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblEvents.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblEvents.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblEvents);
         if (tblEvents.getColumnModel().getColumnCount() > 0) {
             tblEvents.getColumnModel().getColumn(0).setResizable(false);
@@ -305,22 +318,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
             tblEvents.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
-        );
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 102, 670, 146));
+        jPanel2.add(lblB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 760));
 
         jTabbedPane1.addTab("View Events", jPanel2);
 
@@ -345,22 +344,18 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Date date = null;
-//        if ((!txtEmail.getText().equals("")) || (txtEmail.getText().length() == (10) )) {
-//            String format = "dd/MM/yyyy";
-//            String createFlightTimeValidate = txtEmail.getText();
-//
-//            SimpleDateFormat sdf = new SimpleDateFormat(format);
-//            //Date date = null;
-//            try {
-//                date = sdf.parse(createFlightTimeValidate);
-//            } catch (ParseException ex) {
-//                // Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+        if ((!txtDate.getText().equals("")) || (txtDate.getText().length() == (10) )) {
+            String format = "dd/MM/yyyy";
+            String createFlightTimeValidate = txtDate.getText();
 
-        
-        
-        
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            //Date date = null;
+            try {
+                date = sdf.parse(createFlightTimeValidate);
+            } catch (ParseException ex) {
+                // Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         if (txtName.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "Please enter Patient Name.");
@@ -369,10 +364,12 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         } else if (Integer.parseInt(txtAge.getText()) <=0 ) {
             JOptionPane.showMessageDialog(null, "Please enter Valid Age.");
         }
-        else if ((txtEmail.getText().equals("")) || emailRegexFlagError ) {
-            JOptionPane.showMessageDialog(null, "Please enter valid Email.");
-        } 
-        
+        else if ((txtDate.getText().equals("")) || (txtDate.getText().length() != 10 )) {
+            JOptionPane.showMessageDialog(null, "Please enter Date.");
+        } else if ((date == null) || (txtDate.getText().length() != 10 )) {
+            JOptionPane.showMessageDialog(null, "Please enter valid date");
+        }
+
         else {
 
             try {
@@ -389,18 +386,10 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 {
                     p.setGender("Female");
                 }
-                
 
-                
-//                Date startDate = df.parse(LocalDateTime.now()));
-                
-                String currentDate = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now());
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                Date startDate = df.parse(currentDate);
-                
-                System.out.println(currentDate + startDate);
+                Date startDate = df.parse(txtDate.getText());
 
-                
                 p.setDate(startDate);
 
                 rwr.setPatient(p);
@@ -416,31 +405,19 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 cust.setName(txtName.getText());
                 cust.setInsuarance(rootPaneCheckingEnabled);
                 if(rbYes.isSelected())
-                {   
-                    rbNo.setSelected(false);
+                {
                     cust.setInsuarance(true);
                 }
                 if(rbNo.isSelected())
                 {
-                    rbYes.setSelected(false);
                     cust.setInsuarance(false);
                 }
                 
-                
-                String Message = " Patient Appointment Booked Successfully! ";
-                String bodyMessage = txtName.getText().toUpperCase().concat(Message);
-                System.out.println(bodyMessage);
-                
-                sendConfirmationEmail( txtEmail.getText() , bodyMessage , "New Appointment");
-                sendConfirmationEmail( "jkkn.iitkgp@gmail.com", bodyMessage , "New Appointment");
-                JOptionPane.showMessageDialog(null, "Patient record saved and sent an email", "Warning", JOptionPane.INFORMATION_MESSAGE);
-                
-                
                 txtName.setText("");
-                txtEmail.setText("");
+                txtDate.setText("");
                 txtAge.setText("");
-                
-                
+                JOptionPane.showMessageDialog(null, "Patient record saved.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                sendConfirmationEmail( "jkkn.iitkgp@gmail.com", "Patient Appointment Booked Successfully!" , "New Appointment");
             } catch (ParseException ex) {
                 Logger.getLogger(ReceptionAdminWorkArea.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -478,23 +455,6 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private void rbNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbNoActionPerformed
-
-    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
-        // TODO add your handling code here:
-        
-        String PatterN = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtEmail.getText());
-        if(!patternmatch.matches())
-        {
-            emailRegexFlagError = true;
-        }
-        else
-        {
-            emailRegexFlagError = false;
-        }
-        
-    }//GEN-LAST:event_txtEmailKeyReleased
 
     /**
      * @param args the command line arguments
@@ -538,6 +498,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -545,6 +506,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblB2;
     private javax.swing.JLabel lblL;
     private javax.swing.JRadioButton radioFemale;
     private javax.swing.JRadioButton radioMale;
@@ -552,7 +515,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbYes;
     private javax.swing.JTable tblEvents;
     private javax.swing.JTextField txtAge;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

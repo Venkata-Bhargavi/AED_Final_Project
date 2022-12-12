@@ -39,7 +39,8 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private Network network;
         private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
-    
+    private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public ClinicWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
         initComponents();
          this.account = account;
@@ -52,6 +53,12 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblLogout.setIcon(logoImgThisImg);
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
         populateCBVaccine();
         populateSelectedPatient();
         txtName.setEnabled(false);
@@ -120,13 +127,16 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         btnFetch = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         lblLogout = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1100, 800));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTablePatientDetails.setBackground(new java.awt.Color(255, 156, 141));
         jTablePatientDetails.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jTablePatientDetails.setForeground(new java.awt.Color(255, 255, 255));
         jTablePatientDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -187,7 +197,7 @@ public class ClinicWorkArea extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Clinic WorkArea");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 20, 833, 42));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 690, 42));
 
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -225,23 +235,21 @@ public class ClinicWorkArea extends javax.swing.JFrame {
                 lblLogoutMouseClicked(evt);
             }
         });
-        jPanel1.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 50, 40));
+        jPanel1.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 70, 50));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 810));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
         );
 
         pack();
@@ -382,6 +390,7 @@ public class ClinicWorkArea extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePatientDetails;
+    private javax.swing.JLabel lblB;
     private javax.swing.JLabel lblLogout;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtGender;
