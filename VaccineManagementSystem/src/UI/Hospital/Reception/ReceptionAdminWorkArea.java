@@ -49,7 +49,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private Network network;
      private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
-
+private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public ReceptionAdminWorkArea(UserAccount account, ReceptionOrganization receptionOrganization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.account = account;
@@ -62,6 +63,14 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
+        
+        ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
+        lblB2.setIcon(cImgThisImg);
+        
         populateWorkQueueTable();
         populateEvents();
     }
@@ -151,9 +160,11 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         rbYes = new javax.swing.JRadioButton();
         rbNo = new javax.swing.JRadioButton();
+        lblB = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEvents = new javax.swing.JTable();
+        lblB2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,6 +181,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 "Name", "Age", "Status", "Gender", "Receiver", "Date"
             }
         ));
+        ReftoDoctorTbl.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        ReftoDoctorTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(ReftoDoctorTbl);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 106, 1043, 180));
@@ -274,8 +287,11 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
             }
         });
         jPanel1.add(rbNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 514, -1, -1));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 760));
 
         jTabbedPane1.addTab("Add Patients", jPanel1);
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -293,6 +309,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblEvents.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblEvents.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblEvents);
         if (tblEvents.getColumnModel().getColumnCount() > 0) {
             tblEvents.getColumnModel().getColumn(0).setResizable(false);
@@ -300,22 +318,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
             tblEvents.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
-        );
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 102, 670, 146));
+        jPanel2.add(lblB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 760));
 
         jTabbedPane1.addTab("View Events", jPanel2);
 
@@ -502,6 +506,8 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblB2;
     private javax.swing.JLabel lblL;
     private javax.swing.JRadioButton radioFemale;
     private javax.swing.JRadioButton radioMale;

@@ -51,7 +51,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
     
-
+private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public PharmacyAdminWorkArea(UserAccount account, PharmacyOrganization pharmacyOrganization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.ua = account;
@@ -64,7 +65,11 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblLogout.setIcon(logoImgThisImg);
-
+ ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
         populateBox();
         populateTbl();
         populateWorkQueueTable();
@@ -231,19 +236,24 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblLogout = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Pharmacy WorkRequest Dashboard");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 12, 717, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
 
+        tblWorkQueue.setBackground(new java.awt.Color(255, 156, 141));
         tblWorkQueue.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tblWorkQueue.setForeground(new java.awt.Color(255, 255, 255));
         tblWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -252,20 +262,28 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 "Vaccine Name", "Qty", "Status", "Receiver"
             }
         ));
+        tblWorkQueue.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblWorkQueue.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tblWorkQueue);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 339, 607, 323));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Vaccine:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 271, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Qty:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 271, -1, -1));
 
         txtVaccineQty.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel1.add(txtVaccineQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 270, 80, -1));
 
         vaccineComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         vaccineComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(vaccineComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 270, 118, -1));
 
         jButtonRequest.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jButtonRequest.setText("Request");
@@ -274,10 +292,13 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 jButtonRequestActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(619, 271, 167, -1));
 
         jScrollPane2.setBackground(new java.awt.Color(204, 204, 204));
 
+        tblVaccineRequest.setBackground(new java.awt.Color(255, 156, 141));
         tblVaccineRequest.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tblVaccineRequest.setForeground(new java.awt.Color(255, 255, 255));
         tblVaccineRequest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -286,6 +307,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 "Patient Name", "Patient Age", "Status", "Vaccine", "Price", "Qty", "Sender", "Receiver"
             }
         ));
+        tblVaccineRequest.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblVaccineRequest.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tblVaccineRequest.getTableHeader().setReorderingAllowed(false);
         tblVaccineRequest.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -294,6 +317,8 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblVaccineRequest);
 
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 78, 1091, 186));
+
         btnAssign.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         btnAssign.setText("Assign");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +326,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 btnAssignActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAssign, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 271, 152, -1));
 
         btnAccept.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         btnAccept.setText("Accept");
@@ -309,10 +335,13 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 btnAcceptActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAccept, new org.netbeans.lib.awtextra.AbsoluteConstraints(951, 271, 146, -1));
 
         jScrollPane3.setBackground(new java.awt.Color(204, 204, 204));
 
+        jTableVaccineInventory.setBackground(new java.awt.Color(255, 156, 141));
         jTableVaccineInventory.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jTableVaccineInventory.setForeground(new java.awt.Color(255, 255, 255));
         jTableVaccineInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -321,130 +350,56 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
                 "Vaccine ID", "Vaccine Name", "Vaccine Quantity", "Disease"
             }
         ));
+        jTableVaccineInventory.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        jTableVaccineInventory.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jTableVaccineInventory.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableVaccineInventory);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(619, 339, 478, 323));
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 204));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("PinCode:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 271, -1, -1));
 
         txtPinCode.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jPanel1.add(txtPinCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 270, 166, -1));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Vaccine Request");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 316, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Vaccine Inventory");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(619, 316, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Patient Details");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 55, -1, -1));
 
         lblLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblLogoutMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(vaccineComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtVaccineQty, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtPinCode, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, Short.MAX_VALUE)
-                                .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(lblLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssign)
-                    .addComponent(btnAccept)
-                    .addComponent(vaccineComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtVaccineQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jButtonRequest)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPinCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
-        );
+        jPanel1.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(964, 12, 46, 37));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 760));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1103, Short.MAX_VALUE)
+            .addGap(0, 1109, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 6, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 760, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -660,6 +615,7 @@ public class PharmacyAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableVaccineInventory;
+    private javax.swing.JLabel lblB;
     private javax.swing.JLabel lblLogout;
     private javax.swing.JTable tblVaccineRequest;
     private javax.swing.JTable tblWorkQueue;

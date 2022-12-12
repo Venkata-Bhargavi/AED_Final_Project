@@ -36,6 +36,16 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
     
     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+    
+    
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/billing.png";
+    
+     
+    
+     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public DistributorBillingWorkArea(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.account= account;
@@ -50,6 +60,20 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
+        
+             ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
+        
+        
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
     }
     
     void populateTbl()
@@ -86,11 +110,17 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblL = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        distBillingJTbl.setBackground(new java.awt.Color(255, 156, 141));
+        distBillingJTbl.setForeground(new java.awt.Color(255, 255, 255));
         distBillingJTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -101,7 +131,7 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(distBillingJTbl);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 130, 620, 156));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 620, 156));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 20, 45, 43));
 
         lblL.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,11 +139,13 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
                 lblLMouseClicked(evt);
             }
         });
-        jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(671, 20, 55, 43));
+        jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 55, 43));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel2.setText("Distributor Billing Dashboard");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 290, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 290, -1));
+        jPanel1.add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 140, 130));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,7 +155,7 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -178,6 +210,8 @@ public class DistributorBillingWorkArea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblI;
     private javax.swing.JLabel lblL;
     // End of variables declaration//GEN-END:variables
 }
