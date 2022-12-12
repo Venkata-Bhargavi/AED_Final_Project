@@ -14,6 +14,8 @@ import javax.mail.internet.MimeMessage;
 
 public class sendEmail 
 {
+    
+//    OLD Method to send email
     public static void sendConfirmationEmail(String mailIdTo, String message , String subject)
     {
          
@@ -67,5 +69,7 @@ public class sendEmail
             
         }
     }
+    
+   
 
 }

@@ -9,6 +9,14 @@ import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.vaccine.VaccineDirectory;
 import java.util.ArrayList;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -79,6 +87,14 @@ public class EcoSystem extends Organization {
     public ArrayList<Network> getNetworkList() {
         return networkList;
     }
+    
+    public void removeNetwork(String name){
+        for(Network net: networkList){
+            if(net.getName().equals(name)){
+                networkList.remove(net);
+            }
+        }
+    }
 
     public Network createAndAddNetwork() {
         Network network = new Network();
@@ -98,9 +114,8 @@ public class EcoSystem extends Organization {
         if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             return false;
         }
-
-       
-
         return true;
     }
+           
+    
 }

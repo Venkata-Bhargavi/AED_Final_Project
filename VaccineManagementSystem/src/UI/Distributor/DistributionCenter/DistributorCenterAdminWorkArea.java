@@ -77,8 +77,7 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
     
     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
-    private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
-    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
+    
     public DistributorCenterAdminWorkArea(UserAccount account, DistributionCenterOrganization distributionCenterOrganization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.account = account;
@@ -108,13 +107,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
         lblL1.setIcon(logoImgThisImg);
-              ImageIcon bimgIcon = new ImageIcon(bgimagePath);
-        Image bI = bimgIcon.getImage();
-        Image cDimg = bI.getScaledInstance(1100, 800,Image.SCALE_SMOOTH);
-        ImageIcon cImgThisImg = new ImageIcon(cDimg);
-        lblB.setIcon(cImgThisImg);
-        lblB2.setIcon(cImgThisImg);
-
 
     }
     
@@ -253,7 +245,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnLoc = new javax.swing.JButton();
         lblL = new javax.swing.JLabel();
-        lblB = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -268,7 +259,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lblL1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lblB2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,6 +273,7 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
 
+        distJTbl.setBackground(new java.awt.Color(204, 204, 204));
         distJTbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         distJTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -297,7 +288,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 740, 232));
 
         btnAssign.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnAssign.setForeground(new java.awt.Color(255, 156, 141));
         btnAssign.setText("Assign to me ");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +297,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         jPanel1.add(btnAssign, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, -1, -1));
 
         btnAccept.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnAccept.setForeground(new java.awt.Color(255, 156, 141));
         btnAccept.setText("Accept");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -342,7 +331,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
 
         btnLoc.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnLoc.setForeground(new java.awt.Color(255, 156, 141));
         btnLoc.setText("Locate Pharmacy");
         btnLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,59 +345,43 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
             }
         });
         jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 45, 34));
-        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -3, 810, 650));
 
         jTabbedPane1.addTab("Pharmacy Requests", jPanel1);
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel2.setText("Request Supplier");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel3.setText("Vaccine Name:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 143, -1, -1));
 
         vaccineCombo.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        vaccineCombo.setForeground(new java.awt.Color(255, 156, 141));
         vaccineCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(vaccineCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(287, 140, 203, -1));
 
         txtQty.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jPanel2.add(txtQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 171, 205, -1));
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 204));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel4.setText("Qty :");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 174, 49, -1));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel5.setText("Supplier:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 204, -1, -1));
 
         supCombo.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        supCombo.setForeground(new java.awt.Color(255, 156, 141));
         supCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(supCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 204, 205, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 156, 141));
         jButton1.setText("Request");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 244, -1, 38));
 
         jScrollPane3.setBackground(new java.awt.Color(204, 204, 204));
 
-        distRequestTbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 156, 141)));
         distRequestTbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         distRequestTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -419,30 +391,92 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
                 "Vaccine Name", "Qty", "Status", "Supplier", "Sender"
             }
         ));
-        distRequestTbl.setSelectionBackground(new java.awt.Color(255, 156, 141));
-        distRequestTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(distRequestTbl);
-
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 354, 723, 175));
 
         jLabel8.setBackground(new java.awt.Color(204, 204, 204));
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel8.setText("Requests to supplier");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 324, -1, -1));
 
         lblL1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblL1MouseClicked(evt);
             }
         });
-        jPanel2.add(lblL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 45, 34));
 
         jLabel9.setBackground(new java.awt.Color(204, 204, 204));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Distribution Center Work Area");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 679, -1));
-        jPanel2.add(lblB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 650));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(lblL1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jLabel3)
+                        .addGap(16, 16, 16)
+                        .addComponent(vaccineCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(320, 320, 320)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(supCombo, 0, 205, Short.MAX_VALUE)
+                            .addComponent(txtQty))))
+                .addGap(14, 14, 14))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(lblL1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vaccineCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(supCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jLabel8)
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jTabbedPane1.addTab("Request Vaccine", jPanel2);
 
@@ -776,8 +810,6 @@ public class DistributorCenterAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblB;
-    private javax.swing.JLabel lblB2;
     private javax.swing.JLabel lblL;
     private javax.swing.JLabel lblL1;
     private javax.swing.JComboBox supCombo;
