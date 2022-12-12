@@ -43,6 +43,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
         ImageIcon aImgThisImg = new ImageIcon(aDimg);
         lblI.setIcon(aImgThisImg);
+        
+        
+//        btnU.setEnabled(false);
+//        btnA.setEnabled(true);
+//        btnD.setEnabled(false);
     }
     private void populateEntTable() {
         DefaultTableModel model = (DefaultTableModel) tblEnt.getModel();
@@ -94,7 +99,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         cbNetwork = new javax.swing.JComboBox();
         cbEnterpriseName = new javax.swing.JComboBox();
         txtName = new javax.swing.JTextField();
-        btnSubmit = new javax.swing.JButton();
+        btnA = new javax.swing.JButton();
         lblI = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -119,6 +124,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 "Enterprise Name", "Network", "Type"
             }
         ));
+        tblEnt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEntMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEnt);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 498, 100));
@@ -152,20 +162,20 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         });
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, 141, -1));
 
-        btnSubmit.setBackground(new java.awt.Color(255, 156, 141));
-        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
-        btnSubmit.setText("Submit");
-        btnSubmit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnA.setBackground(new java.awt.Color(255, 156, 141));
+        btnA.setForeground(new java.awt.Color(255, 255, 255));
+        btnA.setText("Submit");
+        btnA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
+                btnAActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, 120, 30));
+        add(btnA, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 120, 30));
         add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, 150, 160));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private void btnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAActionPerformed
         // TODO add your handling code here:
         
         
@@ -285,7 +295,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(null, "Enterprise added successfully.", "Warning", JOptionPane.INFORMATION_MESSAGE);
 //        }
         
-    }//GEN-LAST:event_btnSubmitActionPerformed
+    }//GEN-LAST:event_btnAActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
@@ -304,9 +314,31 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbEnterpriseNameActionPerformed
 
+    private void tblEntMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntMouseClicked
+        // TODO add your handling code here:
+//        
+//        int selectedRow = tblEnt.getSelectedRow();
+//        
+//        if (selectedRow < 0) {
+//            JOptionPane.showMessageDialog(null, "Please select a Network to Manage.", "Warning", JOptionPane.WARNING_MESSAGE);
+//        } 
+//        else{
+//            
+//            Enterprise ent = (Enterprise) tblEnt.getValueAt(selectedRow, 0);
+//            ent.get
+//            
+//            System.out.println("Select Network: "+net.getName().toUpperCase());
+//            tblEnt.setText(net.getName());
+//            btnU.setEnabled(true);
+//            btnA.setEnabled(false);
+//            btnD.setEnabled(true);
+//        }
+        
+    }//GEN-LAST:event_tblEntMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnA;
     private javax.swing.JComboBox cbEnterpriseName;
     private javax.swing.JComboBox cbNetwork;
     private javax.swing.JLabel jLabel1;

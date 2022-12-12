@@ -53,7 +53,7 @@ public class ManageHospitalOrganisation extends javax.swing.JPanel {
          cbO.addItem(Organization.Type.ClinicOrganization);
          cbO.addItem(Organization.Type.ReceptionOrganization);
          cbO.addItem(Organization.Type.PharmacyOrganization);
-         cbO.addItem(Organization.Type.EventOrganisation);
+//         cbO.addItem(Organization.Type.EventOrganisation);
          cbO.addItem(Organization.Type.HospitalBillingOrganization);
      }
 

@@ -26,9 +26,13 @@ import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,6 +46,7 @@ public class ReceptionAdminWorkArea extends javax.swing.JFrame {
     /**
      * Creates new form ReceptionAdminWorkArea
      */
+    boolean emailRegexFlagError;
     private UserAccount account;
     private ReceptionOrganization receptionOrganization;
     private Enterprise enterprise;
@@ -151,8 +156,7 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtDate = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
         radioFemale = new javax.swing.JRadioButton();
         radioMale = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
@@ -220,16 +224,16 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 204));
         jLabel4.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        jLabel4.setText("Date:");
+        jLabel4.setText("Email:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 475, 59, -1));
 
-        txtDate.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jPanel1.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 471, 140, -1));
-
-        jLabel5.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        jLabel5.setText("date : dd/MM/yyyy");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(654, 475, -1, -1));
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 471, 140, -1));
 
         radioFemale.setBackground(new java.awt.Color(255, 255, 255));
         radioFemale.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
@@ -343,19 +347,8 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Date date = null;
-        if ((!txtDate.getText().equals("")) || (txtDate.getText().length() == (10) )) {
-            String format = "dd/MM/yyyy";
-            String createFlightTimeValidate = txtDate.getText();
-
-            SimpleDateFormat sdf = new SimpleDateFormat(format);
-            //Date date = null;
-            try {
-                date = sdf.parse(createFlightTimeValidate);
-            } catch (ParseException ex) {
-                // Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        Date date = null;      
+        
         if (txtName.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "Please enter Patient Name.");
@@ -364,12 +357,10 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
         } else if (Integer.parseInt(txtAge.getText()) <=0 ) {
             JOptionPane.showMessageDialog(null, "Please enter Valid Age.");
         }
-        else if ((txtDate.getText().equals("")) || (txtDate.getText().length() != 10 )) {
-            JOptionPane.showMessageDialog(null, "Please enter Date.");
-        } else if ((date == null) || (txtDate.getText().length() != 10 )) {
-            JOptionPane.showMessageDialog(null, "Please enter valid date");
-        }
-
+        else if ((txtEmail.getText().equals("")) || emailRegexFlagError ) {
+            JOptionPane.showMessageDialog(null, "Please enter valid Email.");
+        } 
+        
         else {
 
             try {
@@ -386,10 +377,13 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
                 {
                     p.setGender("Female");
                 }
-
+                
+//                Date startDate = df.parse(LocalDateTime.now()));
+                
+                String currentDate = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(LocalDateTime.now());
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                Date startDate = df.parse(txtDate.getText());
-
+                Date startDate = df.parse(currentDate);
+                
                 p.setDate(startDate);
 
                 rwr.setPatient(p);
@@ -405,19 +399,35 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
                 cust.setName(txtName.getText());
                 cust.setInsuarance(rootPaneCheckingEnabled);
                 if(rbYes.isSelected())
-                {
+                {   
+                    rbNo.setSelected(false);
                     cust.setInsuarance(true);
                 }
                 if(rbNo.isSelected())
                 {
+                    rbYes.setSelected(false);
                     cust.setInsuarance(false);
                 }
                 
+                
+                String Message = " Patient Appointment Booked Successfully! ";
+                String bodyMessage = txtName.getText().toUpperCase().concat(Message);
+                
+                sendConfirmationEmail( txtEmail.getText() , bodyMessage , "New Appointment");
+                sendConfirmationEmail( "jkkn.iitkgp@gmail.com", bodyMessage , "New Appointment");
+                JOptionPane.showMessageDialog(null, "Patient record saved and sent an email", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+                
                 txtName.setText("");
-                txtDate.setText("");
+                txtEmail.setText("");
                 txtAge.setText("");
-                JOptionPane.showMessageDialog(null, "Patient record saved.", "Warning", JOptionPane.INFORMATION_MESSAGE);
-                sendConfirmationEmail( "jkkn.iitkgp@gmail.com", "Patient Appointment Booked Successfully!" , "New Appointment");
+                rbYes.setSelected(false);
+                rbNo.setSelected(false);
+                radioMale.setSelected(false);
+                radioFemale.setSelected(false);
+
+                
+                
             } catch (ParseException ex) {
                 Logger.getLogger(ReceptionAdminWorkArea.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -450,11 +460,37 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
 
     private void rbYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbYesActionPerformed
         // TODO add your handling code here:
+        if(rbYes.isSelected())
+        {
+            rbNo.setSelected(false);
+        }
     }//GEN-LAST:event_rbYesActionPerformed
 
     private void rbNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNoActionPerformed
         // TODO add your handling code here:
+        
+        if(rbNo.isSelected())
+        {
+            rbYes.setSelected(false);
+        }
     }//GEN-LAST:event_rbNoActionPerformed
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        // TODO add your handling code here:
+        
+        
+        String PatterN = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        Pattern pattern = Pattern.compile(PatterN);
+        Matcher patternmatch = pattern.matcher(txtEmail.getText());
+        if(!patternmatch.matches())
+        {
+            emailRegexFlagError = true;
+        }
+        else
+        {
+            emailRegexFlagError = false;
+        }
+    }//GEN-LAST:event_txtEmailKeyReleased
 
     /**
      * @param args the command line arguments
@@ -498,7 +534,6 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -515,7 +550,7 @@ private static final String GFILENAME = Paths.get("src").toAbsolutePath().toStri
     private javax.swing.JRadioButton rbYes;
     private javax.swing.JTable tblEvents;
     private javax.swing.JTextField txtAge;
-    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }
