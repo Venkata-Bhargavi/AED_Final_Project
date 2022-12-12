@@ -9,6 +9,9 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -25,9 +28,16 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
     Enterprise enterprise;
     private OrganizationDirectory directory;
     JPanel workArea;
+     private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/manage_employee.png";
     
     public ManageHospitalEmployee(OrganizationDirectory directory, JPanel workArea) {
         initComponents();
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
         this.workArea = workArea;
         this.directory = directory;
         populateOrganizationComboBox();
@@ -90,12 +100,18 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
         cbOrg = new javax.swing.JComboBox();
         txtName = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
+        lblI = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Add Employee");
 
         jLabel2.setText("Filter by Organization");
 
+        cbFilterOrg.setBackground(new java.awt.Color(255, 156, 141));
+        cbFilterOrg.setForeground(new java.awt.Color(255, 255, 255));
         cbFilterOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbFilterOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +119,8 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
             }
         });
 
+        tblOrg.setBackground(new java.awt.Color(255, 156, 141));
+        tblOrg.setForeground(new java.awt.Color(255, 255, 255));
         tblOrg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -114,14 +132,20 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
                 "Name"
             }
         ));
+        tblOrg.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tblOrg.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tblOrg);
 
         jLabel3.setText("Organization :");
 
         jLabel4.setText("Name :");
 
+        cbOrg.setBackground(new java.awt.Color(255, 156, 141));
+        cbOrg.setForeground(new java.awt.Color(255, 255, 255));
         cbOrg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnCreate.setBackground(new java.awt.Color(255, 156, 141));
+        btnCreate.setForeground(new java.awt.Color(255, 255, 255));
         btnCreate.setText("Create Employee");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,31 +160,37 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(jLabel2)
-                        .addGap(43, 43, 43)
-                        .addComponent(cbFilterOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(303, 303, 303)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(81, 81, 81)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtName)
-                                    .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(222, 222, 222)
+                                .addComponent(jLabel2)
+                                .addGap(43, 43, 43)
+                                .addComponent(cbFilterOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(btnCreate)))))
-                .addContainerGap(227, Short.MAX_VALUE))
+                                .addGap(303, 303, 303)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(190, 190, 190)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(222, 222, 222)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(81, 81, 81)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtName)
+                                            .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(93, 93, 93)
+                                        .addComponent(btnCreate)))))
+                        .addGap(0, 221, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +213,9 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(btnCreate)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addGap(95, 95, 95)
+                .addComponent(lblI, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,6 +252,7 @@ public class ManageHospitalEmployee extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblI;
     private javax.swing.JTable tblOrg;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

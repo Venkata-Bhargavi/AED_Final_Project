@@ -9,6 +9,9 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +27,8 @@ public class ManageHospitalUser extends javax.swing.JPanel {
      */
     private Enterprise enterprise;
     JPanel workArea;
+     private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/manage_user.png";
     public ManageHospitalUser(Enterprise enterprise,JPanel workArea) {
         initComponents();
         this.workArea = workArea;
@@ -31,6 +36,11 @@ public class ManageHospitalUser extends javax.swing.JPanel {
         popOrganizationComboBox();
         cbO.setSelectedIndex(-1);
         popData();
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
         
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
@@ -105,13 +115,18 @@ public class ManageHospitalUser extends javax.swing.JPanel {
         lblEU = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        lblI = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Create User Account");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 40, -1, -1));
 
+        tbl.setBackground(new java.awt.Color(255, 156, 141));
+        tbl.setForeground(new java.awt.Color(255, 255, 255));
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -123,48 +138,56 @@ public class ManageHospitalUser extends javax.swing.JPanel {
                 "UserName", "Role"
             }
         ));
+        tbl.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tbl);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 127, 620, 100));
 
         jLabel2.setText("Organization :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
         jLabel3.setText("Employee :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
 
         jLabel4.setText("Role :");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
 
         jLabel5.setText("UserName :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
 
         jLabel6.setText("Password :");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, -1, -1));
 
+        cbO.setBackground(new java.awt.Color(255, 156, 141));
+        cbO.setForeground(new java.awt.Color(255, 255, 255));
         cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOActionPerformed(evt);
             }
         });
-        add(cbO, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 159, -1));
+        add(cbO, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 159, -1));
 
+        cbE.setBackground(new java.awt.Color(255, 156, 141));
+        cbE.setForeground(new java.awt.Color(255, 255, 255));
         cbE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEActionPerformed(evt);
             }
         });
-        add(cbE, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 159, -1));
+        add(cbE, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 159, -1));
 
+        cbR.setBackground(new java.awt.Color(255, 156, 141));
+        cbR.setForeground(new java.awt.Color(255, 255, 255));
         cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbRActionPerformed(evt);
             }
         });
-        add(cbR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 159, -1));
+        add(cbR, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 159, -1));
 
         txtUN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,34 +199,41 @@ public class ManageHospitalUser extends javax.swing.JPanel {
                 txtUNKeyReleased(evt);
             }
         });
-        add(txtUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 159, -1));
-        add(txtP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 159, -1));
+        add(txtUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 159, -1));
+        add(txtP, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 159, -1));
 
+        btnCreate.setBackground(new java.awt.Color(255, 156, 141));
+        btnCreate.setForeground(new java.awt.Color(255, 255, 255));
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
             }
         });
-        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
-        add(lblEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 290, 23));
-        add(lblEU, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, 290, 23));
+        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, -1, 30));
+        add(lblEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 290, 23));
+        add(lblEU, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 380, 290, 23));
 
+        btnUpdate.setBackground(new java.awt.Color(255, 156, 141));
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 90, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 90, 30));
 
+        btnDelete.setBackground(new java.awt.Color(255, 156, 141));
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, 90, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 90, 30));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, 150, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUNActionPerformed
@@ -468,6 +498,7 @@ public class ManageHospitalUser extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEP;
     private javax.swing.JLabel lblEU;
+    private javax.swing.JLabel lblI;
     private javax.swing.JTable tbl;
     private javax.swing.JTextField txtP;
     private javax.swing.JTextField txtUN;
