@@ -196,7 +196,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 490, 170, 30));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 480, 170, 30));
         add(lblPwdValid, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 413, 219, 27));
 
         lblUN.setText(" ");

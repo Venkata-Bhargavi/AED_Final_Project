@@ -119,12 +119,12 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         titlebox.setText("Vaccine Inventory Management");
         jPanel1.add(titlebox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 470, 60));
 
-        txt_username.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        txt_username.setForeground(new java.awt.Color(204, 204, 204));
+        txt_username.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        txt_username.setForeground(new java.awt.Color(255, 156, 141));
         jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 208, 30));
 
-        pass_password.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        pass_password.setForeground(new java.awt.Color(204, 204, 204));
+        pass_password.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        pass_password.setForeground(new java.awt.Color(255, 156, 141));
         pass_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pass_passwordActionPerformed(evt);

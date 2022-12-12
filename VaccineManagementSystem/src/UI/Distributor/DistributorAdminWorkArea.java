@@ -87,20 +87,20 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1300, 800));
 
         jSplitPane1.setPreferredSize(new java.awt.Dimension(1300, 800));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
         controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnMO.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnMO.setText("Manage Organisation");
         btnMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMOActionPerformed(evt);
             }
         });
-        controlPanel.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 314, -1, -1));
+        controlPanel.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 314, 160, -1));
 
         btnME.setText("Manage Employee");
         btnME.addActionListener(new java.awt.event.ActionListener() {

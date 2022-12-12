@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SystemAdminWorkArea;
+import Business.Disease.Disease;
 import Business.EcoSystem;
 import Business.Network.Network;
 import Business.WorkQueue.ReceptionWorkRequest;
@@ -58,7 +59,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         
         btnU.setEnabled(false);
         btnA.setEnabled(true);
-//        btnD.setEnabled(false);
+        btnD.setEnabled(false);
     }
     
     private void populateNetworkTable() {
@@ -90,6 +91,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         lblN = new javax.swing.JLabel();
         lblI = new javax.swing.JLabel();
         btnU = new javax.swing.JButton();
+        btnD = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1100, 800));
@@ -147,12 +149,12 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 btnAActionPerformed(evt);
             }
         });
-        add(btnA, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 140, 30));
+        add(btnA, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 140, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setPreferredSize(new java.awt.Dimension(1100, 800));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 530));
-        add(lblN, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 480, 420));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 570));
+        add(lblN, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 480, 370));
         add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 540, 150, 140));
 
         btnU.setBackground(new java.awt.Color(255, 156, 141));
@@ -164,7 +166,18 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 btnUActionPerformed(evt);
             }
         });
-        add(btnU, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 140, 30));
+        add(btnU, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 140, 30));
+
+        btnD.setBackground(new java.awt.Color(255, 156, 141));
+        btnD.setForeground(new java.awt.Color(255, 255, 255));
+        btnD.setText("Delete");
+        btnD.setBorder(null);
+        btnD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDActionPerformed(evt);
+            }
+        });
+        add(btnD, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAActionPerformed
@@ -222,7 +235,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 System.out.println("New Network Name: " + net.getName().toUpperCase());
                 btnU.setEnabled(false);
                 btnA.setEnabled(true);
-//                btnD.setEnabled(false);
+                btnD.setEnabled(false);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Enter a valid name");
@@ -239,9 +252,32 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnUActionPerformed
 
+    private void btnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblNetwork.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Network to delete.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            Network net = (Network) tblNetwork.getValueAt(selectedRow, 0);
+
+            system.removeNetwork(net);
+            JOptionPane.showMessageDialog(null, "Successfully deleted the network from the System");
+            populateNetworkTable();
+            txtNetworkName.setText("");
+            btnU.setEnabled(false);
+            btnA.setEnabled(true);
+            btnD.setEnabled(false);
+            
+        }
+        
+        
+    }//GEN-LAST:event_btnDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnA;
+    private javax.swing.JButton btnD;
     private javax.swing.JButton btnU;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane;

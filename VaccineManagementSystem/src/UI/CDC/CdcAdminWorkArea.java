@@ -86,7 +86,6 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1300, 800));
 
         splitPane.setPreferredSize(new java.awt.Dimension(1300, 800));
 
@@ -125,13 +124,14 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         });
         controlPanel.add(btnMEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 160, -1));
 
+        btnVUR.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         btnVUR.setText("Vaccine Usage Report");
         btnVUR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVURActionPerformed(evt);
             }
         });
-        controlPanel.add(btnVUR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+        controlPanel.add(btnVUR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 160, -1));
 
         btnVP.setText("View Patients");
         btnVP.addActionListener(new java.awt.event.ActionListener() {
