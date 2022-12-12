@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Network.Network;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,11 +31,38 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
     private EcoSystem system;
     private Network network;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/sysadmin.png";
+    
+     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public DistributorAdminWorkArea(EcoSystem system, Enterprise enterprise, Network network) {
         initComponents();
         this.system = system;
         this.enterprise = enterprise;
         this.network = network;
+        
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(60, 60,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
+        
+         ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(200, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
     }
 
     /**
@@ -48,15 +78,21 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         controlPanel = new javax.swing.JPanel();
         btnMO = new javax.swing.JButton();
         btnME = new javax.swing.JButton();
-        btnLog = new javax.swing.JButton();
         btnMU = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1300, 800));
 
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(1305, 800));
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(1300, 800));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
+        controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMO.setText("Manage Organisation");
         btnMO.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +100,7 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
                 btnMOActionPerformed(evt);
             }
         });
+        controlPanel.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 314, -1, -1));
 
         btnME.setText("Manage Employee");
         btnME.addActionListener(new java.awt.event.ActionListener() {
@@ -71,13 +108,7 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
                 btnMEActionPerformed(evt);
             }
         });
-
-        btnLog.setText("Logout");
-        btnLog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogActionPerformed(evt);
-            }
-        });
+        controlPanel.add(btnME, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 355, 150, -1));
 
         btnMU.setText("Manage Users");
         btnMU.addActionListener(new java.awt.event.ActionListener() {
@@ -85,37 +116,24 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
                 btnMUActionPerformed(evt);
             }
         });
+        controlPanel.add(btnMU, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 396, 150, -1));
 
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnME, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(314, 314, 314)
-                .addComponent(btnMO)
-                .addGap(18, 18, 18)
-                .addComponent(btnME)
-                .addGap(18, 18, 18)
-                .addComponent(btnMU)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLog)
-                .addGap(35, 35, 35))
-        );
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
+            }
+        });
+        controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 60, 40));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setText("Distributor Admin");
+        controlPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        controlPanel.add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 100, 90));
+        controlPanel.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 730));
 
         jSplitPane1.setLeftComponent(controlPanel);
 
-        workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
+        workArea.setPreferredSize(new java.awt.Dimension(900, 800));
         workArea.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(workArea);
 
@@ -154,14 +172,6 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnMUActionPerformed
 
-    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        MainLoginJFrame ml = new MainLoginJFrame(system,network);
-        ml.setVisible(true); 
-        dB4OUtil.storeSystem(system);
-    }//GEN-LAST:event_btnLogActionPerformed
-
     private void btnMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMEActionPerformed
         // TODO add your handling code here:
          ManageEmployee me = new ManageEmployee(enterprise.getOrganizationDirectory(), workArea);
@@ -169,6 +179,14 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
         CardLayout cardlayout = (CardLayout) workArea.getLayout();
         cardlayout.next(workArea);
     }//GEN-LAST:event_btnMEActionPerformed
+
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
+        // TODO add your handling code here:
+         this.setVisible(false);
+        MainLoginJFrame ml = new MainLoginJFrame(system,network);
+        ml.setVisible(true); 
+        dB4OUtil.storeSystem(system);
+    }//GEN-LAST:event_lblLMouseClicked
 
     /**
      * @param args the command line arguments
@@ -206,12 +224,15 @@ public class DistributorAdminWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLog;
     private javax.swing.JButton btnME;
     private javax.swing.JButton btnMO;
     private javax.swing.JButton btnMU;
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblI;
+    private javax.swing.JLabel lblL;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

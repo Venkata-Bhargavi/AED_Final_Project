@@ -11,6 +11,9 @@ import Business.Organization.SupplierOrganization;
 import Business.Role.Role;
 import Business.Supplier.Supplier;
 import Business.UserAccount.UserAccount;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +29,8 @@ public class ManageUser extends javax.swing.JPanel {
      */
     private Enterprise enterprise;
     JPanel workArea;
+     private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/manage_user.png";
     public ManageUser(Enterprise enterprise, JPanel workArea) {
         initComponents();
         this.workArea = workArea;
@@ -34,6 +39,11 @@ public class ManageUser extends javax.swing.JPanel {
         populateDataToTable();
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
     }
     public void popOrganizationComboBox() {
         cbO.removeAllItems();
@@ -101,13 +111,18 @@ public class ManageUser extends javax.swing.JPanel {
         txtUN = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        lblI = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Create User Account");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 34, 241, -1));
 
+        tbl.setBackground(new java.awt.Color(255, 156, 141));
+        tbl.setForeground(new java.awt.Color(255, 255, 255));
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -141,14 +156,18 @@ public class ManageUser extends javax.swing.JPanel {
         jLabel6.setText("Password :");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 422, -1, -1));
 
+        btnCreate.setBackground(new java.awt.Color(255, 156, 141));
+        btnCreate.setForeground(new java.awt.Color(255, 255, 255));
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
             }
         });
-        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, -1, -1));
+        add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 500, 90, 30));
 
+        cbO.setBackground(new java.awt.Color(255, 156, 141));
+        cbO.setForeground(new java.awt.Color(255, 255, 255));
         cbO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +176,8 @@ public class ManageUser extends javax.swing.JPanel {
         });
         add(cbO, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 239, 162, -1));
 
+        cbE.setBackground(new java.awt.Color(255, 156, 141));
+        cbE.setForeground(new java.awt.Color(255, 255, 255));
         cbE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +186,8 @@ public class ManageUser extends javax.swing.JPanel {
         });
         add(cbE, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 284, 162, -1));
 
+        cbR.setBackground(new java.awt.Color(255, 156, 141));
+        cbR.setForeground(new java.awt.Color(255, 255, 255));
         cbR.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(cbR, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 329, 162, -1));
 
@@ -175,21 +198,26 @@ public class ManageUser extends javax.swing.JPanel {
         });
         add(txtUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 374, 162, -1));
 
+        btnUpdate.setBackground(new java.awt.Color(255, 156, 141));
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 90, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 90, 30));
 
+        btnDelete.setBackground(new java.awt.Color(255, 156, 141));
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 90, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 90, 30));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 530, 150, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
@@ -440,6 +468,7 @@ public class ManageUser extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblI;
     private javax.swing.JLabel lblP;
     private javax.swing.JLabel lblUN;
     private javax.swing.JTable tbl;

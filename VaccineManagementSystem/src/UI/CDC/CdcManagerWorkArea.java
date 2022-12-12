@@ -141,10 +141,9 @@ private static final String AFILENAME = Paths.get("src").toAbsolutePath().toStri
         });
         jPanel1.add(btnReject, new org.netbeans.lib.awtextra.AbsoluteConstraints(694, 381, 93, -1));
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("CDC Manager Work Bench");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 68, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 68, -1, 30));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 156, 141));
 
