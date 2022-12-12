@@ -48,8 +48,7 @@ public class MainLoginJFrame extends javax.swing.JFrame {
         ImageIcon imgIcon = new ImageIcon(imagePath);
         Image i = imgIcon.getImage();
         Image dimg = i.getScaledInstance(1010, 550,Image.SCALE_SMOOTH);
-//        System.out.println(FILENAME);
-//        System.out.println(imagePath);
+
         ImageIcon imgThisImg = new ImageIcon(dimg);
         lblBG.setIcon(imgThisImg);
         
@@ -69,8 +68,7 @@ public class MainLoginJFrame extends javax.swing.JFrame {
          ImageIcon imgIcon = new ImageIcon(imagePath);
         Image i = imgIcon.getImage();
         Image dimg = i.getScaledInstance(1010, 550,Image.SCALE_SMOOTH);
-        System.out.println(FILENAME);
-        System.out.println(imagePath);
+        
         ImageIcon imgThisImg = new ImageIcon(dimg);
         lblBG.setIcon(imgThisImg);
         

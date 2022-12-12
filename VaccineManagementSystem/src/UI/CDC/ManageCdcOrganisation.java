@@ -32,6 +32,11 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
     JPanel workArea;
     private EcoSystem system;
     private Network network;
+    
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/manage_org.png";
+    
+    
    
   
     public ManageCdcOrganisation(OrganizationDirectory orgDirectory, JPanel workArea){
@@ -42,6 +47,11 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
         this.network = null;
         populateTable();
         populateComboBox();
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(100, 100,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
        
     }
     
@@ -77,10 +87,22 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cbOrg = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        lblI = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Add Organisation");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblOrg.setBackground(new java.awt.Color(255, 156, 141));
+        tblOrg.setForeground(new java.awt.Color(255, 255, 255));
         tblOrg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -94,56 +116,25 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblOrg);
 
-        jLabel2.setText("Organisation Type :");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 438, 100));
 
+        jLabel2.setText("Organisation Type :");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+        cbOrg.setBackground(new java.awt.Color(255, 156, 141));
+        cbOrg.setForeground(new java.awt.Color(255, 255, 255));
+        add(cbOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 204, -1));
+
+        jButton1.setBackground(new java.awt.Color(255, 156, 141));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Add Organisation");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(279, 279, 279)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(27, 27, 27)
-                        .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(jLabel1)))
-                .addContainerGap(216, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbOrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(38, 38, 38)
-                .addComponent(jButton1)
-                .addContainerGap(450, Short.MAX_VALUE))
-        );
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, -1, -1));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 620, 150, 120));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -163,6 +154,7 @@ public class ManageCdcOrganisation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblI;
     private javax.swing.JTable tblOrg;
     // End of variables declaration//GEN-END:variables
 }

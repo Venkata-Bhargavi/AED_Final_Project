@@ -11,9 +11,12 @@ import Business.WorkQueue.CDCReportingWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import Business.vaccine.Vaccine;
 import java.awt.Color;
+import java.awt.Image;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -37,6 +40,8 @@ public class ViewPatients extends javax.swing.JPanel {
     private ArrayList<Float> ageList;
     private ArrayList<Integer> yearList;
     JPanel workArea;
+      private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public ViewPatients( Enterprise enterprise, Network network, EcoSystem system, JPanel workArea) {
         initComponents();
         this.workArea = workArea;
@@ -46,6 +51,15 @@ public class ViewPatients extends javax.swing.JPanel {
         ageList = new ArrayList();
         yearList = new ArrayList();
         populateComboBox();
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(350, 400,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lbl1.setIcon(cImgThisImg);
+        lbl2.setIcon(cImgThisImg);
+        lbl3.setIcon(cImgThisImg);
+
     }
     
     void populateComboBox()
@@ -86,7 +100,7 @@ public class ViewPatients extends javax.swing.JPanel {
         txt21 = new javax.swing.JTextField();
         txt22 = new javax.swing.JTextField();
         txtChange = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -104,7 +118,7 @@ public class ViewPatients extends javax.swing.JPanel {
         txtTwenty = new javax.swing.JTextField();
         txtGT = new javax.swing.JTextField();
         txtTot = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -112,65 +126,77 @@ public class ViewPatients extends javax.swing.JPanel {
         jLabel24 = new javax.swing.JLabel();
         txtM = new javax.swing.JTextField();
         txtF = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(800, 800));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Report");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
         jLabel2.setText("Select Vaccine :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, -1, -1));
 
+        cbV.setBackground(new java.awt.Color(255, 156, 141));
+        cbV.setForeground(new java.awt.Color(255, 255, 255));
         cbV.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbVActionPerformed(evt);
             }
         });
-        add(cbV, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 66, -1, -1));
+        add(cbV, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 140, -1));
 
-        btnAge.setBackground(new java.awt.Color(255, 244, 244));
+        btnAge.setBackground(new java.awt.Color(255, 156, 141));
+        btnAge.setForeground(new java.awt.Color(255, 255, 255));
         btnAge.setText("Get Report By Age");
+        btnAge.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgeActionPerformed(evt);
             }
         });
-        add(btnAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 128, -1, -1));
+        add(btnAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 133, -1, 30));
 
-        btnYear.setBackground(new java.awt.Color(255, 244, 244));
+        btnYear.setBackground(new java.awt.Color(255, 156, 141));
+        btnYear.setForeground(new java.awt.Color(255, 255, 255));
         btnYear.setText("Get Report by year");
+        btnYear.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnYearActionPerformed(evt);
             }
         });
-        add(btnYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 128, -1, -1));
+        add(btnYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 133, 130, 30));
 
-        btnGender.setBackground(new java.awt.Color(255, 244, 244));
+        btnGender.setBackground(new java.awt.Color(255, 156, 141));
+        btnGender.setForeground(new java.awt.Color(255, 255, 255));
         btnGender.setText("Get Report by Gender");
+        btnGender.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenderActionPerformed(evt);
             }
         });
-        add(btnGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, -1));
+        add(btnGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 133, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 156, 141));
         jLabel3.setText("Vaccine doses per age");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 156, 141));
         jLabel4.setText("Vaccine Doses per year");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 188, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 156, 141));
         jLabel5.setText("Vaccine doses by gender");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(629, 188, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 244, 244));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -223,11 +249,10 @@ public class ViewPatients extends javax.swing.JPanel {
         });
         jPanel1.add(txtChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 245, 82, -1));
 
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        jLabel27.setText("jLabel27");
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 390));
+        lbl2.setText("jLabel27");
+        jPanel1.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 390));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 260, 390));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 260, 390));
 
         jPanel2.setBackground(new java.awt.Color(255, 244, 244));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -274,11 +299,10 @@ public class ViewPatients extends javax.swing.JPanel {
         jPanel2.add(txtGT, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 273, 78, -1));
         jPanel2.add(txtTot, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 314, 78, -1));
 
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        jLabel28.setText("jLabel28");
-        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 390));
+        lbl1.setText("jLabel28");
+        jPanel2.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 390));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 290, 380));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 290, 380));
 
         jPanel3.setBackground(new java.awt.Color(255, 244, 244));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -311,16 +335,10 @@ public class ViewPatients extends javax.swing.JPanel {
         });
         jPanel3.add(txtF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 131, 82, -1));
 
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        jLabel26.setText("jLabel26");
-        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 390));
+        lbl3.setText("jLabel26");
+        jPanel3.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 390));
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 250, 390));
-
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image.jpg"))); // NOI18N
-        jLabel25.setText("jLabel25");
-        jLabel25.setPreferredSize(new java.awt.Dimension(800, 800));
-        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 800));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 250, 390));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtInfantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInfantActionPerformed
@@ -556,10 +574,6 @@ public class ViewPatients extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -570,6 +584,9 @@ public class ViewPatients extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
     private javax.swing.JTextField txt20;
     private javax.swing.JTextField txt21;
     private javax.swing.JTextField txt22;

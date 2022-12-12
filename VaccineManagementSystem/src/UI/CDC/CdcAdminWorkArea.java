@@ -11,6 +11,9 @@ import Business.Network.Network;
 import Business.Organization.OrganizationDirectory;
 import UI.MainLoginJFrame;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.nio.file.Paths;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -27,12 +30,36 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     private OrganizationDirectory orgDirectory;
     Network network;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/sysadmin.png";
     
+     private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
+    
+     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
     public CdcAdminWorkArea(EcoSystem system, Enterprise enterprise, Network network) {
         initComponents();
         this.system = system;
         this.enterprise = enterprise;
         this.network = network;
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(60, 60,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblA.setIcon(aImgThisImg);
+        
+         ImageIcon logoimgIcon = new ImageIcon(logoImagePath);
+        Image lI = logoimgIcon.getImage();
+        Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
+        ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
+        lblL.setIcon(logoImgThisImg);
+        
+          ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(200, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblCB.setIcon(cImgThisImg);
     }
 
     /**
@@ -52,12 +79,19 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         btnMEvents = new javax.swing.JButton();
         btnVUR = new javax.swing.JButton();
         btnVP = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
+        lblL = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblA = new javax.swing.JLabel();
+        lblCB = new javax.swing.JLabel();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1300, 800));
+
+        splitPane.setPreferredSize(new java.awt.Dimension(1300, 800));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 800));
+        controlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMO.setText("Manage Organisation");
         btnMO.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +99,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 btnMOActionPerformed(evt);
             }
         });
+        controlPanel.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 160, -1));
 
         btnME.setText("Manage Employee");
         btnME.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +107,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 btnMEActionPerformed(evt);
             }
         });
+        controlPanel.add(btnME, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 160, -1));
 
         btnMU.setText("Manage Users");
         btnMU.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +115,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 btnMUActionPerformed(evt);
             }
         });
+        controlPanel.add(btnMU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 160, -1));
 
         btnMEvents.setText("Manage Events");
         btnMEvents.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +123,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 btnMEventsActionPerformed(evt);
             }
         });
+        controlPanel.add(btnMEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 160, -1));
 
         btnVUR.setText("Vaccine Usage Report");
         btnVUR.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +131,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 btnVURActionPerformed(evt);
             }
         });
+        controlPanel.add(btnVUR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
 
         btnVP.setText("View Patients");
         btnVP.addActionListener(new java.awt.event.ActionListener() {
@@ -100,56 +139,24 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
                 btnVPActionPerformed(evt);
             }
         });
+        controlPanel.add(btnVP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 160, -1));
 
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
+        lblL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLMouseClicked(evt);
             }
         });
+        controlPanel.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 50, 40));
 
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMO, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnME, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMU, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMEvents, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVUR, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVP, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnME, btnMEvents, btnMO, btnMU, btnVP, btnVUR});
-
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(btnMO)
-                .addGap(18, 18, 18)
-                .addComponent(btnME)
-                .addGap(18, 18, 18)
-                .addComponent(btnMU)
-                .addGap(18, 18, 18)
-                .addComponent(btnMEvents)
-                .addGap(18, 18, 18)
-                .addComponent(btnVP)
-                .addGap(23, 23, 23)
-                .addComponent(btnVUR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(21, 21, 21))
-        );
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setText("CDC Admin");
+        controlPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
+        controlPanel.add(lblA, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 90, 70));
+        controlPanel.add(lblCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 800));
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setPreferredSize(new java.awt.Dimension(800, 800));
+        workArea.setPreferredSize(new java.awt.Dimension(1100, 800));
         workArea.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(workArea);
 
@@ -161,7 +168,7 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane)
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -222,13 +229,12 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
 //        splitPane.setRightComponent(vp);
     }//GEN-LAST:event_btnVURActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+    private void lblLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLMouseClicked
         // TODO add your handling code here:
-        
-        this.setVisible(false);
+          this.setVisible(false);
         MainLoginJFrame ml = new MainLoginJFrame(system,network);
         ml.setVisible(true); 
-    }//GEN-LAST:event_btnLogoutActionPerformed
+    }//GEN-LAST:event_lblLMouseClicked
 
     /**
      * @param args the command line arguments
@@ -267,7 +273,6 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnME;
     private javax.swing.JButton btnMEvents;
     private javax.swing.JButton btnMO;
@@ -275,6 +280,10 @@ public class CdcAdminWorkArea extends javax.swing.JFrame {
     private javax.swing.JButton btnVP;
     private javax.swing.JButton btnVUR;
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblA;
+    private javax.swing.JLabel lblCB;
+    private javax.swing.JLabel lblL;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables

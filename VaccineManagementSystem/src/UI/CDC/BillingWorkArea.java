@@ -35,6 +35,11 @@ public class BillingWorkArea extends javax.swing.JFrame {
      private static final String logoFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
     private String logoImagePath = logoFILENAME+"/Images/logout_blue.png";
     
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/billing.png";
+     private static final String GFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String bgimagePath = GFILENAME+"/Images/my-gradient.png";
+    
     public BillingWorkArea(UserAccount account, CDCBillingOrganization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.account= account;
@@ -48,6 +53,18 @@ public class BillingWorkArea extends javax.swing.JFrame {
         Image logoDimg = lI.getScaledInstance(30, 30,Image.SCALE_SMOOTH);
         ImageIcon logoImgThisImg = new ImageIcon(logoDimg);
         lblL.setIcon(logoImgThisImg);
+        
+        ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
+        
+        ImageIcon bimgIcon = new ImageIcon(bgimagePath);
+        Image bI = bimgIcon.getImage();
+        Image cDimg = bI.getScaledInstance(1300, 800,Image.SCALE_SMOOTH);
+        ImageIcon cImgThisImg = new ImageIcon(cDimg);
+        lblB.setIcon(cImgThisImg);
     }
     
       void populateTable()
@@ -86,14 +103,21 @@ public class BillingWorkArea extends javax.swing.JFrame {
         btnAssign = new javax.swing.JButton();
         btnPay = new javax.swing.JButton();
         lblL = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("CDC Billing");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 33, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,32 +130,42 @@ public class BillingWorkArea extends javax.swing.JFrame {
                 "Patient Name", "Vaccine", "Status", "Sender", "Receiver", "Message"
             }
         ));
+        tbl.setSelectionBackground(new java.awt.Color(255, 156, 141));
+        tbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tbl);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 136, 607, 143));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 607, 143));
 
+        btnAssign.setBackground(new java.awt.Color(255, 156, 141));
+        btnAssign.setForeground(new java.awt.Color(255, 255, 255));
         btnAssign.setText("Asign");
+        btnAssign.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAssignActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAssign, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 297, -1, -1));
+        jPanel1.add(btnAssign, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 110, 30));
 
+        btnPay.setBackground(new java.awt.Color(255, 156, 141));
+        btnPay.setForeground(new java.awt.Color(255, 255, 255));
         btnPay.setText("Pay");
+        btnPay.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPayActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(599, 297, -1, -1));
+        jPanel1.add(btnPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 100, 30));
 
         lblL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblLMouseClicked(evt);
             }
         });
-        jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 25, 50, 44));
+        jPanel1.add(lblL, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 40, 50, 44));
+        jPanel1.add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 580, 140, 130));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,6 +269,8 @@ public class BillingWorkArea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblB;
+    private javax.swing.JLabel lblI;
     private javax.swing.JLabel lblL;
     private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables

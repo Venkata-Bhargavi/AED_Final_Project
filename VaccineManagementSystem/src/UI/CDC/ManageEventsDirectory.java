@@ -14,13 +14,16 @@ import Business.Inventory.RequestedVaccineQty;
 import Business.Network.Network;
 import Business.WorkQueue.CDCEventInventoryWorkRequest;
 import Business.vaccine.Vaccine;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +46,8 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
     private ArrayList<RequestedVaccineQty> vaccineRequestedArrayList;
     private boolean checkVaccineRequested = false;
     int totalVaccineRemains = 0, capacityEvent = 0;
+    private static final String AFILENAME = Paths.get("src").toAbsolutePath().toString();// path to the data store
+    private String aimagePath = AFILENAME+"/Images/manage_event.png";
     public ManageEventsDirectory(Enterprise enterprise,Network network,EcoSystem system, JPanel workArea) {
         initComponents();
         this.workArea = workArea;
@@ -55,6 +60,11 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         vaccineRequestedArrayList = new ArrayList<>();
         
         populateEventLocation();
+         ImageIcon aimgIcon = new ImageIcon(aimagePath);
+        Image aI = aimgIcon.getImage();
+        Image aDimg = aI.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
+        ImageIcon aImgThisImg = new ImageIcon(aDimg);
+        lblI.setIcon(aImgThisImg);
         
         
         
@@ -159,19 +169,27 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         btnDEI = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEI = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(800, 800));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1100, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 156, 141));
         jLabel1.setText("Events : Mobile Camps");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 29, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 156, 141));
         jLabel2.setText("Events");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 87, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblEvent.setBackground(new java.awt.Color(255, 156, 141));
+        tblEvent.setForeground(new java.awt.Color(255, 255, 255));
         tblEvent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -185,74 +203,87 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblEvent);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 123, 660, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 660, 100));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 156, 141));
         jLabel3.setText("Create New Event");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 259, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, -1, -1));
 
         jLabel4.setText("Event Name :");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 317, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, -1, -1));
 
         jLabel5.setText("Start Date (dd/mm/yyyy) :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 358, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, -1, -1));
 
         jLabel6.setText("Event Location :");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(494, 399, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
 
         jLabel7.setText("Event Capacity :");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 440, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 156, 141));
         jLabel8.setText("Request Vaccines for the event");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, -1, -1));
 
         txtEN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtENActionPerformed(evt);
             }
         });
-        add(txtEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 314, 160, -1));
-        add(txtSD, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 355, 160, -1));
+        add(txtEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 160, -1));
+        add(txtSD, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, 160, -1));
 
+        cbEL.setBackground(new java.awt.Color(255, 156, 141));
+        cbEL.setForeground(new java.awt.Color(255, 255, 255));
         cbEL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cbEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 396, 160, -1));
-        add(txtEventCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 437, 160, -1));
+        add(cbEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 160, -1));
+        add(txtEventCapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 160, -1));
 
         jLabel9.setText("Vaccine :");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 520, -1, -1));
 
         jLabel10.setText("Quantity :");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 570, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 570, -1, -1));
 
+        cbVaccine.setBackground(new java.awt.Color(255, 156, 141));
+        cbVaccine.setForeground(new java.awt.Color(255, 255, 255));
         cbVaccine.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cbVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 108, -1));
-        add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 108, -1));
+        add(cbVaccine, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 520, 108, -1));
+        add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 570, 108, -1));
 
+        btnRequest.setBackground(new java.awt.Color(255, 156, 141));
+        btnRequest.setForeground(new java.awt.Color(255, 255, 255));
         btnRequest.setText("Request");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestActionPerformed(evt);
             }
         });
-        add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 630, -1, -1));
+        add(btnRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 630, 90, -1));
 
+        btnCreateEvent.setBackground(new java.awt.Color(255, 156, 141));
+        btnCreateEvent.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateEvent.setText("Create Event");
         btnCreateEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateEventActionPerformed(evt);
             }
         });
-        add(btnCreateEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, -1, -1));
+        add(btnCreateEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 630, -1, -1));
 
+        btnDEI.setBackground(new java.awt.Color(255, 156, 141));
+        btnDEI.setForeground(new java.awt.Color(255, 255, 255));
         btnDEI.setText("Display Event Inventory");
         btnDEI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDEIActionPerformed(evt);
             }
         });
-        add(btnDEI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 257, 220, -1));
+        add(btnDEI, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 220, -1));
 
+        tblEI.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 156, 141)));
         tblEI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -266,12 +297,8 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblEI);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 314, 370, 302));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/kisspng-circle-structure-area-network-5abe0aa1daab97.4949489615224040018957.png"))); // NOI18N
-        jLabel11.setText("jLabel11");
-        jLabel11.setPreferredSize(new java.awt.Dimension(800, 800));
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 800));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 370, 302));
+        add(lblI, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 640, 140, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtENActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtENActionPerformed
@@ -468,7 +495,6 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
     private javax.swing.JComboBox cbVaccine;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -479,6 +505,7 @@ public class ManageEventsDirectory extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblI;
     private javax.swing.JTable tblEI;
     private javax.swing.JTable tblEvent;
     private javax.swing.JTextField txtEN;
